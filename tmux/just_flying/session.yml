@@ -1,11 +1,13 @@
 # do not modify these
+# /home/uav_6/singularity_poc2/user_ros_workspace/src/mrs_openswarm_real/tmux/tmux/just_flying/config/_env/env.sh
+# /home/uav_6/singularity_poc2/user_ros_workspace/src/mrs_openswarm_real/tmux/tmux/just_flying/session.yml
 root: ./
 name: real_drone
 socket_name: mrs
 attach: false
 tmux_options: -f /etc/ctu-mrs/tmux.conf
 # you can modify these export ROS_MASTER_URI='http://192.168.8.157:11311'; export ROS_IP='192.168.8.157';
-pre_window: source ./config/_env/env.sh; export PLATFORM_CONFIG=./config/mrs_uav_system/$UAV_TYPE.yaml; export CUSTOM_CONFIG=./config/custom_config.yaml; export WORLD_CONFIG=./config/worlds/world_local.yaml; export NETWORK_CONFIG=./config/network_config.yaml; 
+pre_window: source ./config/_env/env.sh
 startup_window: status
 windows:
   - roscore:
@@ -16,47 +18,43 @@ windows:
   - tf:
       layout: tiled
       panes:
-        - waitForTime; roslaunch mrs_ingeniarius_real static_tfs_ZD700.launch 
-  # - Pixhawk:
-  #     layout: tiled
-  #     panes:
-  #       -  waitForTime; roslaunch mrs_ingeniarius_real mavros_uav_ns.launch
-  # - hw_api:
-  #     layout: tiled
-  #     panes:
-  #       -  waitForTime; roslaunch mrs_uav_px4_api api.launch
-  # - RTK:
-  #     layout: tiled
-  #     panes:
-  #       -  waitForTime; roslaunch mrs_serial rtk.launch
-  # - Lidar:
-  #     layout: tiled
-  #     panes:
-  #       -  waitForTime; roslaunch mrs_ingeniarius_real lslidar_c16_ns.launch
-  # - gnss:
-  #     layout: tiled
-  #     panes:
-  #       -  waitForHw; roslaunch mrs_ingeniarius_real gnss_status_verifier.launch
-  # - navsat:
-  #     layout: tiled
-  #     panes:
-  #       -  waitForHw; roslaunch mrs_ingeniarius_real navsat.launch
-  # - imu_cal:
-  #     layout: tiled
-  #     panes:
-  #       -  waitForHw; roslaunch mrs_ingeniarius_real imu_cal.launch
-  # - status:
-  #     layout: tiled
-  #     panes:
-  #       - waitForHw; roslaunch mrs_uav_status status.launch config_file:=./config/status_info.yaml
-  # - core:
-  #     layout: tiled
-  #     panes:
-  #       - waitForHw; roslaunch mrs_ingeniarius_real mrs_core.launch
-  # - dcl_slam:
-  #     layout: tiled
-  #     panes:
-  #       - waitForHw; sleep 3; roslaunch mrs_ingeniarius_real run_single.launch
+        - waitForTime; roslaunch $ROS_LAUNCH_PATH/static_tfs_ZD700.launch 
+  - hw_api:
+      layout: tiled
+      panes:
+        - waitForTime; roslaunch mrs_uav_px4_api api.launch
+  - RTK:
+      layout: tiled
+      panes:
+        - waitForTime; roslaunch mrs_serial rtk.launch
+  - Lidar:
+      layout: tiled
+      panes:
+        - waitForTime; roslaunch $ROS_LAUNCH_PATH/lslidar_c16_ns.launch
+  - gnss:
+      layout: tiled
+      panes:
+        - waitForHw; roslaunch $ROS_LAUNCH_PATH/gnss_status_verifier.launch
+  - navsat:
+      layout: tiled
+      panes:
+        -  waitForHw; roslaunch $ROS_LAUNCH_PATH/navsat.launch
+  - imu_cal:
+      layout: tiled
+      panes:
+        -  waitForHw; roslaunch $ROS_LAUNCH_PATH/imu_cal.launch
+  - status:
+      layout: tiled
+      panes:
+        - waitForHw; roslaunch mrs_uav_status status.launch config_file:=./config/status_info.yaml
+  - core:
+      layout: tiled
+      panes:
+        - waitForHw; roslaunch $ROS_LAUNCH_PATH/mrs_core.launch
+  - dcl_slam:
+      layout: tiled
+      panes:
+        - waitForHw; sleep 3; roslaunch $ROS_LAUNCH_PATH/dcl_slam/run_single.launch
   # - octomap:
   #     layout: tiled
   #     panes:

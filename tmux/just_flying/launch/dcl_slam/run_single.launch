@@ -1,0 +1,20 @@
+<launch>
+	<arg name="set_lio_type" default="1"/> <!-- 1 for LIO-SAM, 2 for FAST-LIO2 -->
+	<arg name="set_respawn_value" default="false"/>
+	<arg name="set_robot_prefix" default="$(optenv UAV_NAME)"/>
+	<arg name="ROS_LAUNCH_PATH" default="$(optenv ROS_LAUNCH_PATH)" />
+	
+	<!-- <param name="/name_list" value="true"/> -->
+	<param name="/mapFrameAsChild" value="true"/>
+
+	<!-- <param name="/number_of_robots" value="3"/> -->
+	<param name="/robot_names" type="yaml" value="[uav6]"/>
+
+  	<include file="$(arg ROS_LAUNCH_PATH)/dcl_slam/single_ugv.launch">
+    	<arg name="robotPrefix" value="$(arg set_robot_prefix)"/>
+		<arg name="respawnValue" value="$(arg set_respawn_value)"/>
+		<arg name="lioType" value="$(arg set_lio_type)"/>
+
+  	</include>
+
+</launch>

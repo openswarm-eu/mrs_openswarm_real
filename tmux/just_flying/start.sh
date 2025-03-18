@@ -6,7 +6,7 @@ SCRIPT=$(readlink -f $0)
 SCRIPTPATH=`dirname $SCRIPT`
 cd "$SCRIPTPATH"
 
-export TMUX_SESSION_NAME=real_swarm
+export TMUX_SESSION_NAME=real_drone
 export TMUX_SOCKET_NAME=mrs
 
 # start tmuxinator

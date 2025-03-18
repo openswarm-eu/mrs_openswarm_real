@@ -11,6 +11,7 @@
   <arg name="c16_type" default="c16_2"/>
   <arg name="rviz" default="false"/>
   <arg name="UAV_NAME" default="$(optenv UAV_NAME)" />
+  <arg name="ROS_CONFIG_PATH" default="$(optenv ROS_CONFIG_PATH)" />
 
   <group ns="$(arg UAV_NAME)/lslidar">
 
@@ -52,7 +53,7 @@
         <remap from="~input" to="pcl_raw" />
         <remap from="~output" to="pcl_raw_crop_temp" />
         <param name="~input_frame" value="$(arg UAV_NAME)/lslidar_link"/> 
-        <rosparam command="load" file="$(find mrs_ingeniarius_real)/config/lslidar/filter_lslidar_down.yaml" />
+        <rosparam command="load" file="$(arg ROS_CONFIG_PATH)/lslidar/filter_lslidar_down.yaml" />
     </node>
 
     <node pkg="nodelet" type="nodelet" name="crop_box_2" args="load pcl/CropBox pcl_manager" output="screen">
@@ -60,7 +61,7 @@
         <remap from="~output" to="pcl_filtered" />
         <param name="input_frame" value="$(arg UAV_NAME)/lslidar_link"/>
         <param name="output_frame" value="$(arg UAV_NAME)/fcu"/>
-        <rosparam command="load" file="$(find mrs_ingeniarius_real)/config/lslidar/filter_lslidar_up.yaml" />
+        <rosparam command="load" file="$(arg ROS_CONFIG_PATH)/lslidar/filter_lslidar_up.yaml" />
     </node>    
 
     <node pkg="nodelet" type="nodelet" name="crop_box_3" args="load pcl/CropBox pcl_manager" output="screen">
@@ -68,7 +69,7 @@
         <remap from="~output" to="/uav6/lio_sam/mapping/map_local_filtered" />
         <param name="input_frame" value="$(arg UAV_NAME)/odom"/>
         <param name="output_frame" value="$(arg UAV_NAME)/fcu"/>
-        <rosparam command="load" file="$(find mrs_ingeniarius_real)/config/lslidar/filter_map_local.yaml" />
+        <rosparam command="load" file="$(arg ROS_CONFIG_PATH)/lslidar/filter_map_local.yaml" />
     </node>   
 
 
