@@ -1,0 +1,14 @@
+udp_topics:
+  - name: "/uav8/distributedMapping/globalDescriptors"
+  - name: "/uav8/distributedMapping/loopInfo"
+  - name: "/uav8/distributedMapping/neighborPoseEstimates"
+  - name: "/uav8/distributedMapping/neighborRotationEstimates"
+  - name: "/uav8/distributedMapping/optimizationState"
+  - name: "/uav8/distributedMapping/poseEstimateState"
+  - name: "/uav8/distributedMapping/rotationEstimateState"
+  - name: "/uav8/distributedMapping/path"
+  - name: "/uav8/distributedMapping/globalMap"
+  - name: "/uav8/octomap_planner/path"
+  - name: "/uav8/move_base_simple/swarm"
+topic_advertisement_rate: 10
+topic_refresh_rate: 10

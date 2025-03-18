@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<launch>
+
+	<!--Bag play options -->
+	<arg name="bag_play_rate" default="1" />
+	<arg name="bag_start_time" default="1" />
+	<arg name="bag_play_duration" default="2300" />
+
+	<!-- SET NAMESPACE to a specific name) -->
+	<arg name="uav_x" default="$(optenv UAV_NAME uav7)"/>
+
+	<!-- GLOBAL TIME PARAM FOR ROSBAG PLAY  -->
+	<param name="use_sim_time" value="false" />
+
+	<!-- PLAY DATASET --> 
+	<!-- /$(arg uav_x)/rtk/bestpos -->
+	<node pkg="rosbag" type="play" name="rosbag_play" args="
+	/home/uav_7/mrs_apptainer/user_ros_workspace/data_2024-11-06-11-08-51_0.bag
+	--clock --pause -r $(arg bag_play_rate) --start=$(arg bag_start_time) --duration=$(arg bag_play_duration) --topics /$(arg uav_x)/hw_api/imu /$(arg uav_x)/lslidar/pcl_filtered /$(arg uav_x)/hw_api/gnss /$(arg uav_x)/rtk/bestpos" output="screen"/>
+
+</launch>

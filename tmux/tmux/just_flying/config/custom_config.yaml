@@ -1,0 +1,358 @@
+mrs_uav_managers:
+
+  estimation_manager:
+
+    state_estimators: [
+     "liosam"
+    ]
+
+    initial_state_estimator: "liosam" # will be used as the first state estimator
+    agl_height_estimator: "" # only slightly filtered height for checking min height (not used in control feedback)
+
+    # namespace of the state estimator
+    liosam:
+
+      address: "liosam/LiosamEstimatorPlugin"
+
+      requires: # data required from the hw api
+        gnss: true
+        imu: false
+        distance_sensor: false
+        altitude: false
+        magnetometer_heading: false
+        position: false
+        orientation: false
+        velocity: false
+        angular_velocity: false
+
+      override_frame_id: # override the default frame_id with a custom one (e.g. slam_origin instead of aloam_origin)
+        enabled: false
+        frame_id: "slam_origin" # the desired frame_id without the UAV namespace
+
+      estimators: # the names of the partial estimators
+        lateral:
+          name: "lat_liosam"
+        altitude:
+          name: "alt_liosam"
+        heading:
+          name: "hdg_liosam"
+          passthrough: false # if true, then heading is not estimated but passed through from the orientation topic
+
+      topics:
+        orientation: "hw_api/orientation" # orientation passthrough
+        angular_velocity: "hw_api/angular_velocity" # angular velocity passthrough
+
+      # namespace of the altitude estimator
+      alt_liosam: 
+
+        max_flight_z: 100.0 # [m] maximum allowed flight Z (in the estimator frame)
+ 
+        innovation:
+          limit: 1.0 # [m] innovation limit that will trigger action
+          action: "mitigate" # {"eland", "switch", "mitigate"}
+  
+        repredictor: # repredictor for correct fusion of delayed measurements
+          enabled: true
+          buffer_size: 200 # [samples] how many states and corrections are kept in history (i.e. estimator running at the default 100 Hz rate will be able to fuse corrections with up to 2 s delay with buffer size of 200 samples)
+  
+        process_noise: # process noise covariance (Q)
+          pos: 1.0 # position state
+          vel: 100.0 # velocity state
+          acc: 100.0 # acceleration state
+  
+        corrections: [
+          "pos_liosam",
+          "vel_hw_api"
+        ]
+  
+        pos_liosam:
+          state_id: 0 # 0 - position, 1 - velocity, 2 - acceleration
+          noise: 0.01 # measurement noise covariance (R)
+          noise_unhealthy_coeff: 100.0 # covariance gets multiplied by this coefficient when correction is unhealthy (R)
+          message:
+            type: "nav_msgs/Odometry"
+            topic: "odom" # without uav namespace
+            limit: 
+              delay: 2.0 # [s] messages with higher delay will flag correction as unhealthy
+              time_since_last: 1.0 # [s] larger time step between messages will flag correction as unhealthy
+  
+          processors: [] # types of processors attached to this measurement
+
+        vel_hw_api:
+          state_id: 1 # 0 - position, 1 - velocity, 2 - acceleration
+          noise: 1.0 # measurement noise covariance (R)
+          noise_unhealthy_coeff: 100.0 # covariance gets multiplied by this coefficient when correction is unhealthy (R)
+          message:
+            type: "geometry_msgs/Vector3Stamped"
+            topic: "hw_api/velocity" # without uav namespace
+            limit: 
+              delay: 1.0 # [s] messages with higher delay will flag correction as unhealthy
+              time_since_last: 0.5 # [s] larger time step between messages will flag correction as unhealthy
+
+          processors: [] # types of processors attached to this measurement
+
+          median_filter:
+            buffer_size: 20 # the number of samples from which the median is calculated
+            max_diff: 2.0 # [m] reject measurement if difference from median is over this value
+
+      # namespace of the heading estimator
+      hdg_liosam: 
+
+        max_flight_z: 100.0 # [m] maximum allowed flight Z (in the estimator frame)
+
+        position_innovation_limit: 1.0 # [m] innovation limit that will trigger switch to other estimator
+
+        repredictor: # repredictor for correct fusion of delayed measurements
+          enabled: true
+          buffer_size: 200 # [samples] how many states and corrections are kept in history (i.e. estimator running at the default 100 Hz rate will be able to fuse corrections with up to 2 s delay with buffer size of 200 samples)
+
+        process_noise: # process noise covariance (Q)
+          pos: 0.1 # position state
+          vel: 0.1 # velocity state
+
+        corrections: [
+          "hdg_liosam"
+        ]
+
+        hdg_liosam:
+          state_id: 0 # 0 - position, 1 - velocity, 2 - acceleration
+          noise: 0.0001 # measurement noise covariance (R)
+          noise_unhealthy_coeff: 100.0 # covariance gets multiplied by this coefficient when correction is unhealthy (R)
+          message:
+            type: "nav_msgs/Odometry"
+            topic: "odom" # without uav namespace
+            limit: 
+              delay: 2.0 # [s] messages with higher delay will flag correction as unhealthy
+              time_since_last: 1.0 # [s] larger time step between messages will flag correction as unhealthy
+
+          processors: [] # types of processors attached to this measurement
+
+      # namespace of the lateral estimator
+      lat_liosam: 
+
+        hdg_source_topic: "liosam/hdg_liosam/output" # [mrs_uav_state_estimation/EstimatorOutput]
+
+        innovation:
+          limit: 1.0 # [m] innovation limit that will trigger action
+          action: "mitigate" # {"eland", "switch", "mitigate"}
+
+        max_flight_z: 100.0 # [m] maximum allowed flight Z (in the estimator frame)
+
+        repredictor: # repredictor for correct fusion of delayed measurements
+          enabled: true
+          buffer_size: 200 # [samples] how many states and corrections are kept in history (i.e. estimator running at the default 100 Hz rate will be able to fuse corrections with up to 2 s delay with buffer size of 200 samples)
+
+        process_noise: # process noise covariance (Q)
+          pos: 1.0 # position state
+          vel: 10.0 # velocity state
+          acc: 0.1 # acceleration state
+
+        corrections: [
+          "pos_liosam"
+        ]
+
+        pos_liosam:
+          state_id: 0 # 0 - position, 1 - velocity, 2 - acceleration
+          noise: 0.01 # measurement noise covariance (R)
+          noise_unhealthy_coeff: 100.0 # covariance gets multiplied by this coefficient when correction is unhealthy (R)
+          message:
+            type: "nav_msgs/Odometry"
+            topic: "odom" # without uav namespace
+            limit: 
+              delay: 2.0 # [s] messages with higher delay will flag correction as unhealthy
+              time_since_last: 1.0 # [s] larger time step between messages will flag correction as unhealthy
+
+          processors: ["tf_to_world"] # types of processors attached to this measurement
+
+          tf_to_world:
+            gnss_topic: "gnss_verifier/gnss_wstatus"
+
+  constraint_manager:
+
+    estimator_types: [
+      "liosam"
+    ]
+
+    constraints: [
+      "ingeniarius",
+      "slow",
+      "medium",
+      "fast",
+    ]
+
+    # list of allowed gains per odometry mode
+    allowed_constraints:
+      liosam: ["ingeniarius","slow", "medium", "fast"]
+
+    # those gains will be used automatically when a localization mode switches
+    # and the current gains are not in the allowed list (next paragraphs)
+    default_constraints:
+      liosam: "medium"
+
+    ingeniarius:
+
+      horizontal:
+        speed: 0.5
+        acceleration: 0.5
+        jerk: 10.0
+        snap: 10.0
+
+      vertical:
+
+        ascending:
+          speed: 0.5
+          acceleration: 0.5
+          jerk: 10.0
+          snap: 10.0
+
+        descending:
+          speed: 0.5
+          acceleration: 0.5
+          jerk: 10.0
+          snap: 10.0
+
+      heading:
+        speed: 0.5
+        acceleration: 1.0
+        jerk: 20.0
+        snap: 20.0
+
+      angular_speed:
+        roll: 60.0 #30.0
+        pitch: 60.0 #30.0
+        yaw: 10.0 #5.0
+
+      tilt: 60.0 # [deg]
+
+  gain_manager:
+
+    estimator_types: [
+      "liosam"
+    ]
+
+    gains: [
+      "ingeniarius",
+    ]
+
+    # list of allowed gains per odometry mode
+    allowed_gains:
+      liosam: ["ingeniarius"]
+
+    # those gains will be used automatically when a localization mode switches
+    # and the current gains are not in the allowed list (next paragraphs)
+    default_gains:
+      liosam: "ingeniarius"
+
+    ingeniarius:
+
+      horizontal:
+        kp: 1.0   # (default: 3.0)
+        kv: 0.7   # (default: 2.0)
+        ka: 0.3   # (default: 1.0)
+
+        kib: 0.1      # (default: 0.1)
+        kib_lim: 10.0
+
+        kiw: 0.1       # (default: 0.1)
+        kiw_lim: 10.0
+
+      vertical:
+        kp: 5.0   # (default: 15.0)
+        kv: 3.0   # (default: 8.0)
+        ka: 0.3   # (default: 1.0)
+
+      attitude:
+        kq_roll_pitch: 6.0  # (default: 5.0)
+        kq_yaw: 6.0         # (default: 5.0)
+
+      mass_estimator:
+        km: 0.5   # (default: 0.5)
+
+        # the maximum estimated uav mass difference
+        km_lim: 20.0 # [kg, at least 1/2 of the UAVs mass to allow landing detection]
+
+  transform_manager:
+
+    liosam:
+      odom_topic: "odom" # name of the topic (expects nav_msgs/Odometry topic type)
+      tf_from_attitude: # used for transforming velocities before full transform is available
+        enabled: true
+        attitude_topic: "attitude" # name of the attitude topic(expects geometry_msgs/QuaternionStamped topic type)
+      namespace: "estimation_manager/liosam" # the namespace of the topic (usually the node that publishes the topic)
+      utm_based: false # if true, will publish tf to utm_origin
+      inverted: true # publish as inverted tf (the default for inverted mrs tf tree convention)
+      republish_in_frames: [] # the odometry message will be transformed and republished in the specified frames
+
+    mapping_origin_tf:
+      enabled: true
+      debug_prints: false
+      lateral_topic: "odom" # name of the topic used for x, y components of the tf (expects nav_msgs/Odometry topic type)
+      altitude_topic: "odom" # name of the topic  used for z components of the tf (expects nav_msgs/Odometry topic type)
+      orientation_topic: "hw_api/orientation" # name of the topic  used for orientation components of the tf (expects geometry_msgs/Quaternion topic type)
+      inverted: true # publish as inverted tf (the default for inverted mrs tf tree convention)
+      custom_frame_id:
+        enabled: true
+        frame_id: "mapping_origin"
+
+  uav_manager:
+
+    takeoff:
+
+      rate: 10 # [Hz]
+
+      during_takeoff:
+        controller: "Se3Controller"
+        tracker: "LandoffTracker"
+
+      after_takeoff:
+        controller: "Se3Controller"
+        tracker: "MpcTracker"
+
+      takeoff_height: 3.0
+
+mrs_uav_controllers:
+
+  se3_controller:
+
+    se3:
+
+      constraints:
+
+        throttle_saturation: 0.9 # [-], range from 0 to 1
+
+        # When the controller wants to output tilt larger than this,
+        # it will return an empty command instead, which should trigger
+        # a failsafe in the control manager.
+        tilt_angle_failsafe:
+          enabled: true
+          limit: 90.0 # [deg]
+
+      angular_rate_feedforward:
+
+        # compensation of a parasitic heading rate due to pitch and roll rate
+        parasitic_pitch_roll: true
+
+        # jerk feed forward
+        jerk: true
+
+      rotation_matrix: 1 # {0 = lee, 1 = baca (oblique projection)}
+
+      # preferred output mode:
+      # - choose this one if more output modes are available
+      preferred_output: 2 # {0 = actuators,
+                          #  1 = control_group,
+                          #  2 = attitude_rate,
+                          #  3 = attitude,}
+
+    # PID gains for the position controller
+    # used only when outputing desired "velocity"
+    position_controller:
+
+      translation_gains:
+        p: 2.0
+        d: 0.15
+        i: 0.2
+      heading_gains:
+        p: 1.0
+        d: 0.1
+        i: 0.01

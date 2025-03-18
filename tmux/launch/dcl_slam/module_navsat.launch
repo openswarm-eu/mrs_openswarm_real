@@ -1,0 +1,28 @@
+<launch>
+
+    <arg name="latitude" default="41.22060674"/>
+    <arg name="longitude" default="-8.52731794"/>
+    <arg name="heading" default="0.0"/>
+
+    <arg name="world_frame" default="uav6/odom"/>
+    <arg name="body_frame" default="uav6/fcu"/>
+
+   
+    <!-- EKF GPS-->
+    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_gps" respawn="true">
+        <remap from="odometry/filtered" to="odometry/navsat" />
+    </node>
+
+    <!-- Navsat -->
+    <node pkg="robot_localization" type="navsat_transform_node" name="navsat" respawn="true">
+        <rosparam param="datum" subst_value="true">
+            [$(arg latitude), $(arg longitude), $(arg heading)]
+        </rosparam>
+        <rosparam param="world_frame_id" subst_value="True">$(arg world_frame)</rosparam>
+        <rosparam param="base_link_frame_id" subst_value="True">$(arg body_frame)</rosparam>
+        <remap from="imu/data" to="hw_api/imu" />
+        <remap from="gps/fix" to="gnss_verifier/gnss_wstatus" />
+        <remap from="odometry/filtered" to="odometry/navsat" />
+    </node>
+
+</launch>

@@ -1,0 +1,45 @@
+<launch>
+	<arg name="set_lio_type" default="1"/> <!-- 1 for LIO-SAM
+												2 for FAST-LIO2 -->
+	<param name="/number_of_robots" value="2"/>
+	<param name="/name_list" value="true"/>
+	<param name="/mapFrameAsChild" value="true"/>
+	
+	<param name="/robot_names" type="yaml" value="[uav1, uav2]"/>
+	<!-- <param name="/robot_names" type="yaml" value="[uav1]"/> -->
+
+	<arg name="set_respawn_value" default="false"/>  <!-- boolean: true, false -->
+
+	<!--- rviz -->
+	<!-- <node pkg="rviz" type="rviz" name="dcl_rviz" args="-d $(find dcl_slam)/config/dcl_rviz.rviz" />
+	<node pkg="dcl_slam" type="dcl_slam_loopVisualizationNode" name="dcl_slam_loopVisualizationNode" output="screen" /> -->
+
+	<!-- <remap from="/uav1/os_cloud_nodelet/points" to="/a/velodyne_points"/>
+	<remap from="/uav1/hw_api/imu" to="/a/imu/data"/> -->
+
+	<!-- <remap from="/uav2/os_cloud_nodelet/points" to="/b/velodyne_points"/>
+	<remap from="/uav2/hw_api/imu" to="/b/imu/data"/> -->
+
+	<!-- Robot list -->
+  	<include file="$(find mrs_ingeniarius_simulation)/launch/dcl_slam/single_ugv.launch">
+    	<arg name="robotPrefix" value="uav1"/>
+		<arg name="respawnValue" value="$(arg set_respawn_value)"/>
+		<arg name="lioType" value="$(arg set_lio_type)"/>
+
+  	</include>
+
+	<include file="$(find mrs_ingeniarius_simulation)/launch/dcl_slam/single_ugv.launch">
+    	<arg name="robotPrefix" value="uav2"/>
+		<arg name="respawnValue" value="$(arg set_respawn_value)"/>
+		<arg name="lioType" value="$(arg set_lio_type)"/>
+  	</include>
+
+
+	<!-- <remap from="/uav1/os_cloud_nodelet/points" to="/a/velodyne_points"/>
+	<remap from="/uav1/hw_api/imu" to="/a/imu/data"/> -->
+
+	<!-- <remap from="/uav2/os_cloud_nodelet/points" to="/b/velodyne_points"/>
+	<remap from="/uav2/hw_api/imu" to="/b/imu/data"/> -->
+
+
+</launch>

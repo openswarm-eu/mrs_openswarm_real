@@ -1,0 +1,36 @@
+<launch>
+
+    <arg name="latitude" default="41.22061958"/>
+    <arg name="longitude" default="-8.52732281"/>
+    <arg name="heading" default="0.0"/>
+    <arg name="robotPrefix" default="$(optenv UAV_NAME)"/>
+   
+   <group ns="$(arg robotPrefix)">
+
+		<!-- parameters -->
+		<rosparam file="$(find mrs_ingeniarius_real)/config/navsat/navsat_$(arg robotPrefix).yaml" command="load" />
+
+        <!-- Odom -->
+        <node pkg="tf2_ros" type="static_transform_publisher" name="$(env UAV_NAME)_base_to_odom" 	args="0 0 0 0 0 0 $(env UAV_NAME)/odom_navsat $(env UAV_NAME)/fcu"/>
+
+        <!-- Map -->
+        <node pkg="tf2_ros" type="static_transform_publisher" name="$(env UAV_NAME)_odom_to_map" 	args="0 0 0 0 0 0 $(env UAV_NAME)/map_navsat $(env UAV_NAME)/odom_navsat"/>
+
+        <!-- EKF GPS-->
+        <node pkg="robot_localization" type="ekf_localization_node" name="ekf_gps" respawn="true">
+            <remap from="odometry/filtered" to="odometry/navsat" />
+        </node>
+
+        <!-- Navsat -->
+        <node pkg="robot_localization" type="navsat_transform_node" name="navsat" respawn="true">
+            <rosparam param="datum" subst_value="true">
+                [$(arg latitude), $(arg longitude), $(arg heading)]
+            </rosparam>
+            <!-- <remap from="imu/data" to="hw_api/imu" /> -->
+            <remap from="imu/data" to="imu_calibration/imu" />
+            <remap from="gps/fix" to="gnss_verifier/gnss_wstatus" />
+            <remap from="odometry/filtered" to="odometry/navsat" />
+        </node>
+	</group>
+
+</launch>

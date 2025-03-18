@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<launch>
+<!-- SET NAMESPACE to a specific name) -->
+<arg name="uav_x" default="$(optenv UAV_NAME uav7)"/>
+
+<!-- RECORD DATASET (with infinite buffer and to a specific folder) -->
+<node pkg="rosbag" type="record" name="rosbag_record" args="
+	/$(arg uav_x)/nlink_linktrack_nodeframe2		
+	/$(arg uav_x)/uwb(.*)
+	/$(arg uav_x)/mavros(.*)
+	/$(arg uav_x)/hw_api/imu
+	/$(arg uav_x)/hw_api/gnss
+	/$(arg uav_x)/rtk/bestpos
+	/$(arg uav_x)/witmotion_imu/imu
+	/$(arg uav_x)/gnss_verifier/gnss_wstatus
+	/$(arg uav_x)/lslidar/pcl_filtered
+	/$(arg uav_x)/estimation_manager/gps_garmin/odom
+	/$(arg uav_x)/odometry/gps
+	/$(arg uav_x)/distributedMapping/localPath
+	/$(arg uav_x)/distributedMapping/globalMap
+	/$(arg uav_x)/odom
+
+	
+--regex
+-b 0 
+--split --size=20480
+-o $(env HOME)/mrs_apptainer/user_ros_workspace/data" output="screen"/>
+
+</launch>
