@@ -77,12 +77,15 @@ lio_sam:
 
   # GPS Settings
   addGPSFactorflag: true
-  gpsInitialLocalization: true                # Ingeniarius modifications, normally true
-  gpsInitialLocal: false
+  gpsInitialLocalization: false                # Ingeniarius modifications, normally true
 
-  # # Ingeniarius
+
+  # Ingeniarius
   gpsBaseStationLat: 41.22061958  
   gpsBaseStationLong: -8.52732281
+
+  # GPS Initialization with measured poses
+  gpsInitialLocal: false
   gpsInitLat: 41.2209589    
   gpsInitLong: -8.52718351
 

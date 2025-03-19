@@ -3,6 +3,7 @@
   <!-- args corresponding to environment variables -->
   <arg name="UAV_NAME" default="$(env UAV_NAME)" />
   <arg name="LOGGER_DEBUG" default="$(optenv LOGGER_DEBUG false)" />
+	<arg name="ROS_LAUNCH_PATH" default="$(optenv ROS_LAUNCH_PATH)" />
 
   <!-- other args -->
   <arg name="standalone" default="false" />
@@ -35,7 +36,7 @@
 
   <!-- LidarFilter //{ -->
 
-  <include file="$(find mrs_ingeniarius_real)/launch/mrs_pcl_filter.launch">
+  <include file="$(arg ROS_LAUNCH_PATH)/mrs_pcl_filter.launch">
 
     <arg name="standalone" value="$(arg standalone)" />
     <arg name="nodelet_manager_name" value="$(arg nodelet_manager_name)" />

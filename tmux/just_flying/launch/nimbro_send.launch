@@ -2,6 +2,7 @@
 <launch>
 
     <arg name="robot_name" default="$(optenv UAV_NAME)"/>
+    <arg name="ROS_CONFIG_PATH" default="$(optenv ROS_CONFIG_PATH)" />
 
     <!-- "Case" for uav6 -->
     <!-- <group if="$(eval arg('robot_name') == 'uav6')"> -->
@@ -60,7 +61,7 @@
             <param name="destination_addr" value="$(arg target1)" />
             <param name="port" value="$(arg port_target1)" />
             <!-- Load the list of topics from a YAML file -->
-            <rosparam command="load" file="$(find mrs_ingeniarius_real)/tmux/swarm_formation/config/nimbro/$(arg robot_name)_topics.yaml" />
+            <rosparam command="load" file="$(arg ROS_CONFIG_PATH)/nimbro/$(arg robot_name)_topics.yaml" />
         </node>
 
         <!-- The sender node -->
@@ -69,7 +70,7 @@
             <param name="destination_addr" value="$(arg target2)" />
             <param name="port" value="$(arg port_target2)" />
             <!-- Load the list of topics from a YAML file -->
-            <rosparam command="load" file="$(find mrs_ingeniarius_real)/tmux/swarm_formation/config/nimbro/$(arg robot_name)_topics.yaml" />
+            <rosparam command="load" file="$(arg ROS_CONFIG_PATH)/nimbro/$(arg robot_name)_topics.yaml" />
         </node>
 
         <!-- The sender node -->
@@ -78,7 +79,7 @@
             <param name="destination_addr" value="$(arg target3)" />
             <param name="port" value="$(arg port_target3)" />
             <!-- Load the list of topics from a YAML file -->
-            <rosparam command="load" file="$(find mrs_ingeniarius_real)/tmux/swarm_formation/config/nimbro/$(arg robot_name)_topics.yaml" />
+            <rosparam command="load" file="$(arg ROS_CONFIG_PATH)/nimbro/$(arg robot_name)_topics.yaml" />
         </node>
     </group>
 

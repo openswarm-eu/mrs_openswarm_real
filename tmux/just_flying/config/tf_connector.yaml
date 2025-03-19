@@ -4,7 +4,7 @@ connecting_frame_id: "common_origin"
 # these are the tf subtrees to be connected through the respective root frames so that the equal frames are equal
 connections:
   - root_frame_id: "uav6/fcu"
-    equal_frame_id: "uav6/odom"
+    equal_frame_id: "uav6/map_navsat"
 
   # you can add further connections here:
   # - root_frame_id: "another_root"

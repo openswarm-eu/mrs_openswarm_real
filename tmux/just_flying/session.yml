@@ -1,13 +1,11 @@
 # do not modify these
-# /home/uav_6/singularity_poc2/user_ros_workspace/src/mrs_openswarm_real/tmux/tmux/just_flying/config/_env/env.sh
-# /home/uav_6/singularity_poc2/user_ros_workspace/src/mrs_openswarm_real/tmux/tmux/just_flying/session.yml
 root: ./
 name: real_drone
 socket_name: mrs
 attach: false
 tmux_options: -f /etc/ctu-mrs/tmux.conf
 # you can modify these export ROS_MASTER_URI='http://192.168.8.157:11311'; export ROS_IP='192.168.8.157';
-pre_window: source ./config/_env/env.sh
+pre_window: source ./scripts/env.sh
 startup_window: status
 windows:
   - roscore:
@@ -55,53 +53,69 @@ windows:
       layout: tiled
       panes:
         - waitForHw; sleep 3; roslaunch $ROS_LAUNCH_PATH/dcl_slam/run_single.launch
-  # - octomap:
-  #     layout: tiled
-  #     panes:
-  #       - waitForHw; sleep 6; roslaunch mrs_ingeniarius_real mrs_mapplan_octomapping.launch config_octomap_server:=./config/octomap_server.yaml config_octomap_planner:=./config/octomap_planner.yaml config_pcl_filter_ouster:=./config/lidar_filter_mapping.yaml world_frame_id:=$UAV_NAME/odom
-  # - swarm:
-  #     layout: tiled
-  #     panes:
-  #       - waitForTime; sleep 3; roslaunch mrs_ingeniarius_real mrs_swarm_formation.launch drone_id:=0 odom_topic:=/$UAV_NAME/estimation_manager/odom_main
-  # - tf_connector:
-  #     layout: tiled
-  #     panes:
-  #       - waitForTime; roslaunch mrs_tf_connector tf_connector.launch custom_config:=./config/tf_connector.yaml
-  # - automatic_start:
-  #     layout: tiled
-  #     panes:
-  #       - waitForHw; history -s roslaunch mrs_uav_autostart automatic_start.launch
-  #       - waitForHw; history -s rosservice call /$UAV_NAME/hw_api/arming 1; sleep 2; rosservice call /$UAV_NAME/hw_api/offboard
-  # - commands:
-  #     layout: tiled
-  #     panes:
-  #       - waitForTime; history -s rosservice call /$UAV_NAME/octomap_planner/stop \"{}\"
-  #       - waitForTime; history -s rosservice call /$UAV_NAME/mavros/cmd/command \"{broadcast:false, command:246, confirmation:0, param1:1.0, param2:0.0, param3:0.0, param4:0.0, param5:0.0, param6:0.0, param7:0.0}\"
-  # - Nimbro:
-  #     layout: tiled
-  #     panes:
-  #       - waitForTime; roslaunch mrs_ingeniarius_real nimbro_send.launch
-  #       - waitForTime; roslaunch mrs_ingeniarius_real nimbro_receive.launch
-  # - MapGlobalService:
-  #     layout: tiled
-  #     panes:
-  #       - waitForControl; roslaunch mrs_ingeniarius_real map_global_service.launch
-  #       - 'history -s rosservice call /$UAV_NAME/map_global_generation/save_map '
-  # - bag:
-  #     layout: tiled
-  #     panes:
-  #       - waitForControl; roslaunch ./launch/bag_record.launch
-  # - rviz:
-  #     layout: tiled
-  #     panes:
-  #       # - waitForTime; roslaunch mrs_ingeniarius_real mrs_rviz.launch
-  #       - waitForTime; rosrun rviz rviz -d "./config/rviz/rviz.rviz"
-  #       - waitForTime; roslaunch mrs_rviz_plugins rviz_interface.launch
-  # - rviz_uav_models:
-  #     layout: tiled
-  #     panes:
-  #       - waitForTime; roslaunch mrs_rviz_plugins load_robot.launch
-  # - urdf:
-  #     layout: tiled
-  #     panes:
-  #       - waitForTime; roslaunch mrs_ingeniarius_real display_zd700.launch
+  - tf_connector:
+      layout: tiled
+      panes:
+        - waitForTime; roslaunch mrs_tf_connector tf_connector.launch custom_config:=./config/tf_connector.yaml
+  - octomap:
+      layout: tiled
+      panes:
+        - waitForHw; sleep 6; roslaunch $ROS_LAUNCH_PATH/mrs_mapplan_octomapping.launch config_octomap_server:=./config/octomap/octomap_server.yaml config_octomap_planner:=./config/octomap/octomap_planner.yaml config_pcl_filter_ouster:=./config/octomap/lidar_filter_mapping.yaml world_frame_id:=$UAV_NAME/liosam_origin
+  - Nimbro:
+      layout: tiled
+      panes:
+        - waitForTime; roslaunch $ROS_LAUNCH_PATH/nimbro_send.launch
+        - waitForTime; roslaunch $ROS_LAUNCH_PATH/nimbro_receive.launch
+  - goto_octo:
+      layout: tiled
+      panes:
+        - waitForHw; history -s roslaunch mrs_uav_autostart automatic_start.launch
+        - 'history -s rosservice call /$UAV_NAME/octomap_planner/goto \"goal: \[0.0, -34.0, 2.5, 0.0\]\"'
+        - 'history -s rosservice call /$UAV_NAME/octomap_planner/goto \"goal: \[-5.0, -34.0, 2.5, 0.0\]\"'
+        - 'history -s rosservice call /$UAV_NAME/octomap_planner/stop \"{}\"'
+  - demo:
+      layout: tiled
+      panes:
+        - waitForHw; history -s roslaunch mrs_uav_autostart automatic_start.launch
+        - 'history -s rosservice call /$UAV_NAME/control_manager/goto_altitude \"goal: 10.0\"'
+        - 'history -s ./scripts/poses.sh'
+  - swarm:
+      layout: tiled
+      panes:
+        - waitForHw; history -s roslaunch mrs_uav_autostart automatic_start.launch
+        - history -s roslaunch mrs_ingeniarius_utils pose_generator.launch
+        - waitForTime; sleep 3; [ $SWARM_FORMATION -eq 1 ] && roslaunch mrs_ingeniarius_real mrs_swarm_formation.launch drone_id:=0 odom_topic:=/$UAV_NAME/estimation_manager/odom_main  || exit
+  - commands:
+      layout: tiled
+      panes:
+        - waitForHw; history -s roslaunch mrs_uav_autostart automatic_start.launch
+        - waitForHw; history -s rosservice call /$UAV_NAME/hw_api/arming 1; sleep 2; rosservice call /$UAV_NAME/hw_api/offboard
+        - waitForTime; history -s rosservice call /$UAV_NAME/mavros/cmd/command \"{broadcast:false, command:246, confirmation:0, param1:1.0, param2:0.0, param3:0.0, param4:0.0, param5:0.0, param6:0.0, param7:0.0}\"
+  - MapGlobalService:
+      layout: tiled
+      panes:
+        - waitForControl; roslaunch $ROS_LAUNCH_PATH/map_global_service.launch
+        - 'history -s rosservice call /$UAV_NAME/map_global_generation/save_map'
+  - UWB:
+      layout: tiled
+      panes:
+        - waitForRos; [ $SYS_ROSBAG_ENABLED -eq 1 ] && roslaunch uwb_odom_publisher uwb_stack.launch || exit
+        - waitForRos; history -s roslaunch uwb_odom_publisher record_bag.launch
+  - bag:
+      layout: tiled
+      panes:
+        - waitForRos; [ $SYS_ROSBAG_ENABLED -eq 1 ] && rosbag record $SYS_ROSBAG_ARGS $SYS_ROSBAG_TOPICS || exit
+  - rviz:
+      layout: tiled
+      panes:
+        # - waitForTime; roslaunch $ROS_LAUNCH_PATH/mrs_rviz.launch
+        - waitForTime; [ $USE_RVIZ -eq 1 ] && rosrun rviz rviz -d "./config/rviz/rviz.rviz" || exit
+        - waitForTime; [ $USE_RVIZ -eq 1 ] && roslaunch mrs_rviz_plugins rviz_interface.launch
+  - rviz_uav_models:
+      layout: tiled
+      panes:
+        - waitForTime; [ $USE_RVIZ -eq 1 ] && roslaunch mrs_rviz_plugins load_robot.launch
+  - urdf:
+      layout: tiled
+      panes:
+        - waitForTime; [ $USE_RVIZ -eq 1 ] && roslaunch $ROS_LAUNCH_PATH/display_zd700.launch

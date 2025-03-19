@@ -4,8 +4,6 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
-        - /Global Options1
-        - /TF1/Frames1
         - /uav11
         - /uav11/DCL-LIO-SAM1
         - /uav11/Octomap1
@@ -79,12 +77,76 @@ Visualization Manager:
       Reference Frame: <Fixed Frame>
       Value: true
     - Class: rviz/TF
-      Enabled: false
+      Enabled: true
       Filter (blacklist): ""
       Filter (whitelist): ""
       Frame Timeout: 15
       Frames:
         All Enabled: false
+        base_link:
+          Value: false
+        base_link_frd:
+          Value: false
+        common_origin:
+          Value: true
+        map:
+          Value: true
+        map_ned:
+          Value: false
+        odom:
+          Value: false
+        odom_ned:
+          Value: false
+        uav6/amsl_origin:
+          Value: false
+        uav6/base_footprint_link:
+          Value: false
+        uav6/fcu:
+          Value: true
+        uav6/fcu/arms:
+          Value: true
+        uav6/fcu/arms_red:
+          Value: true
+        uav6/fcu/props:
+          Value: true
+        uav6/fcu/uav_marker:
+          Value: true
+        uav6/fcu_untilted:
+          Value: false
+        uav6/fixed_origin:
+          Value: false
+        uav6/garmin:
+          Value: false
+        uav6/gnss_link:
+          Value: false
+        uav6/imu_link:
+          Value: false
+        uav6/lidar_link:
+          Value: false
+        uav6/liosam_origin:
+          Value: false
+        uav6/liosam_origin_att_only:
+          Value: false
+        uav6/local_origin:
+          Value: false
+        uav6/lslidar_link:
+          Value: false
+        uav6/map_navsat:
+          Value: false
+        uav6/mapping_origin:
+          Value: false
+        uav6/odom:
+          Value: false
+        uav6/odom_:
+          Value: false
+        uav6/rtk_antenna:
+          Value: false
+        uav6/stable_origin:
+          Value: false
+        uav6/tof_sensor_0:
+          Value: false
+        world:
+          Value: false
       Marker Alpha: 1
       Marker Scale: 1
       Name: TF
@@ -92,9 +154,63 @@ Visualization Manager:
       Show Axes: true
       Show Names: true
       Tree:
-        {}
+        base_link:
+          base_link_frd:
+            {}
+        common_origin:
+          {}
+        map:
+          map_ned:
+            {}
+        odom:
+          odom_ned:
+            {}
+        uav6/map_navsat:
+          uav6/odom_:
+            uav6/fcu:
+              uav6/base_footprint_link:
+                {}
+              uav6/fcu/arms:
+                {}
+              uav6/fcu/arms_red:
+                {}
+              uav6/fcu/props:
+                {}
+              uav6/fcu/uav_marker:
+                {}
+              uav6/fcu_untilted:
+                uav6/amsl_origin:
+                  {}
+              uav6/fixed_origin:
+                uav6/local_origin:
+                  {}
+              uav6/garmin:
+                {}
+              uav6/gnss_link:
+                {}
+              uav6/imu_link:
+                {}
+              uav6/liosam_origin:
+                {}
+              uav6/liosam_origin_att_only:
+                {}
+              uav6/lslidar_link:
+                {}
+              uav6/mapping_origin:
+                {}
+              uav6/odom:
+                uav6/lidar_link:
+                  {}
+                world:
+                  {}
+              uav6/rtk_antenna:
+                {}
+              uav6/stable_origin:
+                {}
+              uav6/tof_sensor_0:
+                {}
       Update Interval: 0
-      Value: false
+      Value: true
     - Class: rviz/Group
       Displays:
         - Class: rviz/Group
@@ -343,28 +459,18 @@ Visualization Manager:
             Expand Link Details: false
             Expand Tree: false
             Link Tree Style: Links in Alphabetic Order
-            uav1/fcu:
+            uav6/fcu:
               Alpha: 1
               Show Axes: false
               Show Trail: false
               Value: true
-            uav1/fcu/arms:
-              Alpha: 1
-              Show Axes: false
-              Show Trail: false
-              Value: true
-            uav1/fcu/props:
-              Alpha: 1
-              Show Axes: false
-              Show Trail: false
-              Value: true
-            uav1/fcu/uav_marker:
+            uav6/fcu/arms_red:
               Alpha: 1
               Show Axes: false
               Show Trail: false
               Value: true
           Name: UAVModel
-          Robot Description: /uav1/robot_model
+          Robot Description: /uav6/robot_model
           TF Prefix: ""
           Update Interval: 0
           Value: true
@@ -394,7 +500,7 @@ Visualization Manager:
               Size (Pixels): 3
               Size (m): 0.10000000149011612
               Style: Flat Squares
-              Topic: /uav1/distributedMapping/globalMap
+              Topic: /uav6/lio_sam/deskew/cloud_deskewed
               Unreliable: false
               Use Fixed Frame: true
               Use rainbow: true
@@ -727,26 +833,6 @@ Visualization Manager:
             Expand Link Details: false
             Expand Tree: false
             Link Tree Style: Links in Alphabetic Order
-            uav2/fcu:
-              Alpha: 1
-              Show Axes: false
-              Show Trail: false
-              Value: true
-            uav2/fcu/arms:
-              Alpha: 1
-              Show Axes: false
-              Show Trail: false
-              Value: true
-            uav2/fcu/props:
-              Alpha: 1
-              Show Axes: false
-              Show Trail: false
-              Value: true
-            uav2/fcu/uav_marker:
-              Alpha: 1
-              Show Axes: false
-              Show Trail: false
-              Value: true
           Name: UAVModel
           Robot Description: /uav2/robot_model
           TF Prefix: ""
@@ -941,7 +1027,7 @@ Visualization Manager:
   Global Options:
     Background Color: 255; 255; 255
     Default Light: true
-    Fixed Frame: common_origin
+    Fixed Frame: world
     Frame Rate: 60
   Name: root
   Tools:
@@ -977,7 +1063,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: -1.5700000524520874
+      Angle: -1.5799999237060547
       Class: rviz/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
@@ -987,10 +1073,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 11.913126945495605
+      Scale: 39.60654067993164
       Target Frame: <Fixed Frame>
-      X: -8.207326889038086
-      Y: -38.18684005737305
+      X: 9.991872787475586
+      Y: 24.701318740844727
     Saved: ~
 Window Geometry:
   Displays:
@@ -1008,5 +1094,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1848
-  X: 1992
+  X: 72
   Y: 27
