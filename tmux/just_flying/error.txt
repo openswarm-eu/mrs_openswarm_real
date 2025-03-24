@@ -1,0 +1,1 @@
+Your hostname 'uav6' is specified only as local host (127.0.1.1). Update '/etc/hosts'.

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PACKAGE_PATH=$(rospack find mrs_ingeniarius_real)
+PACKAGE_PATH=$(rospack find mrs_openswarm_real)
 
 cp $PACKAGE_PATH/rviz/default.rviz /tmp/default.rviz
 
