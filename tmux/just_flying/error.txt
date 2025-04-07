@@ -1,1 +1,66 @@
 Your hostname 'uav6' is specified only as local host (127.0.1.1). Update '/etc/hosts'.
+
+git@github.com:openswarm-eu/singularity_poc2.git
+
+sudo nano /etc/hosts
+
+192.168.8.170	uav6
+192.168.8.188	uav7
+192.168.8.254	uav8
+192.168.8.228	uav9
+192.168.8.190	uav10
+192.168.8.160	uav11
+192.168.8.137	uav12
+192.168.8.144	uav13
+192.168.8.203	uav14
+
+rostopic echo -n1 /uav6/hw_api/battery_state 
+header: 
+  seq: 57
+  stamp: 
+    secs: 1742990570
+    nsecs: 681635296
+  frame_id: ''
+voltage: 23.128000259399414
+temperature: 0.0
+current: -0.3199999928474426
+charge: nan
+capacity: nan
+design_capacity: nan
+percentage: 0.5699999928474426
+power_supply_status: 2
+power_supply_health: 0
+power_supply_technology: 3
+present: True
+cell_voltage: [23.125999450683594]
+cell_temperature: []
+location: "id0"
+serial_number: ''
+---
+
+
+rostopic echo -n1 /uav6/mavros/battery
+header: 
+  seq: 84
+  stamp: 
+    secs: 1742990622
+    nsecs: 684080496
+  frame_id: ''
+voltage: 23.10700035095215
+temperature: 0.0
+current: -0.36000001430511475
+charge: nan
+capacity: nan
+design_capacity: nan
+percentage: 0.5600000023841858
+power_supply_status: 2
+power_supply_health: 0
+power_supply_technology: 3
+present: True
+cell_voltage: [23.104000091552734]
+cell_temperature: []
+location: "id0"
+serial_number: ''
+
+
+

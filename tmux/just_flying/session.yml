@@ -71,8 +71,8 @@ windows:
       layout: tiled
       panes:
         - waitForHw; history -s roslaunch mrs_uav_autostart automatic_start.launch
-        - 'history -s rosservice call /$UAV_NAME/octomap_planner/goto \"goal: \[0.0, -34.0, 2.5, 0.0\]\"'
-        - 'history -s rosservice call /$UAV_NAME/octomap_planner/goto \"goal: \[-5.0, -34.0, 2.5, 0.0\]\"'
+        - 'history -s rosservice call /$UAV_NAME/octomap_planner/goto \"goal: \[13.72, 51.51, 10.5, 0.0]\"'
+        - 'history -s rosservice call /$UAV_NAME/octomap_planner/goto \"goal: \[10.0, 32.0, 10.0, 0.0\]\"'
         - 'history -s rosservice call /$UAV_NAME/octomap_planner/stop \"{}\"'
   - demo:
       layout: tiled
@@ -100,8 +100,8 @@ windows:
   - UWB:
       layout: tiled
       panes:
-        - waitForRos; [ $SYS_UWB -eq 1 ] && roslaunch uwb_odom_publisher uwb_stack.launch || exit
-        - waitForRos; [ $SYS_UWB -eq 1 ] && history -s roslaunch uwb_odom_publisher record_bag.launch || exit
+        - waitForTime; [ $SYS_UWB -eq 1 ] && roslaunch uwb_odom_publisher uwb_stack.launch || exit
+        - waitForTime; [ $SYS_UWB -eq 1 ] && history -s roslaunch uwb_odom_publisher record_bag.launch || exit
   - bag:
       layout: tiled
       panes:

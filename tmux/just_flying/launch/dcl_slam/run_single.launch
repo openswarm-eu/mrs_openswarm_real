@@ -8,7 +8,7 @@
 	<param name="/mapFrameAsChild" value="true"/>
 
 	<!-- <param name="/number_of_robots" value="3"/> -->
-	<param name="/robot_names" type="yaml" value="[uav6]"/>
+	<param name="/robot_names" type="yaml" value="[uav6, uav7, uav8, uav9, uav10, uav11, uav12, uav13, uav14]"/>
 
   	<include file="$(arg ROS_LAUNCH_PATH)/dcl_slam/single_ugv.launch">
     	<arg name="robotPrefix" value="$(arg set_robot_prefix)"/>

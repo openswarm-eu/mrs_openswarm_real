@@ -56,8 +56,8 @@ lio_sam:
 
   # Topics
   pointCloudTopic: "lslidar/pcl_filtered"  # Point cloud data
-  imuTopic: "hw_api/imu"            # IMU data
-  # imuTopic: "imu_calibration/imu"   # IMU data
+  # imuTopic: "hw_api/imu"            # IMU data
+  imuTopic: "imu_calibration/imu"   # IMU data
   odomTopic: "odom"         # IMU pre-preintegration odometry, same frequency as IMU
   gpsTopic: "odometry/gps"  # GPS odometry topic from navsat, see module_navsat.launch file
   # gpsTopic: "estimation_manager/gps_garmin/odom"
@@ -77,8 +77,7 @@ lio_sam:
 
   # GPS Settings
   addGPSFactorflag: true
-  gpsInitialLocalization: false                # Ingeniarius modifications, normally true
-
+  gpsInitialLocalization: true                # Ingeniarius modifications, normally true
 
   # Ingeniarius
   gpsBaseStationLat: 41.22061958  
@@ -96,6 +95,10 @@ lio_sam:
   # # gpsBaseStationLong: -8.52748393
   # gpsInitLat: 41.21705305
   # gpsInitLong: -8.52738819
+
+  # # Forrest 2
+  # gpsBaseStationLat: 41.21711155  
+  # gpsBaseStationLong: -8.52746193
 
   imuInitYaw: 0.0
   useImuHeadingInitialization: true             # if using GPS data, set to "true"

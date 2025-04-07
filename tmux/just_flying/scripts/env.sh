@@ -34,15 +34,26 @@ export ROS_LAUNCH_PATH=$ROS_LAUNCH_PATH
 export ROS_CONFIG_PATH=$ROS_CONFIG_PATH
 
 ############## GPS DATA ##############
+# Ingeniarius
 export DATUM_LATITUDE=41.22061958
 export DATUM_LONGITUDE=-8.52732281
 export DATUM_HEADING=0.0
+
+# # Forest
+# export DATUM_LATITUDE=41.22061958
+# export DATUM_LONGITUDE=-8.52732281
+# export DATUM_HEADING=0.0
+
+# # Forest 2
+# export DATUM_LATITUDE=41.21711155
+# export DATUM_LONGITUDE=-8.52746193
+# export DATUM_HEADING=0.0
 
 ############## ROS BAG ##############
 export SYS_ROSBAG_ENABLED=0         # enable / disable bag recording (be careful to NOT run long term experiments without bags!)
 export SYS_ROSBAG_SIZE='1024'       # max size before splitting in Mb (i.e. 0 = infinite, 1024 = 1024Mb = 1Gb)
 export SYS_ROSBAG_DURATION='8h'
-export SYS_ROSBAG_PATH="$HOME/bag_files/openswarm/latest/"
+export SYS_ROSBAG_PATH="$HOME/bag_files/openswarm/"
 
 export SYS_ROSBAG_ARGS="
     --regex
@@ -52,13 +63,28 @@ export SYS_ROSBAG_ARGS="
     --output-prefix=$SYS_ROSBAG_PATH
 "
 export SYS_ROSBAG_TOPICS="
-    /imu_rion
-    /lslidar_point_cloud
-    /smart_bms_jbd_node/batt_smart_bms
+	/$UAV_NAME/nlink_linktrack_nodeframe2		
+	/$UAV_NAME/uwb(.*)
+	/$UAV_NAME/mavros(.*)
+	/$UAV_NAME/rtk(.*)
+	/$UAV_NAME/hw_api/imu
+	/$UAV_NAME/hw_api/gnss
+	/$UAV_NAME/hw_api/altitude
+	/$UAV_NAME/hw_api/odometry
+	/$UAV_NAME/hw_api/velocity
+	/$UAV_NAME/hw_api/angular_velocity
+	/$UAV_NAME/hw_api/battery_state
+	/$UAV_NAME/gnss_verifier/gnss_wstatus
+	/$UAV_NAME/lslidar/pcl_filtered
+	/$UAV_NAME/estimation_manager/odom_main
+	/$UAV_NAME/odometry/gps
+	/$UAV_NAME/distributedMapping/localPath
+	/$UAV_NAME/distributedMapping/globalMap
+	/$UAV_NAME/odom
 "
 
 ############## RVIZ ##############
-export USE_RVIZ=1           # enable / disable rviz
+export USE_RVIZ=0           # enable / disable rviz
 
 ########## SWARM FORMATION #######
 export SWARM_FORMATION=0 

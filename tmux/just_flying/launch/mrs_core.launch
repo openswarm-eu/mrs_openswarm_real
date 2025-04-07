@@ -13,7 +13,7 @@
   <arg name="BODY_DISTURBANCE_X" default="$(optenv INITIAL_DISTURBANCE_X 0.0)" />
   <arg name="BODY_DISTURBANCE_Y" default="$(optenv INITIAL_DISTURBANCE_Y 0.0)" />
   <arg name="DEBUG" default="$(optenv DEBUG false)" />
-  <arg name="LOGGER_DEBUG" default="$(optenv LOGGER_DEBUG true)" />
+  <arg name="LOGGER_DEBUG" default="$(optenv LOGGER_DEBUG false)" />
   <arg name="UAV_MASS" default="$(optenv UAV_MASS)" />
 
   <!-- config files -->
@@ -195,6 +195,20 @@
     <arg name="bond" value="$(arg bond)" />
     <arg name="standalone" value="$(arg STANDALONE)" />
     <arg name="nodelet_manager_name" value="$(arg nodelet_manager_name)" />
+
+  </include>
+
+  <!-- //} -->
+
+  <!-- MRS Status //{ -->
+
+  <include file="$(find mrs_uav_status)/launch/acquisition.launch" >
+
+    <arg name="UAV_NAME" value="$(arg UAV_NAME)" />
+    <arg name="RUN_TYPE" value="$(arg RUN_TYPE)" />
+
+    <arg name="platform_config" value="$(arg platform_config)" />
+    <arg name="custom_config" value="$(arg custom_config)" />
 
   </include>
 
