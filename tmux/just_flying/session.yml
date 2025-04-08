@@ -21,6 +21,7 @@ windows:
       layout: tiled
       panes:
         - waitForTime; roslaunch mrs_uav_px4_api api.launch
+        - waitForTime; sleep 5; rosservice call /$UAV_NAME/mavros/cmd/command "$RESET_COMMAND"
   - RTK:
       layout: tiled
       panes:
@@ -40,7 +41,7 @@ windows:
   - imu_cal:
       layout: tiled
       panes:
-        -  waitForHw; roslaunch $ROS_LAUNCH_PATH/imu_cal.launch
+        -  waitForHw; sleep 10; roslaunch $ROS_LAUNCH_PATH/imu_cal.launch
   - status:
       layout: tiled
       panes:
@@ -52,7 +53,7 @@ windows:
   - dcl_slam:
       layout: tiled
       panes:
-        - waitForHw; sleep 3; roslaunch $ROS_LAUNCH_PATH/dcl_slam/run_single.launch
+        - waitForHw; sleep 25; roslaunch $ROS_LAUNCH_PATH/dcl_slam/run_single.launch
   - tf_connector:
       layout: tiled
       panes:
@@ -91,7 +92,7 @@ windows:
       panes:
         - waitForHw; history -s roslaunch mrs_uav_autostart automatic_start.launch
         - waitForHw; history -s rosservice call /$UAV_NAME/hw_api/arming 1; sleep 2; rosservice call /$UAV_NAME/hw_api/offboard
-        - waitForTime; history -s rosservice call /$UAV_NAME/mavros/cmd/command \"{broadcast:false, command:246, confirmation:0, param1:1.0, param2:0.0, param3:0.0, param4:0.0, param5:0.0, param6:0.0, param7:0.0}\"
+        - waitForHw; history -s rosservice call /$UAV_NAME/mavros/cmd/command \"{broadcast:\ false, command:\ 246, confirmation:\ 0, param1:\ 1.0, param2:\ 0.0, param3:\ 0.0, param4:\ 0.0, param5:\ 0.0, param6:\ 0.0, param7:\ 0.0}\"
   - MapGlobalService:
       layout: tiled
       panes:

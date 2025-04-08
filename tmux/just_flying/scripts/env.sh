@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ############## CONFIG #############
-export UAV_NAME=uav6
+export UAV_NAME=uav9
 export RUN_TYPE=realworld
 export UAV_TYPE=x500
 export UAV_MASS=5.367
@@ -13,6 +13,8 @@ export OLD_PX4_FW=0
 export GPS_PORT="/dev/serial/by-id/usb-Emlid_ReachM+_8243DBF507E2BB50-if02"
 export IMU_PORT="/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0"
 export TOF_UP_PORT="/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0"
+
+export RESET_COMMAND="{broadcast: false, command: 246, confirmation: 0, param1: 1.0, param2: 0.0, param3: 0.0, param4: 0.0, param5: 0.0, param6: 0.0, param7: 0.0}"
 
 ##############  ROS  ##############
 # export ROS_MASTER_URI='http://192.168.8.170:11311'
