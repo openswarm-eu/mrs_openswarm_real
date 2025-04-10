@@ -45,7 +45,7 @@ windows:
   - status:
       layout: tiled
       panes:
-        - waitForHw; roslaunch mrs_uav_status status.launch config_file:=$ROS_CONFIG_PATH/config/status_info.yaml
+        - waitForHw; roslaunch mrs_uav_status status.launch config_file:=$ROS_CONFIG_PATH/status_info.yaml
   - core:
       layout: tiled
       panes:
@@ -58,6 +58,7 @@ windows:
       layout: tiled
       panes:
         - waitForTime; roslaunch mrs_tf_connector tf_connector.launch custom_config:=./config/tf_connector.yaml
+        - waitForTime; [ $COMPUTER_RVIZ -eq 1 ] && roslaunch $ROS_LAUNCH_PATH/tf_relay.launch || exit
   - octomap:
       layout: tiled
       panes:
@@ -65,8 +66,7 @@ windows:
   - Nimbro:
       layout: tiled
       panes:
-        # - waitForTime; roslaunch $ROS_LAUNCH_PATH/nimbro_send.launch
-        # - waitForTime; roslaunch $ROS_LAUNCH_PATH/nimbro_receive.launch
+        - waitForTime; roslaunch $ROS_LAUNCH_PATH/tf_throttle.launch
         - waitForTime; rosrun mrs_openswarm_real run_nimbro.py ./config/network_config.yaml `rospack find mrs_openswarm_real`/config/communication_config.yaml
   - goto_octo:
       layout: tiled

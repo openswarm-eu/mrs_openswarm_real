@@ -9,21 +9,21 @@ navsat:
   broadcast_cartesian_transform: false
   broadcast_cartesian_transform_as_parent_frame: false
   publish_filtered_gps: true
-  base_link_frame_id: uav6/fcu
-  gps_frame_id: uav6/fcu
-  world_frame: uav6/map_navsat
+  base_link_frame_id: uav11/fcu
+  gps_frame_id: uav11/fcu
+  world_frame: uav11/map_navsat
 
 # EKF for Navsat
 ekf_gps:
   # Ingeniarius
-  imu_yaw_heading: "/uav6/imu_calibration/imu" #"/uav6/hw_api/imu"
+  imu_yaw_heading: "/uav11/imu_calibration/imu"
   imu_yaw_heading_wait_seconds: 10.0
   # original version
   publish_tf: false
-  map_frame: uav6/map_navsat
-  odom_frame: uav6/odom_navsat
-  base_link_frame: uav6/fcu
-  world_frame: uav6/map_navsat
+  map_frame: uav11/map_navsat
+  odom_frame: uav11/odom_navsat
+  base_link_frame: uav11/fcu
+  world_frame: uav11/map_navsat
 
   frequency: 50
   two_d_mode: false
@@ -31,7 +31,7 @@ ekf_gps:
   # -------------------------------------
   # External IMU:
   # -------------------------------------
-  imu0: imu_calibration/imu # hw_api/imu
+  imu0: imu_calibration/imu
   # make sure the input is aligned with ROS REP105. "imu_correct" is manually transformed by myself. EKF can also transform the data using tf between your imu and base_link
   imu0_config: [false, false, false,
                 true,  true,  true,

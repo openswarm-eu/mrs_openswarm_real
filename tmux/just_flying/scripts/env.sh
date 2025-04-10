@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ############## CONFIG #############
-export UAV_NAME=uav9
+export UAV_NAME=uav11
 export RUN_TYPE=realworld
 export UAV_TYPE=x500
 export UAV_MASS=5.367
@@ -87,6 +87,7 @@ export SYS_ROSBAG_TOPICS="
 
 ############## RVIZ ##############
 export USE_RVIZ=0           # enable / disable rviz
+export COMPUTER_RVIZ=0      # enable / disable rviz on the computer
 
 ########## SWARM FORMATION #######
 export SWARM_FORMATION=0 

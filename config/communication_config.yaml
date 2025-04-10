@@ -50,6 +50,9 @@ topics: # topics published out of this machine to receivers specified above
  - name: "move_base_simple/swarm"
    compress: true # enable bz2 compression
    rate: 10.0
+ - name: "tf_throttle/tf"
+   compress: true # enable bz2 compression
+   rate: 10.0
 
 services:
   - name: "trajectory_generation/path"

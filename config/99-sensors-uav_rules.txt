@@ -1,0 +1,16 @@
+##### Add it to /etc/udev/rules.d
+
+# FTDI IMU RION 
+#ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", SYMLINK+="imu_rion", MODE="0777"
+
+# GPS Reach 
+SUBSYSTEM=="tty", ATTRS{idVendor}=="3032", ATTRS{idProduct}=="0012", SYMLINK+="rtk", MODE="0777"
+
+# Pixhawk  
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", SYMLINK+="pixhawk", MODE="0777"
+
+# UWB module
+SUBSYSTEM=="tty", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", SYMLINK+="uwb", MODE="0777"
+
+# Restart_udev_rules
+# sudo udevadm trigger
