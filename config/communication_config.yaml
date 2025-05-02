@@ -73,3 +73,5 @@ services:
     type: mrs_msgs/String
   - name: "control_manager/enable_callbacks"
     type: std_srvs/SetBool
+  - name: "control_manager/goto"
+    type: mrs_msgs/Vec4
