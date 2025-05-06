@@ -65,8 +65,8 @@
     </node>    
 
     <node pkg="nodelet" type="nodelet" name="crop_box_3" args="load pcl/CropBox pcl_manager" output="screen">
-        <remap from="~input" to="/uav6/lio_sam/mapping/map_local" />
-        <remap from="~output" to="/uav6/lio_sam/mapping/map_local_filtered" />
+        <remap from="~input" to="lio_sam/mapping/map_local" />
+        <remap from="~output" to="lio_sam/mapping/map_local_filtered" />
         <param name="input_frame" value="$(arg UAV_NAME)/odom"/>
         <param name="output_frame" value="$(arg UAV_NAME)/fcu"/>
         <rosparam command="load" file="$(arg ROS_CONFIG_PATH)/lslidar/filter_map_local.yaml" />

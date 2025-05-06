@@ -9,8 +9,8 @@
     <node name="map_global_generation" pkg="mrs_openswarm_utils" type="map_global_generation" output="screen">
 
       <param name="uav_name" value="$(arg UAV_NAME)" />
-	    <param name="uav_names" type="yaml" value="[uav6, uav9, uav8]"/>
-      <param name="frame_output" value="common_origin" />
+	    <param name="uav_names" type="yaml" value="[uav6, uav7, uav8, uav9, uav10, uav11, uav12, uav13, uav14]"/>
+      <param name="frame_output" value="world" />
       <param name="wait_time" value="3.0" />
       <param name="save_pcd_file" value="true" />
       <param name="use_icp" value="true" />
