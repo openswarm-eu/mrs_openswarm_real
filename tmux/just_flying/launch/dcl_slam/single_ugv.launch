@@ -4,9 +4,16 @@
 	<arg name="respawnValue" default="false"/>
   	<arg name="ROS_CONFIG_PATH" default="$(optenv ROS_CONFIG_PATH)" />
 
+	<arg name="latitude" default="$(optenv DATUM_LATITUDE)"/>
+	<arg name="longitude" default="$(optenv DATUM_LONGITUDE)"/>
+
 	<group if="$(eval arg('lioType') == 1)" ns="$(arg robotPrefix)">
 		<!-- parameters -->
 		<rosparam file="$(arg ROS_CONFIG_PATH)/loc_dcl_slam/dcl_lio_sam_vlp16_params.yaml" command="load" />
+
+		<!-- Overwrite GPS params -->
+		<rosparam param="lio_sam/gpsBaseStationLat" subst_value="true">$(arg latitude)</rosparam>
+		<rosparam param="lio_sam/gpsBaseStationLong" subst_value="true">$(arg longitude)</rosparam>
 
 		<!--- lio-sam main nodes -->
 		<arg name="project" default="dcl_lio_sam"/>
