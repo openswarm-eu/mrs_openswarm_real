@@ -1,14 +1,14 @@
 use_utm_origin: true
 utm_origin_units: 1 # 0 - UTM, 1 - Latitude Longitude
-utm_origin_lat: 41.22061603
-utm_origin_lon: -8.52731407
+utm_origin_lat: 41.21711155
+utm_origin_lon: -8.52746193
 
 world_origin:
 
   units: "LATLON" # {"UTM, "LATLON"}
 
-  origin_x: 41.22061958
-  origin_y: -8.52732281
+  origin_x: 41.21711155
+  origin_y: -8.52746193
 
 safety_area:
 
@@ -17,23 +17,23 @@ safety_area:
   horizontal:
 
     # the frame of reference in which the points are expressed
-    frame_name: "slam_map"
+    frame_name: "liosam_origin"
 
     # polygon
     #
     # x, y [m] for any frame_name except latlon_origin
     # x = latitude, y = longitude [deg]  for frame_name=="latlon_origin"
     points: [
-      0.0,	0.0,
-      0.0, 80.0,
-      30.0, 80.0,
-      30.0, 0.0,
+      -5, -5,
+      20, -5,
+      20, 65,
+      -5, 65,
     ]
 
   vertical:
 
     # the frame of reference in which the max&min z is expressed
-    frame_name: "slam_map"
+    frame_name: "liosam_origin"
 
     max_z: 15.0
-    min_z: -1.0
+    min_z: 0.0
