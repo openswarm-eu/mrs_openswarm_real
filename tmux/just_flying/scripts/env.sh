@@ -1,11 +1,14 @@
 #!/bin/bash
 
+############## CHANGE #############
+export UAV_NAME=uav12
+export WORLD_NAME=ingeniarius	# forest, ingeniarius
+export RESET_COMMAND_FLAG=0
+
 ############## CONFIG #############
-export UAV_NAME=uav11
 export RUN_TYPE=realworld
 export UAV_TYPE=x500
 export UAV_MASS=5.367
-export WORLD_NAME=ingeniarius_hq
 export INITIAL_DISTURBANCE_X=0.0
 export INITIAL_DISTURBANCE_Y=0.0
 export SENSORS="pixhawk"
@@ -13,7 +16,6 @@ export OLD_PX4_FW=0
 export GPS_PORT="/dev/serial/by-id/usb-Emlid_ReachM+_8243DBF507E2BB50-if02"
 export IMU_PORT="/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0"
 export TOF_UP_PORT="/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0"
-
 export RESET_COMMAND="{broadcast: false, command: 246, confirmation: 0, param1: 1.0, param2: 0.0, param3: 0.0, param4: 0.0, param5: 0.0, param6: 0.0, param7: 0.0}"
 
 ##############  ROS  ##############
@@ -24,7 +26,6 @@ export ROSCONSOLE_FORMAT='[${severity}] [${node}] [${function}] [${line}]: ${mes
 ############ MRS FILES ############
 export PLATFORM_CONFIG=./config/mrs_uav_system/$UAV_TYPE.yaml
 export CUSTOM_CONFIG=./config/custom_config.yaml
-export WORLD_CONFIG=./config/worlds/world_local.yaml
 export NETWORK_CONFIG=./config/network_config.yaml
 
 ############## GENERAL ##############
@@ -36,20 +37,20 @@ export ROS_LAUNCH_PATH=$ROS_LAUNCH_PATH
 export ROS_CONFIG_PATH=$ROS_CONFIG_PATH
 
 ############## GPS DATA ##############
-# Ingeniarius
-export DATUM_LATITUDE=41.22061958
-export DATUM_LONGITUDE=-8.52732281
-export DATUM_HEADING=0.0
-
-# # Forest
-# export DATUM_LATITUDE=41.22061958
-# export DATUM_LONGITUDE=-8.52732281
-# export DATUM_HEADING=0.0
-
-# # Forest 2
-# export DATUM_LATITUDE=41.21711155
-# export DATUM_LONGITUDE=-8.52746193
-# export DATUM_HEADING=0.0
+if [ "$WORLD_NAME" = "ingeniarius" ]; then
+	export WORLD_CONFIG=./config/worlds/world_local_ingeniarius.yaml
+    export DATUM_LATITUDE=41.22061958
+    export DATUM_LONGITUDE=-8.52732281
+    export DATUM_HEADING=0.0
+elif [ "$WORLD_NAME" = "forest" ]; then
+	export WORLD_CONFIG=./config/worlds/world_local_forest.yaml
+    export DATUM_LATITUDE=41.21711155
+    export DATUM_LONGITUDE=-8.52746193
+    export DATUM_HEADING=0.0
+else
+    echo "Unknown WORLD_NAME: $WORLD_NAME"
+    exit 1
+fi
 
 ############## ROS BAG ##############
 export SYS_ROSBAG_ENABLED=0         # enable / disable bag recording (be careful to NOT run long term experiments without bags!)
