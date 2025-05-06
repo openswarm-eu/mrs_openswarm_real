@@ -46,6 +46,10 @@ windows:
       layout: tiled
       panes:
         - waitForHw; roslaunch mrs_uav_status status.launch config_file:=$ROS_CONFIG_PATH/status_info.yaml
+  - monitor:
+      layout: tiled
+      panes:
+        - waitForHw; roslaunch $ROS_LAUNCH_PATH/node_crash_checker.launch
   - core:
       layout: tiled
       panes:
