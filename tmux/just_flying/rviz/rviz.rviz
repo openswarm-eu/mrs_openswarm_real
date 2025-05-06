@@ -4,13 +4,8 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
-        - /TF1
-        - /TF1/Frames1
         - /uav11
-        - /uav11/UAVModel1
-        - /uav11/DCL-LIO-SAM1
         - /uav11/DCL-LIO-SAM1/Global Map1
-        - /uav11/Octomap1
         - /uav11/Octomap1/octomap_local1
         - /uav11/Octomap1/octomap_global1
         - /uav11/Octomap1/octoplanner1
@@ -99,54 +94,56 @@ Visualization Manager:
           Value: false
         odom_ned:
           Value: false
-        uav11/amsl_origin:
+        uav1/amsl_origin:
           Value: false
-        uav11/base_footprint_link:
+        uav1/base_footprint_link:
           Value: false
-        uav11/fcu:
+        uav1/fcu:
           Value: true
-        uav11/fcu/arms:
+        uav1/fcu/arms:
           Value: false
-        uav11/fcu/arms_red:
+        uav1/fcu/arms_red:
           Value: false
-        uav11/fcu/props:
+        uav1/fcu/props:
           Value: false
-        uav11/fcu/uav_marker:
+        uav1/fcu/uav_marker:
           Value: false
-        uav11/fcu_untilted:
+        uav1/fcu_untilted:
           Value: false
-        uav11/fixed_origin:
+        uav1/fixed_origin:
           Value: false
-        uav11/garmin:
+        uav1/garmin:
           Value: false
-        uav11/gnss_link:
+        uav1/gnss_link:
           Value: false
-        uav11/imu_link:
+        uav1/imu_link:
           Value: false
-        uav11/lidar_link:
+        uav1/lidar_link:
           Value: false
-        uav11/liosam_origin:
+        uav1/liosam_origin:
           Value: false
-        uav11/liosam_origin_att_only:
+        uav1/liosam_origin_att_only:
           Value: false
-        uav11/local_origin:
+        uav1/local_origin:
           Value: false
-        uav11/lslidar_link:
+        uav1/lslidar_link:
           Value: false
-        uav11/map_navsat:
+        uav1/map_navsat:
           Value: false
-        uav11/odom:
+        uav1/odom:
+          Value: true
+        uav1/odom_:
           Value: false
-        uav11/odom_:
+        uav1/rtk_antenna:
           Value: false
-        uav11/rtk_antenna:
+        uav1/stable_origin:
           Value: false
-        uav11/stable_origin:
+        uav1/tof_sensor_0:
           Value: false
-        uav11/tof_sensor_0:
+        utm:
           Value: false
         world:
-          Value: false
+          Value: true
       Marker Alpha: 1
       Marker Scale: 1
       Name: TF
@@ -163,48 +160,50 @@ Visualization Manager:
         odom:
           odom_ned:
             {}
-        uav11/map_navsat:
-          uav11/odom_:
-            uav11/fcu:
-              uav11/base_footprint_link:
+        uav1/map_navsat:
+          uav1/odom_:
+            uav1/fcu:
+              uav1/base_footprint_link:
                 {}
-              uav11/fcu/arms:
+              uav1/fcu/arms:
                 {}
-              uav11/fcu/arms_red:
+              uav1/fcu/arms_red:
                 {}
-              uav11/fcu/props:
+              uav1/fcu/props:
                 {}
-              uav11/fcu/uav_marker:
+              uav1/fcu/uav_marker:
                 {}
-              uav11/fcu_untilted:
-                uav11/amsl_origin:
+              uav1/fcu_untilted:
+                uav1/amsl_origin:
                   {}
-              uav11/fixed_origin:
-                uav11/local_origin:
+              uav1/fixed_origin:
+                uav1/local_origin:
                   {}
-              uav11/garmin:
+              uav1/garmin:
                 {}
-              uav11/gnss_link:
+              uav1/gnss_link:
                 {}
-              uav11/imu_link:
+              uav1/imu_link:
                 {}
-              uav11/liosam_origin:
+              uav1/liosam_origin:
                 {}
-              uav11/liosam_origin_att_only:
+              uav1/liosam_origin_att_only:
                 {}
-              uav11/lslidar_link:
+              uav1/lslidar_link:
                 {}
-              uav11/odom:
-                uav11/lidar_link:
+              uav1/odom:
+                uav1/lidar_link:
                   {}
                 world:
                   {}
-              uav11/rtk_antenna:
+              uav1/rtk_antenna:
                 {}
-              uav11/stable_origin:
+              uav1/stable_origin:
                 {}
-              uav11/tof_sensor_0:
+              uav1/tof_sensor_0:
                 {}
+        utm:
+          {}
       Update Interval: 0
       Value: true
     - Class: rviz/Group
@@ -455,18 +454,18 @@ Visualization Manager:
             Expand Link Details: false
             Expand Tree: false
             Link Tree Style: Links in Alphabetic Order
-            uav11/fcu:
+            uav1/fcu:
               Alpha: 1
               Show Axes: false
               Show Trail: false
               Value: true
-            uav11/fcu/arms_red:
+            uav1/fcu/arms_red:
               Alpha: 1
               Show Axes: false
               Show Trail: false
               Value: true
           Name: UAVModel
-          Robot Description: /uav11/robot_model
+          Robot Description: /uav1/robot_model
           TF Prefix: ""
           Update Interval: 0
           Value: true
@@ -496,7 +495,7 @@ Visualization Manager:
               Size (Pixels): 3
               Size (m): 0.10000000149011612
               Style: Flat Squares
-              Topic: /uav11/distributedMapping/globalMap
+              Topic: /uav1/distributedMapping/globalMap
               Unreliable: false
               Use Fixed Frame: true
               Use rainbow: true
@@ -522,7 +521,7 @@ Visualization Manager:
               Radius: 0.029999999329447746
               Shaft Diameter: 0.10000000149011612
               Shaft Length: 0.10000000149011612
-              Topic: /uav6/lio_sam/mapping/path
+              Topic: /uav1/lio_sam/mapping/path
               Unreliable: false
               Value: true
             - Alpha: 3
@@ -555,23 +554,23 @@ Visualization Manager:
           Displays:
             - Class: rviz/MarkerArray
               Enabled: true
-              Marker Topic: /uav6/octomap_local_vis/free_cells_vis_array_throttled
+              Marker Topic: /uav1/octomap_local_vis/free_cells_vis_array_throttled
               Name: octomap_local
               Namespaces:
-                {}
+                map: true
               Queue Size: 100
               Value: true
             - Class: rviz/MarkerArray
               Enabled: true
-              Marker Topic: /uav6/octomap_local_vis/occupied_cells_vis_array_throttled
+              Marker Topic: /uav1/octomap_local_vis/occupied_cells_vis_array_throttled
               Name: octomap_global
               Namespaces:
-                {}
+                map: true
               Queue Size: 100
               Value: true
             - Class: rviz/MarkerArray
               Enabled: true
-              Marker Topic: /uav6/octomap_planner/visualize_planner
+              Marker Topic: /uav1/octomap_planner/visualize_planner
               Name: octoplanner
               Namespaces:
                 {}
@@ -579,7 +578,7 @@ Visualization Manager:
               Value: true
             - Class: rviz/MarkerArray
               Enabled: true
-              Marker Topic: /uav6/octomap_planner/visualize_processed
+              Marker Topic: /uav1/octomap_planner/visualize_processed
               Name: MarkerArray
               Namespaces:
                 {}
@@ -624,7 +623,7 @@ Visualization Manager:
       Topic: /clicked_point
     - Class: mrs_rviz_plugins/ControlTool
     - Class: mrs_rviz_plugins/WaypointPlanner
-      Drone name: uav6
+      Drone name: uav1
       Fly now: true
       Height offset: 0
       Loop: false

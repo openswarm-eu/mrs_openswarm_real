@@ -4,7 +4,7 @@
 
   <group>
 
-    <node pkg="mrs_ingeniarius_real" type="refactor_rviz_config.sh" name="anyname" output="screen" />
+    <node pkg="mrs_openswarm_real" type="refactor_rviz_config.sh" name="anyname" output="screen" />
 
     <node pkg="rviz" type="rviz" name="rviz" args="-d /tmp/default.rviz" launch-prefix="bash -c 'sleep 1; $0 $@' " />
 
