@@ -21,6 +21,7 @@ windows:
       layout: tiled
       panes:
         - waitForTime; roslaunch mrs_uav_px4_api api.launch
+        # - waitForTime; roslaunch $ROS_LAUNCH_PATH/api.launch
         - waitForTime; [ $RESET_COMMAND_FLAG -eq 1 ] && sleep 5; rosservice call /$UAV_NAME/mavros/cmd/command "$RESET_COMMAND"
   - RTK:
       layout: tiled
@@ -42,6 +43,10 @@ windows:
       layout: tiled
       panes:
         -  waitForHw; sleep 10; roslaunch $ROS_LAUNCH_PATH/imu_cal.launch
+  # - range_cal:
+  #     layout: tiled
+  #     panes:
+  #       -  waitForHw; sleep 10; roslaunch $ROS_LAUNCH_PATH/range_cal.launch
   - status:
       layout: tiled
       panes:
@@ -50,6 +55,11 @@ windows:
       layout: tiled
       panes:
         - waitForHw; roslaunch $ROS_LAUNCH_PATH/node_crash_checker.launch
+  - takeoff:
+      layout: tiled
+      panes:
+        - waitForHw; history -s roslaunch mrs_uav_autostart automatic_start.launch
+        - 'waitForControl; rosservice call /$UAV_NAME/hw_api/arming 1; sleep 2; rosservice call /$UAV_NAME/hw_api/offboard'
   - core:
       layout: tiled
       panes:
