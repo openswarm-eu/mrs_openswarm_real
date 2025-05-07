@@ -58,8 +58,8 @@ windows:
   - takeoff:
       layout: tiled
       panes:
-        - waitForHw; history -s roslaunch mrs_uav_autostart automatic_start.launch
-        - 'waitForControl; rosservice call /$UAV_NAME/hw_api/arming 1; sleep 2; rosservice call /$UAV_NAME/hw_api/offboard'
+        - waitForHw; roslaunch mrs_uav_autostart automatic_start.launch custom_config:=$ROS_CONFIG_PATH/automatic_start.yaml
+        - waitForControl; history -s rosservice call /$UAV_NAME/uav_manager/takeoff
   - core:
       layout: tiled
       panes:
@@ -125,5 +125,4 @@ windows:
       layout: tiled
       panes:
         - waitForTime; [ $USE_RVIZ -eq 1 ] && roslaunch $ROS_LAUNCH_PATH/mrs_rviz.launch
-        - waitForTime; [ $USE_RVIZ -eq 1 ] && roslaunch mrs_rviz_plugins load_robot.launch
-        - waitForTime; [ $USE_RVIZ -eq 1 ] && roslaunch $ROS_LAUNCH_PATH/display_zd700.launch
+        - waitForTime; [ $USE_RVIZhistory -s 
