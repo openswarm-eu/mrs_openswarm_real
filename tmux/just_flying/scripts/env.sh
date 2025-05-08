@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ############## CHANGE #############
-export UAV_NAME=uav12
+export UAV_NAME=uav6
 export WORLD_NAME=ingeniarius	# forest, ingeniarius
 export RESET_COMMAND_FLAG=0
 
@@ -56,7 +56,7 @@ fi
 export SYS_ROSBAG_ENABLED=0         # enable / disable bag recording (be careful to NOT run long term experiments without bags!)
 export SYS_ROSBAG_SIZE='1024'       # max size before splitting in Mb (i.e. 0 = infinite, 1024 = 1024Mb = 1Gb)
 export SYS_ROSBAG_DURATION='8h'
-export SYS_ROSBAG_PATH="$HOME/bag_files/openswarm/"
+export SYS_ROSBAG_PATH="$HOME/bag_files/$PROJECT_NAME/latest/"
 
 export SYS_ROSBAG_ARGS="
     --regex
