@@ -3,7 +3,8 @@ mrs_uav_managers:
   estimation_manager:
 
     state_estimators: [
-     "liosam"
+      "liosam",
+      # "rtk"
     ]
 
     initial_state_estimator: "liosam" # will be used as the first state estimator

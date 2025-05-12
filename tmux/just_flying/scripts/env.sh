@@ -89,9 +89,10 @@ export SYS_ROSBAG_TOPICS="
 ############## RVIZ ##############
 export USE_RVIZ=0           # enable / disable rviz
 export COMPUTER_RVIZ=0      # enable / disable rviz on the computer
+export DISABLE_ROS1_EOL_WARNINGS=1
 
 ########## SWARM FORMATION #######
-export SWARM_FORMATION=0 
+export SWARM_FORMATION=1
 
 ############## UWB ###############
 export SYS_UWB=0 

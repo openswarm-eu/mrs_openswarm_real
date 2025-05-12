@@ -1,0 +1,23 @@
+<launch>
+
+    <arg name="UAV_NAME" default="$(optenv UAV_NAME uav1)"/>
+
+    <arg name="latitude" default="$(optenv DATUM_LATITUDE)"/>
+    <arg name="longitude" default="$(optenv DATUM_LONGITUDE)"/>
+
+    <!-- <group ns="$(arg UAV_NAME)">
+        <node pkg="mrs_openswarm_utils" type="gpsOdometry" name="gps_odometry" output="screen" respawn="true">
+            <remap from="~input_topic" to="hw_api/gnss" />
+            <remap from="~input_topic_get_offset" to="get_offset" />
+            <remap from="~output_topic_offset" to="yaw_offset" />
+        </node>
+    </group> -->
+    <group ns="$(arg UAV_NAME)">
+        <node pkg="mrs_openswarm_utils" type="convert_gps_enu_01.py" name="gps_converter" output="screen" respawn="true">
+            <param name="latitude" value="$(arg latitude)"/>
+            <param name="longitude" value="$(arg longitude)"/>
+            <remap from="~input_topic" to="hw_api/rtk" />
+        </node>
+    </group>
+
+</launch>

@@ -20,13 +20,16 @@ windows:
   - hw_api:
       layout: tiled
       panes:
-        - waitForTime; roslaunch mrs_uav_px4_api api.launch
-        # - waitForTime; roslaunch $ROS_LAUNCH_PATH/api.launch
+        - waitForTime; roslaunch $ROS_LAUNCH_PATH/api.launch custom_config:=$ROS_CONFIG_PATH/api.yaml
         - waitForTime; [ $RESET_COMMAND_FLAG -eq 1 ] && sleep 5; rosservice call /$UAV_NAME/mavros/cmd/command "$RESET_COMMAND"
   - RTK:
       layout: tiled
       panes:
         - waitForTime; roslaunch mrs_serial rtk.launch
+  # - RTK_yaw:
+  #     layout: tiled
+  #     panes:
+  #       - waitForTime; roslaunch $ROS_LAUNCH_PATH/rtk_yaw.launch
   - Lidar:
       layout: tiled
       panes:
@@ -35,10 +38,10 @@ windows:
       layout: tiled
       panes:
         - waitForHw; roslaunch $ROS_LAUNCH_PATH/gnss_status_verifier.launch
-  - navsat:
-      layout: tiled
-      panes:
-        -  waitForHw; roslaunch $ROS_LAUNCH_PATH/navsat.launch
+  # - navsat:
+  #     layout: tiled
+  #     panes:
+  #       -  waitForHw; roslaunch $ROS_LAUNCH_PATH/navsat.launch
   - imu_cal:
       layout: tiled
       panes:
@@ -51,6 +54,7 @@ windows:
       layout: tiled
       panes:
         - waitForHw; roslaunch mrs_uav_status status.launch config_file:=$ROS_CONFIG_PATH/status_info.yaml
+        - waitForHw; roslaunch $ROS_LAUNCH_PATH/fsm_uav.launch
   - monitor:
       layout: tiled
       panes:
