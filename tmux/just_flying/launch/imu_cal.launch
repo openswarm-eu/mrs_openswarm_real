@@ -5,6 +5,7 @@
     <arg name="self_offset" default="false"/>
     <arg name="imu_offset" default="true"/>
     <arg name="lla_offset" default="false"/>
+    <arg name="wit_offset" default="0.0"/>
 
     <arg name="UAV_NAME" default="$(optenv UAV_NAME uav1)"/>
 
@@ -20,6 +21,7 @@
             <param name="self_offset" value="$(arg self_offset)"/>
             <param name="imu_offset" value="$(arg imu_offset)"/>
             <param name="lla_offset" value="$(arg lla_offset)"/>
+            <param name="wit_offset" value="$(arg wit_offset)"/>
         </node>
     </group>
 
