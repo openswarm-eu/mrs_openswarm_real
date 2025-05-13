@@ -46,6 +46,10 @@ windows:
       layout: tiled
       panes:
         -  waitForHw; sleep 10; roslaunch $ROS_LAUNCH_PATH/imu_cal.launch
+  - imu_wit:
+      layout: tiled
+      panes:
+        -  waitForHw; roslaunch $ROS_LAUNCH_PATH/witmotion.launch
   # - range_cal:
   #     layout: tiled
   #     panes:

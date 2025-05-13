@@ -1,11 +1,13 @@
 #!/bin/bash
 
 ############## CHANGE #############
-export UAV_NAME=uav6
 export WORLD_NAME=ingeniarius	# forest, ingeniarius
 export RESET_COMMAND_FLAG=0
 
 ############## CONFIG #############
+# Get the hostname
+HOSTNAME_VAR=$(hostname)
+export UAV_NAME="$HOSTNAME_VAR"
 export RUN_TYPE=realworld
 export UAV_TYPE=x500
 export UAV_MASS=5.367
