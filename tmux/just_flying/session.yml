@@ -45,7 +45,7 @@ windows:
   - imu_cal:
       layout: tiled
       panes:
-        -  waitForHw; sleep 10; roslaunch $ROS_LAUNCH_PATH/imu_cal.launch
+        -  waitForHw; sleep 10; roslaunch $ROS_LAUNCH_PATH/imu_cal_uav.launch
   - imu_wit:
       layout: tiled
       panes:
