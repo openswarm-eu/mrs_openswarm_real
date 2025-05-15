@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ############## CHANGE #############
+export UAV_NAMES="[uav11, uav12, uav13]"
 export WORLD_NAME=ingeniarius	# forest, ingeniarius
 export RESET_COMMAND_FLAG=0
 

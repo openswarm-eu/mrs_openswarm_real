@@ -71,6 +71,9 @@ topics: # topics published out of this machine to receivers specified above
  - name: "fms/stop"
    compress: true # enable bz2 compression
    rate: 5.0
+ - name: "fms/init"
+   compress: true # enable bz2 compression
+   rate: 5.0
 
 services:
   - name: "trajectory_generation/path"
