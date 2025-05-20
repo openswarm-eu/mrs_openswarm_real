@@ -57,8 +57,9 @@ windows:
   - status:
       layout: tiled
       panes:
-        - waitForHw; roslaunch mrs_uav_status status.launch config_file:=$ROS_CONFIG_PATH/status_info.yaml
         - waitForHw; roslaunch $ROS_LAUNCH_PATH/fsm_uav.launch
+        - waitForHw; roslaunch mrs_uav_autostart automatic_start.launch custom_config:=$ROS_CONFIG_PATH/automatic_start.yaml
+        - waitForHw; roslaunch mrs_uav_status status.launch config_file:=$ROS_CONFIG_PATH/status_info.yaml
   - monitor:
       layout: tiled
       panes:
@@ -66,7 +67,7 @@ windows:
   - takeoff:
       layout: tiled
       panes:
-        - waitForHw; roslaunch mrs_uav_autostart automatic_start.launch custom_config:=$ROS_CONFIG_PATH/automatic_start.yaml
+        - waitForHw; history -s roslaunch mrs_uav_autostart automatic_start.launch custom_config:=$ROS_CONFIG_PATH/automatic_start.yaml
         - waitForControl; history -s rosservice call /$UAV_NAME/uav_manager/takeoff
   - core:
       layout: tiled
