@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ############## CHANGE #############
-export UAV_NAMES="[uav11, uav12, uav13]"
+export UAV_NAMES="[uav6, uav7, uav8, uav9, uav10, uav11]"
 export WORLD_NAME=ingeniarius	# forest, ingeniarius
 export RESET_COMMAND_FLAG=0
 export COMPUTER_NAME="asus1"
@@ -29,7 +29,7 @@ export ROSCONSOLE_FORMAT='[${severity}] [${node}] [${function}] [${line}]: ${mes
 
 ############ MRS FILES ############
 export PLATFORM_CONFIG=./config/mrs_uav_system/$UAV_TYPE.yaml
-export CUSTOM_CONFIG=./config/custom_config.yaml
+export CUSTOM_CONFIG=./config/custom_config_garmin.yaml
 export NETWORK_CONFIG=./config/network_config.yaml
 
 ############## GENERAL ##############

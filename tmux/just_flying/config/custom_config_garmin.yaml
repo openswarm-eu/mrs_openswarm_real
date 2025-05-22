@@ -3,7 +3,8 @@ mrs_uav_managers:
   estimation_manager:
 
     state_estimators: [
-     "liosam"
+     "liosam",
+      "rtk"
     ]
 
     initial_state_estimator: "liosam" # will be used as the first state estimator
@@ -262,16 +263,18 @@ mrs_uav_managers:
 
     gains: [
       "ingeniarius",
+      "supersoft",
+      "soft"
     ]
 
     # list of allowed gains per odometry mode
     allowed_gains:
-      liosam: ["ingeniarius"]
+      liosam: ["ingeniarius", "supersoft", "soft"]
 
     # those gains will be used automatically when a localization mode switches
     # and the current gains are not in the allowed list (next paragraphs)
     default_gains:
-      liosam: "ingeniarius"
+      liosam: "supersoft"
 
     ingeniarius:
 
