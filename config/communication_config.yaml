@@ -19,64 +19,64 @@ topics: # topics published out of this machine to receivers specified above
    rate: 10.0
  - name: "distributedMapping/globalDescriptors"
    compress: true # enable bz2 compression
-   rate: 10.0
+   rate: 1.0
  - name: "distributedMapping/loopInfo"
    compress: true # enable bz2 compression
-   rate: 10.0
+   rate: 1.0
  - name: "distributedMapping/neighborPoseEstimates"
    compress: true # enable bz2 compression
-   rate: 10.0
+   rate: 1.0
  - name: "distributedMapping/neighborRotationEstimates"
    compress: true # enable bz2 compression
-   rate: 10.0
+   rate: 1.0
  - name: "distributedMapping/optimizationState"
    compress: true # enable bz2 compression
-   rate: 10.0
+   rate: 1.0
  - name: "distributedMapping/poseEstimateState"
    compress: true # enable bz2 compression
-   rate: 10.0
+   rate: 1.0
  - name: "distributedMapping/rotationEstimateState"
    compress: true # enable bz2 compression
-   rate: 10.0
+   rate: 1.0
  - name: "distributedMapping/path"
    compress: true # enable bz2 compression
-   rate: 10.0
+   rate: 1.0
  - name: "distributedMapping/globalMap"
    compress: true # enable bz2 compression
-   rate: 10.0
+   rate: 0.1
  - name: "octomap_planner/path"
    compress: true # enable bz2 compression
-   rate: 10.0
+   rate: 1.0
  - name: "move_base_simple/swarm"
    compress: true # enable bz2 compression
-   rate: 10.0
+   rate: 1.0
  - name: "move_base_path/swarm"
    compress: true # enable bz2 compression
-   rate: 10.0
+   rate: 1.0
  - name: "tf_throttle/tf"
    compress: true # enable bz2 compression
-   rate: 10.0
+   rate: 1.0
  - name: "fms/sensor_check"
    compress: true # enable bz2 compression
-   rate: 5.0
+   rate: 2.0
  - name: "fms/swarm_check"
    compress: true # enable bz2 compression
-   rate: 5.0
+   rate: 2.0
  - name: "fms/pre_flight"
    compress: true # enable bz2 compression
-   rate: 5.0
+   rate: 2.0
  - name: "fms/finish"
    compress: true # enable bz2 compression
-   rate: 5.0
+   rate: 2.0
  - name: "fms/stop"
    compress: true # enable bz2 compression
-   rate: 5.0
+   rate: 2.0
  - name: "fms/init"
    compress: true # enable bz2 compression
-   rate: 5.0
+   rate: 2.0
  - name: "fms/drone_status"
    compress: true # enable bz2 compression
-   rate: 5.0
+   rate: 2.0
 
 services:
   - name: "trajectory_generation/path"

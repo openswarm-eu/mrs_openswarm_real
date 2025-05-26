@@ -274,7 +274,7 @@ mrs_uav_managers:
     # those gains will be used automatically when a localization mode switches
     # and the current gains are not in the allowed list (next paragraphs)
     default_gains:
-      liosam: "supersoft"
+      liosam: "ingeniarius"
 
     ingeniarius:
 
