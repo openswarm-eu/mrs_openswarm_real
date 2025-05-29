@@ -1,0 +1,6 @@
+# Description: Configuration file for the swarm simulation in MRS OpenSwarm
+uav_height: 0.0 # Offset of height of the UAV
+distance_target: 0.5
+wait_takeoff: false
+wait_odom: true
+have_swarm_relative_pts_: false

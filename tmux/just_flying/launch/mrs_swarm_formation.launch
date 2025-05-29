@@ -1,6 +1,7 @@
 <launch>
 
   <arg name="UAV_NAME" default="$(optenv UAV_NAME)"/>
+  <arg name="UAV_NAMES" default="$(optenv UAV_NAMES)" />
   <arg name="ROS_CONFIG_PATH" default="$(optenv ROS_CONFIG_PATH)" />
 
   <arg name="drone_id"/>
@@ -10,7 +11,8 @@
     <node pkg="ego_planner" name="swarm_formation" type="ego_planner_node" output="screen">
 
       <param name="manager/name_list" value="true"/>
-      <param name="manager/robot_names" type="yaml" value="[uav6, uav7, uav8, uav9, uav10, uav11]"/>
+      <!-- <param name="manager/robot_names" type="yaml" value="[uav6, uav7, uav8, uav9, uav10, uav11]"/> -->
+      <param name="manager/robot_names" type="yaml" value="$(arg UAV_NAMES)"/>
       <param name="manager/robot_name" type="string" value="$(arg UAV_NAME)"/>
 
       <param name="drone_id"  value="$(arg drone_id)"/>
@@ -19,7 +21,7 @@
       <remap from="~planning/start"   to = "/drone_$(arg drone_id)_planning/start"/>
       <remap from="~planning/finish"  to = "/drone_$(arg drone_id)_planning/finish"/>
 
-      <rosparam file="$(arg ROS_CONFIG_PATH)/swarm/swarm_hexagon.yaml" command="load" />
+      <rosparam file="$(arg ROS_CONFIG_PATH)/swarm/swarm.yaml" command="load" />
 
     </node>
   </group> 

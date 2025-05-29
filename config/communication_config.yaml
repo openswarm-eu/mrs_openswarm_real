@@ -53,6 +53,9 @@ topics: # topics published out of this machine to receivers specified above
  - name: "move_base_path/swarm"
    compress: true # enable bz2 compression
    rate: 1.0
+ - name: "swarm_formation/positions"
+   compress: true # enable bz2 compression
+   rate: 1.0
  - name: "tf_throttle/tf"
    compress: true # enable bz2 compression
    rate: 1.0
