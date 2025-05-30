@@ -30,8 +30,8 @@
                 [$(arg latitude), $(arg longitude), $(arg heading)]
             </rosparam>
             <rosparam param="tf_prefix" subst_value="true">$(arg robotPrefix)</rosparam>
-            <!-- <remap from="imu/data" to="hw_api/imu" /> -->
-            <remap from="imu/data" to="imu_calibration/imu" />
+            <remap from="imu/data" to="hw_api/imu" />
+            <!-- <remap from="imu/data" to="imu_calibration/imu" /> -->
             <remap from="gps/fix" to="gnss_verifier/gnss_wstatus" />
             <remap from="odometry/filtered" to="odometry/navsat" />
         </node>

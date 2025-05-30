@@ -7,18 +7,19 @@ navsat:
   yaw_offset: 0
   zero_altitude: true
   broadcast_cartesian_transform: true
-  broadcast_cartesian_transform_as_parent_frame: true
+  broadcast_cartesian_transform_as_parent_frame: false
   publish_filtered_gps: true
   base_link_frame_id: fcu
   gps_frame_id: fcu
   world_frame: map_navsat
+  cartesian_frame_id: utm_origin
 
 # EKF for Navsat
 ekf_gps:
   # original version
   publish_tf: false
   map_frame: map_navsat
-  odom_frame: odom_navsat
+  odom_frame: odom_
   base_link_frame: fcu
   world_frame: map_navsat
 
