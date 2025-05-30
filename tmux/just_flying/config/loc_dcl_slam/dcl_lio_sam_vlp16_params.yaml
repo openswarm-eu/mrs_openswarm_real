@@ -59,8 +59,8 @@ lio_sam:
   imuTopic: "hw_api/imu"            # IMU data
   # imuTopic: "imu_calibration/imu"   # IMU data
   odomTopic: "odom"         # IMU pre-preintegration odometry, same frequency as IMU
-  # gpsTopic: "odometry/gps"  # GPS odometry topic from navsat, see module_navsat.launch file
-  gpsTopic: "estimation_manager/rtk/odom"
+  gpsTopic: "odometry/gps"  # GPS odometry topic from navsat, see module_navsat.launch file
+  # gpsTopic: "estimation_manager/rtk/odom"
   # gpsTopic: "estimation_manager/gps_garmin/odom"
   gpsFixTopic: "gnss_verifier/gnss_wstatus"
  

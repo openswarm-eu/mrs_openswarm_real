@@ -38,10 +38,10 @@ windows:
       layout: tiled
       panes:
         - waitForHw; roslaunch $ROS_LAUNCH_PATH/gnss_status_verifier.launch
-  # - navsat:
-  #     layout: tiled
-  #     panes:
-  #       -  waitForHw; roslaunch $ROS_LAUNCH_PATH/navsat.launch
+  - navsat:
+      layout: tiled
+      panes:
+        -  waitForHw; roslaunch $ROS_LAUNCH_PATH/navsat.launch
   - imu_cal:
       layout: tiled
       panes:
