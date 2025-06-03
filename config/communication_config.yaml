@@ -41,9 +41,9 @@ topics: # topics published out of this machine to receivers specified above
  - name: "distributedMapping/path"
    compress: true # enable bz2 compression
    rate: 1.0
-#  - name: "distributedMapping/globalMap"
-#    compress: true # enable bz2 compression
-#    rate: 0.1
+ - name: "distributedMapping/globalMap"
+   compress: true # enable bz2 compression
+   rate: 1.0
  - name: "octomap_planner/path"
    compress: true # enable bz2 compression
    rate: 1.0

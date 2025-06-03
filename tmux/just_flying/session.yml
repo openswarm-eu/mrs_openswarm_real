@@ -76,7 +76,7 @@ windows:
   - dcl_slam:
       layout: tiled
       panes:
-        - waitForHw; sleep 25; roslaunch $ROS_LAUNCH_PATH/dcl_slam/run_single.launch
+        - waitForHw; sleep 10; roslaunch $ROS_LAUNCH_PATH/dcl_slam/run_single.launch
   - tf_connector:
       layout: tiled
       panes:

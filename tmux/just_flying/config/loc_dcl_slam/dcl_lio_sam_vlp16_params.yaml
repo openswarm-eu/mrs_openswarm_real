@@ -47,7 +47,7 @@ dcl_slam: {
   # GPS Settings
   addGPSFactorflag: true,
   gpsUpatedDistFix: 1.0,
-  gpsCovThreshold: 5.0,
+  gpsCovThreshold: 1.0,
   poseCovThreshold: 25.0,
   useGpsElevation: false,                      # if GPS elevation is bad, set to "false"
 }
@@ -78,7 +78,7 @@ lio_sam:
 
   # GPS Settings
   addGPSFactorflag: true
-  gpsInitialLocalization: true                # Ingeniarius modifications, normally true
+  gpsInitialLocalization: false                # Ingeniarius modifications, normally true
 
   # Ingeniarius
   gpsBaseStationLat: 41.22061958  
