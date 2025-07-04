@@ -5,7 +5,7 @@ socket_name: mrs
 attach: false
 tmux_options: -f /etc/ctu-mrs/tmux.conf
 # you can modify these export ROS_MASTER_URI='http://192.168.8.157:11311'; export ROS_IP='192.168.8.157';
-pre_window: source ./scripts/env.sh
+pre_window: source ./scripts/env_ferox.sh
 startup_window: status
 windows:
   - roscore:
@@ -16,7 +16,7 @@ windows:
   - tf:
       layout: tiled
       panes:
-        - waitForTime; roslaunch $ROS_LAUNCH_PATH/static_tfs_ZD700.launch 
+        - waitForTime; roslaunch $ROS_LAUNCH_PATH/static_tfs_ZD700.launch
   - hw_api:
       layout: tiled
       panes:
@@ -79,12 +79,12 @@ windows:
       layout: tiled
       panes:
         - waitForTime; roslaunch $ROS_LAUNCH_PATH/tf_throttle.launch
-        - waitForTime; rosrun mrs_openswarm_real run_nimbro.py ./config/network_config.yaml `rospack find mrs_openswarm_real`/config/communication_config_ferox.yaml
+        - waitForTime; rosrun mrs_openswarm_real run_nimbro.py ./config/network_config.yaml `rospack find mrs_openswarm_real`/config/communication_config.yaml
   - status:
       layout: tiled
       panes:
         - waitForHw; roslaunch $ROS_LAUNCH_PATH/fsm_uav.launch
-        - waitForHw; roslaunch mrs_uav_autostart automatic_start.launch custom_config:=$ROS_CONFIG_PATH/automatic_start.yaml
+        - waitForHw; history -s roslaunch mrs_uav_autostart automatic_start.launch custom_config:=$ROS_CONFIG_PATH/automatic_start.yaml
         - waitForHw; roslaunch mrs_uav_status status.launch config_file:=$ROS_CONFIG_PATH/status_info.yaml
   - monitor:
       layout: tiled
@@ -99,7 +99,7 @@ windows:
       layout: tiled
       panes:
         - waitForHw; history -s roslaunch mrs_uav_autostart automatic_start.launch
-        - 'history -s rosservice call /$UAV_NAME/octomap_planner/goto \"goal: \[13.72, 51.51, 10.5, 0.0]\"'
+        - 'history -s rosservice call /$UAV_NAME/octomap_planner/goto \"goal: \[12.0, 51.0, 10.0, 0.0]\"'
         - 'history -s rosservice call /$UAV_NAME/octomap_planner/goto \"goal: \[10.0, 32.0, 10.0, 0.0\]\"'
         - 'history -s rosservice call /$UAV_NAME/octomap_planner/stop \"{}\"'
   - t_alt_poses:
@@ -113,6 +113,11 @@ windows:
       panes:
         - waitForHw; history -s roslaunch mrs_uav_autostart automatic_start.launch
         - history -s roslaunch $ROS_LAUNCH_PATH/pose_generator.launch
+  # - t_waypoint_utm:
+  #     layout: tiled
+  #     panes:
+  #       - waitForHw; history -s roslaunch mrs_uav_autostart automatic_start.launch
+  #       - history -s roslaunch $ROS_LAUNCH_PATH/pose_generator_utm.launch
   - t_estimator:
       layout: tiled
       panes:
@@ -142,9 +147,8 @@ windows:
       layout: tiled
       panes:
         - waitForTime; [ $USE_RVIZ -eq 1 ] && roslaunch $ROS_LAUNCH_PATH/mrs_rviz.launch
-        - waitForTime; [ $USE_RVIZhistory -s 
   - BerryDetector:
       layout: tiled
       panes:
         -  waitForHw; sleep 10; roslaunch continuous_gopro_photo continuous_photo.launch
-        -  waitForHw; sleep 10; roslaunch berries_detector_gemmo berry_detector.launch
+        # -  waitForHw; sleep 30; roslaunch berries_detector_gemmo berry_detector.launch

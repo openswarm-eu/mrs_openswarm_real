@@ -1,0 +1,30 @@
+<launch>
+
+  <!-- defines name of the namespace of the drone -->
+  <arg name="UAV_NAME" default="$(optenv UAV_NAME uav1)" />
+  <arg name="ROS_CONFIG_PATH" default="$(optenv ROS_CONFIG_PATH)" />
+  <arg name="FRAME" default="utm_navsat"/>
+
+    <!-- Namespace - all topics, services and parameters will be remapped using this namespace as a prefix (eg.: "/waypoint_flier_simple/odom_uav_in" to "/uav1/waypoint_flier_simple/odom_uav_in") -->
+  <group ns="$(arg UAV_NAME)">
+
+    <node pkg="mrs_openswarm_utils" type="pose_generator_utm.py" name="pose_generator" output="screen">
+
+      <!-- ROS parameters config file -->
+      <rosparam param="frame_id" subst_value="true">$(arg UAV_NAME)/$(arg FRAME)</rosparam>
+      <rosparam param="uav_name" subst_value="true">$(arg UAV_NAME)</rosparam>
+      <rosparam param="rate" subst_value="true">1.0</rosparam>
+      
+      <!-- Path to the YAML file containing target poses -->
+      <param name="yaml_file" value="$(arg ROS_CONFIG_PATH)/swarm/target_poses_utm.yaml" />
+      
+      <remap from="~control_manager_diag_in" to="control_manager/diagnostics" />
+
+      <remap from="~trajectory_out" to="control_manager/trajectory_reference" />
+      <remap from="~land_out" to="uav_manager/land" />
+
+    </node>
+
+  </group>
+
+</launch>

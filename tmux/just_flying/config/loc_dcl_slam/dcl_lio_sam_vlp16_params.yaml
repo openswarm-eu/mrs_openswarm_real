@@ -15,8 +15,8 @@ dcl_slam: {
   mapping_process_interval: 0.1,          # interval of optmization (in second)
 
   # keyframe params
-  keyframe_distance_threshold: 1.0,       # keyframe distance threshold (in meter)
-  keyframe_angle_threshold: 0.2,          # keyframe angle threshold (in rad)
+  keyframe_distance_threshold: 0.5,       # keyframe distance threshold (in meter)
+  keyframe_angle_threshold: 0.1,          # keyframe angle threshold (in rad)
 
   # mapping
   global_optmization_enable: true,        # enable distributed DGS
@@ -30,7 +30,7 @@ dcl_slam: {
   map_leaf_size: 0.4,                     # scan to map matching downsample rate (default 0.4)
 
   # loop closure
-  intra_robot_loop_closure_enable: false, # enable to search intra-robot loop closre with global descriptor
+  intra_robot_loop_closure_enable: true, # enable to search intra-robot loop closre with global descriptor
   inter_robot_loop_closure_enable: true,  # enable to search intra-robot loop closre with global descriptor
   descriptor_type: "LidarIris",           # descriptor type: ScanContext, LidarIris, M2DP
   knn_candidates: 6,                      # k nearest neighbor search of row key
@@ -46,9 +46,9 @@ dcl_slam: {
 
   # GPS Settings
   addGPSFactorflag: true,
-  gpsUpatedDistFix: 1.0,
+  gpsUpatedDistFix: -1.0,
   gpsCovThreshold: 1.0,
-  poseCovThreshold: 25.0,
+  poseCovThreshold: -1.0,
   useGpsElevation: false,                      # if GPS elevation is bad, set to "false"
 }
 
@@ -74,11 +74,11 @@ lio_sam:
   mapFrameAsChild: true
 
   # localization initialized
-  # localizationInitialized: false  # normally false
+  localizationInitialized: false
 
   # GPS Settings
   addGPSFactorflag: true
-  gpsInitialLocalization: false                # Ingeniarius modifications, normally true
+  gpsInitialLocalization: true
 
   # Ingeniarius
   gpsBaseStationLat: 41.22061958  

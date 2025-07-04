@@ -33,7 +33,7 @@ lidar3d:
     max: [35.0, 5.0, 19.0]
 
   ground_removal:
-    use: true
+    use: false
     range:
       use: true
     static_frame_id: liosam_origin

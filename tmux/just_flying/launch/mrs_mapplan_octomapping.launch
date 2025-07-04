@@ -20,7 +20,8 @@
   <arg name="config_octomap_visualizer" default="" />
 
   <!-- ING configs -->
-  <arg name="topic_3d_lidar_in" default="lio_sam/deskew/cloud_deskewed" />
+  <!-- <arg name="topic_3d_lidar_in" default="lio_sam/deskew/cloud_deskewed" /> -->
+  <arg name="topic_3d_lidar_in" default="lslidar/pcl_filtered" />
 
   <!-- NodeletManager //{ -->
 
