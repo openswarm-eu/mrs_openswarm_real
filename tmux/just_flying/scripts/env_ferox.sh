@@ -28,14 +28,8 @@ export TOF_UP_PORT="/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0"
 export RESET_COMMAND="{broadcast: false, command: 246, confirmation: 0, param1: 1.0, param2: 0.0, param3: 0.0, param4: 0.0, param5: 0.0, param6: 0.0, param7: 0.0}"
 
 ##############  ROS  ##############
-CONTAINER_IP=$(hostname -I | awk '{print $1}')
-echo "Container IP is $CONTAINER_IP"
-
-# export ROS_MASTER_URI='http://192.168.0.178:11311'
-export ROS_IP='192.168.0.178'
-# export ROS_IP=$CONTAINER_IP
-# export ROS_HOSTNAME=$CONTAINER_IP
-export ROS_HOSTNAME='192.168.0.178'
+# export ROS_MASTER_URI='http://192.168.8.170:11311'
+# export ROS_IP='192.168.8.170'
 export ROSCONSOLE_FORMAT='[${severity}] [${node}] [${function}] [${line}]: ${message}'
 
 ############ MRS FILES ############
