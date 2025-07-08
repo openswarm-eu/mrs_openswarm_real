@@ -117,5 +117,13 @@ services:
     type: mrs_msgs/Vec4
   - name: "octomap_planner/goto"
     type: mrs_msgs/Vec4
+  - name: "octomap_planner/stop"
+    type: std_srvs/Trigger
+  - name: "octomap_planner/clear"
+    type: std_srvs/Trigger
+  - name: "octomap_planner/clear_octomap"
+    type: std_srvs/Trigger
   - name: "uav_manager/takeoff"
     type: std_srvs/Trigger
+  - name: "control_manager/transform_pose"
+    type: mrs_msgs/TransformPoseSrv

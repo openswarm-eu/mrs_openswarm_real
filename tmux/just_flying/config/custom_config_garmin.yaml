@@ -4,11 +4,17 @@ mrs_uav_managers:
 
     state_estimators: [
       "liosam",
-      "gps_garmin"
+      "gps_garmin",
+      "passthrough"
     ]
 
-    initial_state_estimator: "gps_garmin" # will be used as the first state estimator
-    agl_height_estimator: "" # only slightly filtered height for checking min height (not used in control feedback)
+    initial_state_estimator: "liosam"   # will be used as the first state estimator
+    agl_height_estimator: "garmin_agl"  # only slightly filtered height for checking min height (not used in control feedback)
+
+    passthrough: # namespace of the state estimator
+      alt_garmin: # namespace of the altitude estimator
+
+        max_flight_z: 100.0 # [m] maximum allowed flight Z (in the estimator frame)
 
     gps_garmin: # namespace of the state estimator
       alt_garmin: # namespace of the altitude estimator
@@ -27,9 +33,9 @@ mrs_uav_managers:
         altitude: false
         magnetometer_heading: false
         position: false
-        orientation: false
-        velocity: false
-        angular_velocity: false
+        orientation: true
+        velocity: true
+        angular_velocity: true
 
       override_frame_id: # override the default frame_id with a custom one (e.g. slam_origin instead of aloam_origin)
         enabled: false
@@ -42,7 +48,7 @@ mrs_uav_managers:
           name: "alt_liosam"
         heading:
           name: "hdg_liosam"
-          passthrough: false # if true, then heading is not estimated but passed through from the orientation topic
+          passthrough: true # if true, then heading is not estimated but passed through from the orientation topic
 
       topics:
         orientation: "hw_api/orientation" # orientation passthrough
@@ -113,7 +119,7 @@ mrs_uav_managers:
             orientation_topic: "hw_api/orientation"
             max_tilt: 30.0 # [deg]
 
-      # Parameters of altitude median filters - buffer_size , max_diff 
+        # Parameters of altitude median filters - buffer_size , max_diff 
         vel_hw_api:
           state_id: 1 # 0 - position, 1 - velocity, 2 - acceleration
           noise: 0.01 # measurement noise covariance (R)
@@ -208,7 +214,8 @@ mrs_uav_managers:
 
     estimator_types: [
       "liosam",
-      "gps_garmin"
+      "gps_garmin",
+      "passthrough"
     ]
 
     constraints: [
@@ -221,11 +228,15 @@ mrs_uav_managers:
     # list of allowed gains per odometry mode
     allowed_constraints:
       liosam: ["ingeniarius","slow", "medium", "fast"]
+      gps_garmin: ["slow", "medium", "fast"]
+      passthrough: ["slow", "medium", "fast"]
 
     # those gains will be used automatically when a localization mode switches
     # and the current gains are not in the allowed list (next paragraphs)
     default_constraints:
       liosam: "slow"
+      gps_garmin: "slow"
+      passthrough: "slow"
 
     ingeniarius:
 
@@ -266,7 +277,8 @@ mrs_uav_managers:
 
     estimator_types: [
       "liosam",
-      "gps_garmin"
+      "gps_garmin",
+      "passthrough"
     ]
 
     gains: [
@@ -278,11 +290,15 @@ mrs_uav_managers:
     # list of allowed gains per odometry mode
     allowed_gains:
       liosam: ["ingeniarius", "supersoft", "soft"]
+      gps_garmin: ["supersoft", "soft"]
+      passthrough: ["supersoft", "soft"]
 
     # those gains will be used automatically when a localization mode switches
     # and the current gains are not in the allowed list (next paragraphs)
     default_gains:
       liosam: "ingeniarius"
+      gps_garmin: "soft"
+      passthrough: "soft"
 
     ingeniarius:
 
@@ -337,6 +353,10 @@ mrs_uav_managers:
 
   uav_manager:
 
+    # require gain or constraint manager running to takeoff?
+    require_gain_manager: false       #### 
+    require_constraint_manager: false ####
+
     takeoff:
 
       rate: 10 # [Hz]
@@ -349,11 +369,23 @@ mrs_uav_managers:
         controller: "Se3Controller"
         tracker: "MpcTracker"
 
-      takeoff_height: 10.0
+      takeoff_height: 3.0
+
+    landing:
+
+      rate: 10 # [Hz]
+      landing_tracker: "LandoffTracker"
+      landing_controller: "MpcController"
+
+      # those two must apply simultaneously
+      landing_cutoff_mass_factor:  0.5 # how much lighter does the drone appear to be?
+      landing_cutoff_timeout:  2.0 # [s] how long does the throttle has to be below the mass factor
+
+      disarm: false ### ING(7): true -> false ### 
 
   control_manager:
 
-    state_input: 1 # {0 = mrs_msgs::UavState, 1 = nav_msgs::Odometry} ### ING(6): 0 -> 1 ###
+    state_input: 0 # {0 = mrs_msgs::UavState, 1 = nav_msgs::Odometry} ### ING(6): 0 -> 1 ###
 
     # tracker used for landing and takeoff
     landing_takeoff_tracker: "LandoffTracker"
@@ -447,7 +479,7 @@ mrs_uav_managers:
 
     obstacle_bumper:
 
-      enabled: true
+      enabled: false
 
       switch_tracker: true
       tracker: "MpcTracker"
@@ -639,5 +671,5 @@ mrs_uav_trackers:
 
       enabled:           true # disabling this will stop this UAV to react to others, but it will still transmit data to others
       enabled_passively: true # disabling this will stop this uav to even transmit its data to others (only if enabled: false)
-      radius: 5.0 # [m]
+      radius: 1.0 # [m] ### ING(8): 5.0 -> 1.0 ###
       correction: 3.0 # [m]
