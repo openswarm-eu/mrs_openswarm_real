@@ -1,15 +1,15 @@
 #!/bin/bash
 
 ############## CHANGE #############
-# export UAV_NAMES="[uav13]"
-export UAV_NAMES="[uav12, uav13, uav14]"
+export UAV_NAMES="[uav9]"
+# export UAV_NAMES="[uav12, uav13, uav14]"
 # export UAV_NAMES="[uav6, uav7, uav8, uav9, uav10, uav11]"
 # export UAV_NAMES="[uav6, uav7, uav8, uav9, uav10, uav11, uav12, uav13, uav14]"
 export WORLD_NAME=ingeniarius	# forest, ingeniarius, espoo
 # export WORLD_NAME=forest	# forest, ingeniarius
 export RESET_COMMAND_FLAG=0
 export COMPUTER_NAME="asus1"
-export SWARM_HEIGHT=6.0   # Height of swarm (m)
+export SWARM_HEIGHT=3.0   # Height of swarm (m)
 
 ############## CONFIG #############
 # Get the hostname
@@ -111,6 +111,9 @@ export SYS_ROSBAG_TOPICS="
 	/$UAV_NAME/distributedMapping/localPath
 	/$UAV_NAME/distributedMapping/globalMap
 	/$UAV_NAME/odom
+	/$UAV_NAME/witmotion_imu/imu
+	/$UAV_NAME/marker/berry_detection
+	/$UAV_NAME/inference_results
 "
 
 ############## RVIZ ##############

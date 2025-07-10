@@ -48,7 +48,7 @@ mrs_uav_managers:
           name: "alt_liosam"
         heading:
           name: "hdg_liosam"
-          passthrough: true # if true, then heading is not estimated but passed through from the orientation topic
+          passthrough: false # if true, then heading is not estimated but passed through from the orientation topic
 
       topics:
         orientation: "hw_api/orientation" # orientation passthrough
@@ -162,7 +162,7 @@ mrs_uav_managers:
           noise_unhealthy_coeff: 100.0 # covariance gets multiplied by this coefficient when correction is unhealthy (R)
           message:
             type: "nav_msgs/Odometry"
-            topic: "odom" # without uav namespace
+            topic: "lio_sam/imupreintegration/odom" # without uav namespace
             limit: 
               delay: 2.0 # [s] messages with higher delay will flag correction as unhealthy
               time_since_last: 1.0 # [s] larger time step between messages will flag correction as unhealthy
@@ -199,7 +199,7 @@ mrs_uav_managers:
           noise_unhealthy_coeff: 100.0 # covariance gets multiplied by this coefficient when correction is unhealthy (R)
           message:
             type: "nav_msgs/Odometry"
-            topic: "odom" # without uav namespace
+            topic: "lio_sam/imupreintegration/odom" # without uav namespace
             limit: 
               delay: 2.0 # [s] messages with higher delay will flag correction as unhealthy
               time_since_last: 1.0 # [s] larger time step between messages will flag correction as unhealthy
@@ -303,7 +303,7 @@ mrs_uav_managers:
     ingeniarius:
 
       horizontal:
-        kp: 1.0   # (default: 3.0)
+        kp: 0.5   # (default: 3.0)
         kv: 0.7   # (default: 2.0) 0.8
         ka: 0.1   # (default: 1.0) 0.1
 
@@ -369,7 +369,7 @@ mrs_uav_managers:
         controller: "Se3Controller"
         tracker: "MpcTracker"
 
-      takeoff_height: 3.0
+      takeoff_height: 5.0
 
     landing:
 
@@ -403,7 +403,7 @@ mrs_uav_managers:
           limit: 75.0 # [deg]
 
       tilt_error_disarm:
-        enabled: true
+        enabled: false
         timeout: 0.5 # [s] # for how long the error has to be present to disarm
         error_threshold: 20.0 # [deg]
 

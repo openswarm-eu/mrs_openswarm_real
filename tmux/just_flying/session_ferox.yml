@@ -58,10 +58,10 @@ windows:
       layout: tiled
       panes:
         - waitForHw; roslaunch $ROS_LAUNCH_PATH/mrs_core.launch
-  - dcl_slam:
+  - lio_sam:
       layout: tiled
       panes:
-        - waitForHw; sleep 25; roslaunch $ROS_LAUNCH_PATH/dcl_slam/run_single.launch
+        - waitForHw; sleep 15; roslaunch $ROS_LAUNCH_PATH/lio_sam/run_uav.launch
   - tf_connector:
       layout: tiled
       panes:
@@ -99,9 +99,11 @@ windows:
       layout: tiled
       panes:
         - waitForHw; history -s roslaunch mrs_uav_autostart automatic_start.launch
-        - 'history -s rosservice call /$UAV_NAME/octomap_planner/goto \"goal: \[12.0, 51.0, 10.0, 0.0]\"'
-        - 'history -s rosservice call /$UAV_NAME/octomap_planner/goto \"goal: \[10.0, 32.0, 10.0, 0.0\]\"'
+        - 'history -s rosservice call /$UAV_NAME/octomap_planner/goto \"goal: \[12.0, 51.0, 4.0, 0.0]\"'
+        - 'history -s rosservice call /$UAV_NAME/octomap_planner/goto \"goal: \[5.0, 21.5, 4.0, 0.0\]\"'
         - 'history -s rosservice call /$UAV_NAME/octomap_planner/stop \"{}\"'
+        - 'history -s rosbag record /$UAV_NAME/hw_api/imu /$UAV_NAME/witmotion_imu/imu'
+        - 'history -s rostopic hz /$UAV_NAME/marker/berry_detection'
   - t_alt_poses:
       layout: tiled
       panes:
@@ -152,4 +154,4 @@ windows:
       layout: tiled
       panes:
         -  waitForHw; sleep 10; roslaunch continuous_gopro_photo continuous_photo.launch
-        -  waitForHw; sleep 30; roslaunch berries_detector_gemmo berry_detector.launch
+  #       -  waitForHw; sleep 15; roslaunch berries_detector_gemmo berry_detector.launch
