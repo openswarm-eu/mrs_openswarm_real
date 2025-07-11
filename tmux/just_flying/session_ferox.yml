@@ -154,4 +154,4 @@ windows:
       layout: tiled
       panes:
         -  waitForHw; sleep 10; roslaunch continuous_gopro_photo continuous_photo.launch
-  #       -  waitForHw; sleep 15; roslaunch berries_detector_gemmo berry_detector.launch
+        # -  waitForHw; sleep 15; roslaunch berries_detector_gemmo berry_detector.launch

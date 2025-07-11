@@ -10,8 +10,8 @@ main_timer:
 diagnostics_timer:
   rate: 10.0 # [Hz]
 
-euclidean_distance_cutoff: 0.5 # [m] maximum distance for Euclidean distance field
-safe_obstacle_distance: 0.5 # [m]
+euclidean_distance_cutoff: 1.0 # [m] maximum distance for Euclidean distance field
+safe_obstacle_distance: 1.0 # [m]
 
 min_path_length: 0.2 # [m] minimum length of path to be published
 

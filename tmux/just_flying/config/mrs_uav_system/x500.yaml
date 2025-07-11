@@ -1,4 +1,5 @@
-uav_mass: 5.37
+uav_mass: 5.80 # with GoPro/raspberry
+# uav_mass: 5.37
 
 motor_params:
   n_motors: 6
