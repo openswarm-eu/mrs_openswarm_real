@@ -8,7 +8,7 @@ mrs_uav_managers:
       "passthrough"
     ]
 
-    initial_state_estimator: "liosam"   # will be used as the first state estimator
+    initial_state_estimator: "gps_garmin"   # will be used as the first state estimator
     agl_height_estimator: "garmin_agl"  # only slightly filtered height for checking min height (not used in control feedback)
 
     passthrough: # namespace of the state estimator
@@ -369,7 +369,7 @@ mrs_uav_managers:
         controller: "Se3Controller"
         tracker: "MpcTracker"
 
-      takeoff_height: 5.0
+      takeoff_height: 3.0
 
     landing:
 
@@ -619,7 +619,7 @@ mrs_uav_controllers:
         # it will return an empty command instead, which should trigger
         # a failsafe in the control manager.
         tilt_angle_failsafe:
-          enabled: true
+          enabled: false
           limit: 90.0 # [deg]
 
       angular_rate_feedforward:

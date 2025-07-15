@@ -1,0 +1,15 @@
+<launch>
+
+    <arg name="UAV_NAME" default="$(optenv UAV_NAME uav1)"/>
+      <arg name="ROS_DATA_PATH" default="$(optenv ROS_DATA_PATH)" />
+
+    <group ns="$(arg UAV_NAME)">
+        <node pkg="mrs_openswarm_utils" type="save_position_node.py" name="save_position_node" output="screen" respawn="false">
+            <remap from="~odom" to="estimation_manager/odom_main" />
+            <remap from="~gnss" to="gnss_verifier/gnss_wstatus" />
+            <param name="uav_name" value="$(arg UAV_NAME)" />
+            <param name="path" value="$(arg ROS_DATA_PATH)" />
+        </node>
+    </group>
+
+</launch>

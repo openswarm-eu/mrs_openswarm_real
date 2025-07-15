@@ -98,6 +98,9 @@ topics: # topics published out of this machine to receivers specified above
  - name: "lio_sam/mapping/path"
    compress: true # enable bz2 compression
    rate: 0.2
+ - name: "save_position_node/saved_poses"
+   compress: true # enable bz2 compression
+   rate: 0.2
 
 services:
   - name: "trajectory_generation/path"

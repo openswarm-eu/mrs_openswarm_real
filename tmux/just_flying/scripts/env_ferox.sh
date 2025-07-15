@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ############## CHANGE #############
-export UAV_NAMES="[uav15]"
-# export UAV_NAMES="[uav12, uav13, uav14]"
+# export UAV_NAMES="[uav15]"
+export UAV_NAMES="[uav15, uav10, uav9]"
 # export UAV_NAMES="[uav6, uav7, uav8, uav9, uav10, uav11]"
 # export UAV_NAMES="[uav6, uav7, uav8, uav9, uav10, uav11, uav12, uav13, uav14]"
 export WORLD_NAME=ingeniarius	# forest, ingeniarius, espoo
@@ -43,9 +43,11 @@ export NETWORK_CONFIG=./config/network_config.yaml
 # location of the running script
 ROS_LAUNCH_PATH="$PWD/launch"
 ROS_CONFIG_PATH="$PWD/config"
+ROS_DATA_PATH="$PWD/data"
 
 export ROS_LAUNCH_PATH=$ROS_LAUNCH_PATH
 export ROS_CONFIG_PATH=$ROS_CONFIG_PATH
+export ROS_DATA_PATH=$ROS_DATA_PATH
 
 ############## GPS DATA ##############
 if [ "$WORLD_NAME" = "ingeniarius" ]; then
