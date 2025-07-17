@@ -2,7 +2,7 @@
 
 ############## CHANGE #############
 # export UAV_NAMES="[uav15]"
-export UAV_NAMES="[uav15, uav10, uav9]"
+export UAV_NAMES="[uav10, uav7, uav9]"
 # export UAV_NAMES="[uav6, uav7, uav8, uav9, uav10, uav11]"
 # export UAV_NAMES="[uav6, uav7, uav8, uav9, uav10, uav11, uav12, uav13, uav14]"
 export WORLD_NAME=ingeniarius	# forest, ingeniarius, espoo
