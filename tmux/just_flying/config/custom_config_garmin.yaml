@@ -369,7 +369,7 @@ mrs_uav_managers:
         controller: "Se3Controller"
         tracker: "MpcTracker"
 
-      takeoff_height: 3.0
+      takeoff_height: 10.0
 
     landing:
 
@@ -382,6 +382,15 @@ mrs_uav_managers:
       landing_cutoff_timeout:  2.0 # [s] how long does the throttle has to be below the mass factor
 
       disarm: false ### ING(7): true -> false ### 
+
+    # detecting if desired throttle cross max threshold, triggers landing after that
+    max_throttle:
+
+      enabled: true
+      rate: 30 # [Hz]
+      max_throttle: 0.80 # [-]
+      eland_timeout: 10.0 # [s]  ### ING: 1.0 -> 3.0 ###
+      ungrip_timeout: 0.5 # [s]
 
   control_manager:
 

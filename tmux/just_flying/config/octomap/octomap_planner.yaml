@@ -19,8 +19,8 @@ distance_penalty: 1.0 # coefficient for traveled distance from start in A* cost 
 greedy_penalty: 1.0 # coefficient for estimated distance to goal in A* cost function
 
 max_waypoint_distance: 0.0 # [m] // or set negative for no padding
-min_altitude: 2.5 # [m]
-max_altitude: 3.5 # [m]
+min_altitude: 8.0 # [m]
+max_altitude: 12.0 # [m]
 unknown_is_occupied: true # if false, planning through unknown space is enabled 
 replan_after: 1.0 # [s] time from last planning after which replanning is triggered
 

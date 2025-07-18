@@ -10,7 +10,7 @@ export WORLD_NAME=ingeniarius	# forest, ingeniarius, espoo
 export RESET_COMMAND_FLAG=0
 export COMPUTER_NAME="asus1"
 # export COMPUTER_NAME="Ikaros"
-export SWARM_HEIGHT=3.0   # Height of swarm (m)
+export SWARM_HEIGHT=10.0   # Height of swarm (m)
 
 ############## CONFIG #############
 # Get the hostname
