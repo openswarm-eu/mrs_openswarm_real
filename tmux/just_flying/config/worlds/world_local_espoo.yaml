@@ -1,14 +1,14 @@
 use_utm_origin: true
 utm_origin_units: 1 # 0 - UTM, 1 - Latitude Longitude
-utm_origin_lat: 41.21711155
-utm_origin_lon: -8.52746193
+utm_origin_lat: 61.8929263
+utm_origin_lon: 27.4177693
 
 world_origin:
 
   units: "LATLON" # {"UTM, "LATLON"}
 
-  origin_x: 41.21711155
-  origin_y: -8.52746193
+  origin_x: 61.8929263
+  origin_y: 27.4177693
 
 safety_area:
 

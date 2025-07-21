@@ -1,15 +1,15 @@
 #!/bin/bash
 
 ############## CHANGE #############
-# export UAV_NAMES="[uav15]"
-export UAV_NAMES="[uav10, uav7, uav9]"
+export UAV_NAMES="[uav13]"
+export UAV_NAMES="[uav13]"
 # export UAV_NAMES="[uav6, uav7, uav8, uav9, uav10, uav11]"
 # export UAV_NAMES="[uav6, uav7, uav8, uav9, uav10, uav11, uav12, uav13, uav14]"
-export WORLD_NAME=ingeniarius	# forest, ingeniarius, espoo
+export WORLD_NAME=espoo	# forest, ingeniarius, espoo
 # export WORLD_NAME=forest	# forest, ingeniarius
 export RESET_COMMAND_FLAG=0
-export COMPUTER_NAME="asus1"
-# export COMPUTER_NAME="Ikaros"
+# export COMPUTER_NAME="asus1"
+export COMPUTER_NAME="Ikaros"
 export SWARM_HEIGHT=10.0   # Height of swarm (m)
 
 ############## CONFIG #############
@@ -69,14 +69,14 @@ elif [ "$WORLD_NAME" = "forest" ]; then
 	export DATUM_LATITUDE_END=41.216510440162686
 	export DATUM_LONGITUDE_END=-8.52715607577829
 elif [ "$WORLD_NAME" = "espoo" ]; then
-	export WORLD_CONFIG=./config/worlds/world_local_espoo.yaml
-    export DATUM_LATITUDE=41.21711155
-    export DATUM_LONGITUDE=-8.52746193
+    export WORLD_CONFIG=./config/worlds/world_local_espoo.yaml #(Alterar arquivo)
+    export DATUM_LATITUDE=61.8929263
+    export DATUM_LONGITUDE=27.4177693
     export DATUM_HEADING=0.0
-	export DATUM_LATITUDE_START=41.21683395
-	export DATUM_LONGITUDE_START=-8.527359231666667
-	export DATUM_LATITUDE_END=41.216510440162686
-	export DATUM_LONGITUDE_END=-8.52715607577829
+    export DATUM_LATITUDE_START=61.8929263
+    export DATUM_LONGITUDE_START=27.4177693
+    export DATUM_LATITUDE_END=61.89291210
+    export DATUM_LONGITUDE_END=27.41757379
 else
     echo "Unknown WORLD_NAME: $WORLD_NAME"
     exit 1

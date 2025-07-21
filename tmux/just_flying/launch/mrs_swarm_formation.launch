@@ -2,6 +2,7 @@
 
   <arg name="UAV_NAME" default="$(optenv UAV_NAME)"/>
   <arg name="UAV_NAMES" default="$(optenv UAV_NAMES)" />
+  <arg name="COMPUTER_NAME" default="$(optenv COMPUTER_NAME)" />
   <arg name="ROS_CONFIG_PATH" default="$(optenv ROS_CONFIG_PATH)" />
 
   <arg name="drone_id"/>
@@ -13,7 +14,8 @@
       <param name="manager/name_list" value="true"/>
       <!-- <param name="manager/robot_names" type="yaml" value="[uav6, uav7, uav8, uav9, uav10, uav11]"/> -->
       <param name="manager/robot_names" type="yaml" value="$(arg UAV_NAMES)"/>
-      <param name="manager/robot_name" type="string" value="$(arg UAV_NAME)"/>
+      <param name="manager/robot_name" value="$(arg UAV_NAME)"/>
+      <param name="manager/computer_name" value="$(arg COMPUTER_NAME)"/>
 
       <param name="drone_id"  value="$(arg drone_id)"/>
       
