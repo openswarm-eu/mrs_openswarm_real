@@ -140,3 +140,5 @@ services:
     type: std_srvs/Trigger
   - name: "control_manager/transform_pose"
     type: mrs_msgs/TransformPoseSrv
+  - name: "control_manager/reference"
+    type: mrs_msgs/ReferenceStampedSrv
