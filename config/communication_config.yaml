@@ -17,33 +17,6 @@ topics: # topics published out of this machine to receivers specified above
  - name: "mrs_uav_status/uav_status_short"
    compress: true # enable bz2 compression
    rate: 10.0
- - name: "distributedMapping/globalDescriptors"
-   compress: true # enable bz2 compression
-   rate: 1.0
- - name: "distributedMapping/loopInfo"
-   compress: true # enable bz2 compression
-   rate: 1.0
- - name: "distributedMapping/neighborPoseEstimates"
-   compress: true # enable bz2 compression
-   rate: 1.0
- - name: "distributedMapping/neighborRotationEstimates"
-   compress: true # enable bz2 compression
-   rate: 1.0
- - name: "distributedMapping/optimizationState"
-   compress: true # enable bz2 compression
-   rate: 1.0
- - name: "distributedMapping/poseEstimateState"
-   compress: true # enable bz2 compression
-   rate: 1.0
- - name: "distributedMapping/rotationEstimateState"
-   compress: true # enable bz2 compression
-   rate: 1.0
- - name: "distributedMapping/path"
-   compress: true # enable bz2 compression
-   rate: 1.0
- - name: "distributedMapping/globalMap"
-   compress: true # enable bz2 compression
-   rate: 1.0
  - name: "octomap_planner/path"
    compress: true # enable bz2 compression
    rate: 1.0
@@ -80,21 +53,6 @@ topics: # topics published out of this machine to receivers specified above
  - name: "fms/drone_status"
    compress: true # enable bz2 compression
    rate: 2.0
- - name: "inference_results"
-   compress: true # enable bz2 compression
-   rate: 1.0
- - name: "hw_api/gnss"
-   compress: true # enable bz2 compression
-   rate: 1.0
-#  - name: "continuous_gopro_photo/image_raw"
-#    compress: true # enable bz2 compression
-#    rate: 1.0
-#  - name: "continuous_gopro_photo/camera_info"
-#    compress: true # enable bz2 compression
-#    rate: 1.0
- - name: "marker/berry_detection"
-   compress: true # enable bz2 compression
-   rate: 0.5
  - name: "lio_sam/mapping/map_global"
    compress: true # enable bz2 compression
    rate: 5.0
