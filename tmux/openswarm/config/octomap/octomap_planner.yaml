@@ -21,7 +21,7 @@ greedy_penalty: 1.0 # coefficient for estimated distance to goal in A* cost func
 max_waypoint_distance: 0.0 # [m] // or set negative for no padding
 min_altitude: 8.0 # [m]
 max_altitude: 12.0 # [m]
-unknown_is_occupied: true # if false, planning through unknown space is enabled 
+unknown_is_occupied: false # if false, planning through unknown space is enabled 
 replan_after: 1.0 # [s] time from last planning after which replanning is triggered
 
 timeout_threshold: 2.0 # [s] time after which A* planning is aborted and returns path to the node with the so far lowest cost   
@@ -39,7 +39,7 @@ trajectory_generator:
   relax_heading: true # if true, constraints on heading dynamics are ignored during trajectory generation process
   use_heading: true # if false heading is ignored during trajectory tracking
   heading_offset: 0.0 # [rad] offset of desired heading to direction of flight
-  turn_in_flight_direction: true # sample heading reference in direction of flight
+  turn_in_flight_direction: false # sample heading reference in direction of flight
   max_segment_length_heading: 1.0 # [m] maximum length of segment for heading sampling
 
 subt_planner:

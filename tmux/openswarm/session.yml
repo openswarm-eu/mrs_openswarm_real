@@ -50,14 +50,14 @@ windows:
       layout: tiled
       panes:
         - waitForTime; [ $COMPUTER_RVIZ -eq 1 ] && roslaunch $ROS_LAUNCH_PATH/tf_relay.launch || exit
-  - lio_sam:
-      layout: tiled
-      panes:
-        - waitForHw; sleep 15; roslaunch $ROS_LAUNCH_PATH/lio_sam/run_uav.launch
+  # - lio_sam:
+  #     layout: tiled
+  #     panes:
+  #       - waitForHw; sleep 15; roslaunch $ROS_LAUNCH_PATH/lio_sam/run_uav.launch
   - octomap:
       layout: tiled
       panes:
-        - waitForHw; sleep 6; roslaunch $ROS_LAUNCH_PATH/mrs_mapplan_octomapping.launch config_octomap_server:=./config/octomap/octomap_server.yaml config_octomap_planner:=./config/octomap/octomap_planner.yaml config_pcl_filter_ouster:=./config/octomap/lidar_filter_mapping.yaml world_frame_id:=$UAV_NAME/liosam_origin
+        - waitForHw; sleep 6; roslaunch $ROS_LAUNCH_PATH/mrs_mapplan_octomapping.launch config_octomap_server:=./config/octomap/octomap_server.yaml config_octomap_planner:=./config/octomap/octomap_planner.yaml config_pcl_filter_ouster:=./config/octomap/lidar_filter_mapping.yaml # world_frame_id:=$UAV_NAME/world_origin
   - monitor:
       layout: tiled
       panes:
@@ -66,7 +66,7 @@ windows:
       layout: tiled
       panes:
         - waitForHw; roslaunch $ROS_LAUNCH_PATH/fsm_uav.launch
-        - waitForHw; history -s roslaunch mrs_uav_autostart automatic_start.launch custom_config:=$ROS_CONFIG_PATH/automatic_start.yaml
+        - waitForHw; roslaunch mrs_uav_autostart automatic_start.launch custom_config:=$ROS_CONFIG_PATH/automatic_start.yaml
         - waitForHw; roslaunch mrs_uav_status status.launch config_file:=$ROS_CONFIG_PATH/status_info.yaml
   - t_goto:
       layout: tiled

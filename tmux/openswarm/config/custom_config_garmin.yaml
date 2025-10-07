@@ -238,6 +238,10 @@ mrs_uav_managers:
       gps_garmin: "slow"
       passthrough: "slow"
 
+    slow:
+      horizontal:
+        speed: 2.0        # [m/s]
+
     ingeniarius:
 
       horizontal:
@@ -297,7 +301,7 @@ mrs_uav_managers:
     # and the current gains are not in the allowed list (next paragraphs)
     default_gains:
       liosam: "ingeniarius"
-      gps_garmin: "soft"
+      gps_garmin: "supersoft"
       passthrough: "soft"
 
     ingeniarius:
@@ -682,3 +686,21 @@ mrs_uav_trackers:
       enabled_passively: true # disabling this will stop this uav to even transmit its data to others (only if enabled: false)
       radius: 1.0 # [m] ### ING(8): 5.0 -> 1.0 ###
       correction: 3.0 # [m]
+
+mrs_uav_trajectory_generation:
+
+  # execution time limiter
+  max_time: 0.5 # [s]
+
+  # check and fix the max deviation between the input path and the output trajectory
+  # by subsampling the original path with more waypoints
+  check_trajectory_deviation:
+    max_deviation: 0.20 # [m]
+
+  # allows to neglect waypoints in the original path if the new path
+  # does not violate max distance from the original path.
+  # This makes for similar but sparser paths, which are easier for the
+  # trajectory generator to work with.
+  path_straightener:
+    enabled: true
+    max_deviation: 0.20 # [m]
