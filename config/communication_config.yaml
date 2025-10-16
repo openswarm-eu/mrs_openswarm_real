@@ -62,6 +62,9 @@ topics: # topics published out of this machine to receivers specified above
  - name: "save_position_node/saved_poses"
    compress: true # enable bz2 compression
    rate: 0.2
+ - name: "control_manager/trajectory_original/poses"
+   compress: true # enable bz2 compression
+   rate: 0.2
 
 services:
   - name: "trajectory_generation/path"
