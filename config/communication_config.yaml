@@ -106,3 +106,5 @@ services:
     type: mrs_msgs/TransformPoseSrv
   - name: "control_manager/reference"
     type: mrs_msgs/ReferenceStampedSrv
+  - name: "sweeping_generator/start"
+    type: mrs_msgs/Vec1
