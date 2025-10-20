@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ############## CHANGE #############
-export UAV_NAMES="[uav6]"
+export UAV_NAMES="[uav9, uav10, uav15, uav12, uav11, uav14, uav13]"
 # export UAV_NAMES="[uav6, uav7, uav8, uav9, uav10, uav11, uav12, uav13, uav14, uav15]"
 export WORLD_NAME=alfena	# forest, ingeniarius, alfena
 export RESET_COMMAND_FLAG=0
@@ -57,10 +57,14 @@ elif [ "$WORLD_NAME" = "alfena" ]; then
     export DATUM_LATITUDE=41.23142444
     export DATUM_LONGITUDE=-8.48918312
     export DATUM_HEADING=0.0
-	export DATUM_LATITUDE_START=41.231528
-	export DATUM_LONGITUDE_START=-8.489502
-	export DATUM_LATITUDE_END=41.231751
-	export DATUM_LONGITUDE_END=-8.490120
+	# export DATUM_LATITUDE_START=41.231528
+	# export DATUM_LONGITUDE_START=-8.489502
+	# export DATUM_LATITUDE_END=41.231751
+	# export DATUM_LONGITUDE_END=-8.490120
+	export DATUM_LATITUDE_START=41.23175554608477
+	export DATUM_LONGITUDE_START=-8.489968067026277
+	export DATUM_LATITUDE_END=41.232120983191294
+	export DATUM_LONGITUDE_END=-8.490831150515527
 elif [ "$WORLD_NAME" = "forest" ]; then
 	export WORLD_CONFIG=./config/worlds/world_local_forest.yaml
     export DATUM_LATITUDE=41.21711155

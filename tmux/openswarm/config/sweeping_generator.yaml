@@ -1,0 +1,23 @@
+frame_id: "world_origin"
+
+leader_msg: "mpc"
+frame_publish: "utm_navsat"
+
+timer_main:
+  rate: 1.0 # [Hz]
+
+timer_pose:
+  rate: 1.0 # [Hz]
+
+center:
+  x: -110.0 # [m] # -80 -50.0 não
+  y: 110.0 # [m] # 80 120.0 não
+  z: 10.0 # [m]
+
+dimensions:
+  x: 150.0 # [m]
+  y: 150.0 # [m]
+
+angle: 2.35 # 1.83 não
+lateral_scale: 1.0
+side: 7 #10.0
