@@ -1,0 +1,17 @@
+<launch>
+
+  <!-- args corresponding to environment variables -->
+  <arg name="UAV_NAME" default="$(optenv UAV_NAME)" />
+  <arg name="UAV_NAMES" default="$(optenv UAV_NAMES)" />
+  <arg name="COMPUTER_NAME" default="$(optenv COMPUTER_NAME)" />
+
+  <group ns="$(arg UAV_NAME)">
+    <node name="uav_fsm" pkg="mrs_openswarm_utils" type="fsm_uav_v2.py" output="screen">
+      <param name="uav_name" value="$(arg UAV_NAME)" />
+      <param name="computer_name" value="$(arg COMPUTER_NAME)" />
+      <!-- <param name="uav_names" type="yaml" value="[uav6, uav7, uav8, uav9, uav10, uav11, uav12, uav13, uav14]"/> -->
+      <param name="uav_names" type="yaml" value="$(arg UAV_NAMES)"/>
+    </node>
+  </group>
+
+</launch>

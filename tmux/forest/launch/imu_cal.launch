@@ -1,0 +1,28 @@
+<launch>
+
+    <arg name="maxSize" default="1000"/>
+    <arg name="apply_offset" default="true"/>
+    <arg name="self_offset" default="false"/>
+    <arg name="imu_offset" default="true"/>
+    <arg name="lla_offset" default="false"/>
+    <arg name="wit_offset" default="0.0"/>
+
+    <arg name="UAV_NAME" default="$(optenv UAV_NAME uav1)"/>
+
+    <group ns="$(arg UAV_NAME)">
+        <node pkg="mrs_openswarm_utils" type="imu_calibration" name="imu_calibration" output="screen" respawn="true">
+            <remap from="~input_topic_main" to="hw_api/imu_in" />
+            <remap from="~input_topic_ref" to="witmotion_imu/imu" />
+            <remap from="~input_topic_offset" to="yaw_offset" />
+            <remap from="~output_topic_imu" to="hw_api/imu" />
+            <remap from="~output_topic_orientation" to="hw_api/orientation" />
+            <param name="maxSize" value="$(arg maxSize)"/>
+            <param name="apply_offset" value="$(arg apply_offset)"/>
+            <param name="self_offset" value="$(arg self_offset)"/>
+            <param name="imu_offset" value="$(arg imu_offset)"/>
+            <param name="lla_offset" value="$(arg lla_offset)"/>
+            <param name="wit_offset" value="$(arg wit_offset)"/>
+        </node>
+    </group>
+
+</launch>

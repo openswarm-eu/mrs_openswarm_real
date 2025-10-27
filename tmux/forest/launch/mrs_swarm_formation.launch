@@ -1,0 +1,31 @@
+<launch>
+
+  <arg name="UAV_NAME" default="$(optenv UAV_NAME)"/>
+  <arg name="UAV_NAMES" default="$(optenv UAV_NAMES)" />
+  <arg name="COMPUTER_NAME" default="$(optenv COMPUTER_NAME)" />
+  <arg name="ROS_CONFIG_PATH" default="$(optenv ROS_CONFIG_PATH)" />
+
+  <arg name="drone_id"/>
+  <arg name="odom_topic"/>
+
+  <group ns="$(arg UAV_NAME)">
+    <node pkg="ego_planner" name="swarm_formation" type="ego_planner_node" output="screen">
+
+      <param name="manager/name_list" value="true"/>
+      <!-- <param name="manager/robot_names" type="yaml" value="[uav6, uav7, uav8, uav9, uav10, uav11]"/> -->
+      <param name="manager/robot_names" type="yaml" value="$(arg UAV_NAMES)"/>
+      <param name="manager/robot_name" value="$(arg UAV_NAME)"/>
+      <param name="manager/computer_name" value="$(arg COMPUTER_NAME)"/>
+
+      <param name="drone_id"  value="$(arg drone_id)"/>
+      
+      <remap from="~odom_world"       to="$(arg odom_topic)"/>
+      <remap from="~planning/start"   to = "/drone_$(arg drone_id)_planning/start"/>
+      <remap from="~planning/finish"  to = "/drone_$(arg drone_id)_planning/finish"/>
+
+      <rosparam file="$(arg ROS_CONFIG_PATH)/swarm/swarm.yaml" command="load" />
+
+    </node>
+  </group> 
+
+</launch>
