@@ -68,6 +68,15 @@ windows:
         - waitForHw; roslaunch $ROS_LAUNCH_PATH/fsm_uav.launch
         - waitForHw; roslaunch mrs_uav_autostart automatic_start.launch custom_config:=$ROS_CONFIG_PATH/automatic_start.yaml
         - waitForHw; roslaunch mrs_uav_status status.launch config_file:=$ROS_CONFIG_PATH/status_info.yaml
+  - sweeping_generator:
+      layout: tiled
+      panes:
+        - waitForControl; roslaunch $ROS_LAUNCH_PATH/swarm_sweeping_generator.launch
+        - 'history -s rosservice call /$UAV_NAME/sweeping_generator/start 0.2'
+  - constraint_manager:
+      layout: tiled
+      panes:
+        - 'history -s rosservice call /$UAV_NAME/constraint_manager/set_constraints \"value: \fast\"'
   - t_goto:
       layout: tiled
       panes:

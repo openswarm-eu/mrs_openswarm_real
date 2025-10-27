@@ -1,3 +1,6 @@
+uav_leader: "uav6"
+global_frame: "utm_navsat"
+
 planning_tree:
   resolution: 0.4
 

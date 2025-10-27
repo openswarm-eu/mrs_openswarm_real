@@ -392,13 +392,13 @@ mrs_uav_managers:
 
       enabled: true
       rate: 30 # [Hz]
-      max_throttle: 0.80 # [-]
+      max_throttle: 0.90 # [-]
       eland_timeout: 10.0 # [s]  ### ING: 1.0 -> 3.0 ###
       ungrip_timeout: 0.5 # [s]
 
   control_manager:
 
-    state_input: 0 # {0 = mrs_msgs::UavState, 1 = nav_msgs::Odometry} ### ING(6): 0 -> 1 ###
+    state_input: 0 # {0 = mrs_msgs::UavState, 1 = nav_msgs::Odometry}
 
     # tracker used for landing and takeoff
     landing_takeoff_tracker: "LandoffTracker"
@@ -407,21 +407,21 @@ mrs_uav_managers:
 
       tilt_limit:
 
-        eland:    ### ING(2): true -> false ###
-          enabled: false
+        eland:
+          enabled: true
           limit: 75.0 # [deg]
 
         disarm:
-          enabled: false
+          enabled: true
           limit: 75.0 # [deg]
 
       tilt_error_disarm:
-        enabled: false
+        enabled: true
         timeout: 0.5 # [s] # for how long the error has to be present to disarm
         error_threshold: 20.0 # [deg]
 
-      yaw_error_eland:  ### ING(3): true -> false ###
-        enabled: false
+      yaw_error_eland:
+        enabled: true
         limit: 90.0 # [deg]
 
       # tracker used for emergency hover routine
@@ -437,8 +437,8 @@ mrs_uav_managers:
       # trigger eland when the odometry corrections are too unreliable
       # - should be false when using custom odometry source without available innovation values
       # - the innovation limit is set per-controller in the controllers.yaml file
-      odometry_innovation_eland:    ### ING(1): true -> false ###
-        enabled: false
+      odometry_innovation_eland:
+        enabled: true
 
       # emergency landing (still feedback)
       eland:
@@ -608,13 +608,13 @@ mrs_uav_managers:
       speed: 0.25 # [rad/s]
       timer_rate: 10 # [Hz]
 
-    Se3Controller: ### ING(4): 1.5 -> 3.0 ###
-      eland_threshold: 3.0 # [m], position error triggering eland
+    Se3Controller:
+      eland_threshold: 1.5 # [m], position error triggering eland
       failsafe_threshold: 2.5 # [m], position error triggering failsafe land
       odometry_innovation_threshold: 1.5 # [m], position odometry innovation threshold
 
-    MpcController:  ### ING(4): 3.5 -> 7.0 ###
-      eland_threshold: 7.0 # [m], position error triggering eland
+    MpcController:
+      eland_threshold: 3.5 # [m], position error triggering eland
       failsafe_threshold: 4.5 # [m], position error triggering failsafe land
       odometry_innovation_threshold: 2.5 # [m], position odometry innovation threshold
 
@@ -632,7 +632,7 @@ mrs_uav_controllers:
         # it will return an empty command instead, which should trigger
         # a failsafe in the control manager.
         tilt_angle_failsafe:
-          enabled: false
+          enabled: true
           limit: 90.0 # [deg]
 
       angular_rate_feedforward:
@@ -682,9 +682,9 @@ mrs_uav_trackers:
     # mrs collision avoidance
     collision_avoidance:
 
-      enabled:           false # disabling this will stop this UAV to react to others, but it will still transmit data to others
+      enabled:           true # disabling this will stop this UAV to react to others, but it will still transmit data to others
       enabled_passively: true # disabling this will stop this uav to even transmit its data to others (only if enabled: false)
-      radius: 1.0 # [m] ### ING(8): 5.0 -> 1.0 ###
+      radius: 2.0 # [m]
       correction: 3.0 # [m]
 
 mrs_uav_trajectory_generation:
@@ -704,3 +704,6 @@ mrs_uav_trajectory_generation:
   path_straightener:
     enabled: true
     max_deviation: 0.20 # [m]
+
+  # when true, the resulting trajectory will have a heading always pointing tangentially along the trajectory
+  override_heading_atan2: true
