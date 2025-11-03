@@ -9,6 +9,10 @@ timer_main:
 timer_pose:
   rate: 1.0 # [Hz]
 
+timer_comm:
+  rate: 1.0 # [Hz]
+  timeout: 5.0 # [s]
+
 center:
   x: 10.0 # [m]
   y: -4.0 # [m]
