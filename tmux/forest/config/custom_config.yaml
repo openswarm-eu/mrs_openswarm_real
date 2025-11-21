@@ -74,7 +74,7 @@ mrs_uav_managers:
   
         corrections: [
           "pos_liosam",
-          "pos_garmin",
+          # "pos_garmin",
           "vel_hw_api"
         ]
   
@@ -84,7 +84,7 @@ mrs_uav_managers:
           noise_unhealthy_coeff: 100.0 # covariance gets multiplied by this coefficient when correction is unhealthy (R)
           message:
             type: "nav_msgs/Odometry"
-            topic: "lio_sam/imupreintegration/odom" # without uav namespace
+            topic: "odom_transformed" # without uav namespace
             limit: 
               delay: 2.0 # [s] messages with higher delay will flag correction as unhealthy
               time_since_last: 1.0 # [s] larger time step between messages will flag correction as unhealthy
@@ -199,7 +199,7 @@ mrs_uav_managers:
           noise_unhealthy_coeff: 100.0 # covariance gets multiplied by this coefficient when correction is unhealthy (R)
           message:
             type: "nav_msgs/Odometry"
-            topic: "lio_sam/imupreintegration/odom" # without uav namespace
+            topic: "odom_transformed" # without uav namespace
             limit: 
               delay: 2.0 # [s] messages with higher delay will flag correction as unhealthy
               time_since_last: 1.0 # [s] larger time step between messages will flag correction as unhealthy

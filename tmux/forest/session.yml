@@ -58,6 +58,10 @@ windows:
       layout: tiled
       panes:
         - waitForHw; sleep 15; roslaunch $ROS_LAUNCH_PATH/lio_sam/run_uav.launch
+  - republisher:
+      layout: tiled
+      panes:
+        -  waitForHw; roslaunch $ROS_LAUNCH_PATH/repub_odom_tf_desired.launch
   - octomap:
       layout: tiled
       panes:
