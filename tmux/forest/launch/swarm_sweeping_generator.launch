@@ -19,11 +19,21 @@
       <param name="computer_name" value="$(arg COMPUTER_NAME)" />
 
      <!-- Define the waypoint list as a parameter -->
-      <param name="waypoint_list" type="yaml" value="[
+      <!-- <param name="waypoint_list" type="yaml" value="[
           [10.0, 15.0, 1.5],
           [10.0, 30.0, 1.5],
           [20.0, 30.0, 1.5]
+      ]"/> -->
+
+     <!-- Define the waypoint list as a parameter -->
+     <param name="waypoint_frame" value="utm_navsat" />
+      <param name="waypoint_list" type="yaml" value="[
+          [47.397743, 8.545594, 1.5]
       ]"/>
+
+    <!-- Home: latitude: 47.3975176, longitude: 8.5453274 -->
+    <!-- Origin: latitude: 47.3977466, longitude: 8.5455947 -->
+    <!-- 2nd Point: latitude: 47.3975202, longitude: 8.5455976 -->
 
       <remap from="~control_manager_diag_in" to="control_manager/diagnostics" />
       <remap from="~path_out" to="trajectory_generation/path" />
