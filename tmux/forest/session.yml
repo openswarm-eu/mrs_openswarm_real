@@ -38,10 +38,18 @@ windows:
       layout: tiled
       panes:
         -  waitForHw; roslaunch $ROS_LAUNCH_PATH/navsat.launch
-  - imu_cal:
+  - distance_filter:
       layout: tiled
       panes:
-        -  waitForHw; roslaunch $ROS_LAUNCH_PATH/imu_cal_uav.launch
+        -  waitForHw; roslaunch $ROS_LAUNCH_PATH/range_filter.launch
+  # - imu_cal:
+  #     layout: tiled
+  #     panes:
+  #       -  waitForHw; roslaunch $ROS_LAUNCH_PATH/imu_cal_uav.launch
+  - imu_filter:
+      layout: tiled
+      panes:
+        -  waitForHw; roslaunch $ROS_LAUNCH_PATH/imu_upsampler.launch
   # - imu_wit:
   #     layout: tiled
   #     panes:
@@ -66,6 +74,10 @@ windows:
       layout: tiled
       panes:
         - waitForHw; sleep 6; roslaunch $ROS_LAUNCH_PATH/mrs_mapplan_octomapping.launch config_octomap_server:=./config/octomap/octomap_server.yaml config_octomap_planner:=./config/octomap/octomap_planner.yaml config_pcl_filter_ouster:=./config/octomap/lidar_filter_mapping.yaml # world_frame_id:=$UAV_NAME/world_origin
+  - octomap_min:
+      layout: tiled
+      panes:
+        - waitForHw; sleep 6; roslaunch $ROS_LAUNCH_PATH/mrs_octomapping.launch
   - monitor:
       layout: tiled
       panes:
@@ -76,7 +88,7 @@ windows:
         - waitForHw; roslaunch $ROS_LAUNCH_PATH/fsm_uav.launch
         - waitForHw; roslaunch mrs_uav_autostart automatic_start.launch custom_config:=$ROS_CONFIG_PATH/automatic_start.yaml
         - waitForHw; roslaunch mrs_uav_status status.launch config_file:=$ROS_CONFIG_PATH/status_info.yaml
-  - sweeping_generator:
+  - swarm:
       layout: tiled
       panes:
         - waitForControl; roslaunch $ROS_LAUNCH_PATH/swarm_sweeping_generator.launch
@@ -105,12 +117,6 @@ windows:
         - waitForHw; history -s roslaunch mrs_uav_autostart automatic_start.launch
         - 'history -s rosservice call /$UAV_NAME/control_manager/goto_altitude \"goal: 10.0\"'
         - 'history -s ./scripts/poses.sh'
-  - swarm:
-      layout: tiled
-      panes:
-        - waitForHw; history -s roslaunch mrs_uav_autostart automatic_start.launch
-        - history -s roslaunch $ROS_LAUNCH_PATH/pose_generator.launch
-        - waitForTime; sleep 3; [ $SWARM_FORMATION -eq 1 ] && roslaunch $ROS_LAUNCH_PATH/mrs_swarm_formation.launch drone_id:=0 odom_topic:=/$UAV_NAME/estimation_manager/odom_main  || exit
   - commands:
       layout: tiled
       panes:

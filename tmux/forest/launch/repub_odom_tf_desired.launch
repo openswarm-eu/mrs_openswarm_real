@@ -7,8 +7,9 @@
     <node name="repub_odom_tf_desired" pkg="mrs_openswarm_utils" type="repub_odom_tf_desired" output="screen">
       <param name="uav_name" value="$(arg UAV_NAME)" />
       <param name="target_frame" value="$(arg UAV_NAME)/fcu" />
-      <remap from="odom" to="lio_sam/imupreintegration/odom" />
-      <!-- <remap from="odom" to="lio_sam/mapping/odometry" /> -->
+      <param name="parent_frame" value="$(arg UAV_NAME)/odom" />
+      <!-- <remap from="odom" to="lio_sam/imupreintegration/odom" /> -->
+      <remap from="odom" to="lio_sam/mapping/odometry" />
     </node>
   </group>
 

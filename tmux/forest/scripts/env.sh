@@ -3,7 +3,7 @@
 ############## CHANGE #############
 export UAV_NAMES="[uav9, uav10, uav11]"
 # export UAV_NAMES="[uav6, uav7, uav8, uav9, uav10, uav11, uav12, uav13, uav14, uav15]"
-export WORLD_NAME=forest	# forest, ingeniarius, alfena
+export WORLD_NAME=ingeniarius	# forest, ingeniarius, alfena
 export RESET_COMMAND_FLAG=0
 export COMPUTER_NAME="asus1"
 export SWARM_HEIGHT=5.0
@@ -72,6 +72,15 @@ elif [ "$WORLD_NAME" = "forest" ]; then
     export DATUM_HEADING=0.0
 	export DATUM_LATITUDE_START=41.21683395
 	export DATUM_LONGITUDE_START=-8.527359231666667
+	export DATUM_LATITUDE_END=41.216510440162686
+	export DATUM_LONGITUDE_END=-8.52715607577829
+elif [ "$WORLD_NAME" = "meco" ]; then
+	export WORLD_CONFIG=./config/worlds/world_local_meco.yaml
+    export DATUM_LATITUDE=41.31794607
+    export DATUM_LONGITUDE=-8.53678607
+    export DATUM_HEADING=0.0
+	export DATUM_LATITUDE_START=41.3180771
+	export DATUM_LONGITUDE_START=-8.5369298
 	export DATUM_LATITUDE_END=41.216510440162686
 	export DATUM_LONGITUDE_END=-8.52715607577829
 else

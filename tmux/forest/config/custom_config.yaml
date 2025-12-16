@@ -73,14 +73,15 @@ mrs_uav_managers:
           acc: 1.0 # acceleration state
   
         corrections: [
-          "pos_liosam",
-          # "pos_garmin",
+          # "pos_liosam",
+          # "pos_px4",
+          "pos_garmin",
           "vel_hw_api"
         ]
   
         pos_liosam:
           state_id: 0 # 0 - position, 1 - velocity, 2 - acceleration
-          noise: 0.01 # measurement noise covariance (R)
+          noise: 0.01 # measurement noise covariance (R) # Test have been made with 0.5 in order to reduce oscillations
           noise_unhealthy_coeff: 100.0 # covariance gets multiplied by this coefficient when correction is unhealthy (R)
           message:
             type: "nav_msgs/Odometry"
@@ -89,6 +90,19 @@ mrs_uav_managers:
               delay: 2.0 # [s] messages with higher delay will flag correction as unhealthy
               time_since_last: 1.0 # [s] larger time step between messages will flag correction as unhealthy
   
+          processors: [] # types of processors attached to this measurement
+
+        pos_px4:
+          state_id: 0 # 0 - position, 1 - velocity, 2 - acceleration
+          noise: 0.001 # measurement noise covariance (R)
+          noise_unhealthy_coeff: 100.0 # covariance gets multiplied by this coefficient when correction is unhealthy (R)
+          message:
+            type: "nav_msgs/Odometry"
+            topic: "hw_api/odometry" # without uav namespace
+            limit:
+              delay: 2.0 # [s] messages with higher delay will flag correction as unhealthy
+              time_since_last: 1.0 # [s] larger time step between messages will flag correction as unhealthy
+
           processors: [] # types of processors attached to this measurement
 
         pos_garmin:

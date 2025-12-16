@@ -9,7 +9,7 @@ navsat:
   broadcast_cartesian_transform: true
   broadcast_cartesian_transform_as_parent_frame: false
   publish_filtered_gps: true
-  base_link_frame_id: base_footprint_linkv
+  base_link_frame_id: base_footprint_link
   gps_frame_id: base_footprint_link
   # world_frame: map_navsat
 

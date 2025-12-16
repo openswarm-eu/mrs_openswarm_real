@@ -27,3 +27,5 @@ lateral_scale: 1.0
 side: 10.0
 
 octomap_planner_set: true
+leader_reference_set: false
+heading_leader_zero: false
