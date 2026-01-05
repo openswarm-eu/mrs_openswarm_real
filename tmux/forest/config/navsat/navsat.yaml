@@ -9,8 +9,8 @@ navsat:
   broadcast_cartesian_transform: true
   broadcast_cartesian_transform_as_parent_frame: false
   publish_filtered_gps: true
-  base_link_frame_id: base_footprint_link
-  gps_frame_id: base_footprint_link
+  base_link_frame_id: fcu
+  gps_frame_id: fcu
   # world_frame: map_navsat
 
 # EKF for Navsat
@@ -19,7 +19,7 @@ ekf_gps:
   publish_tf: false
   # map_frame: map_navsat
   odom_frame: odom
-  base_link_frame: base_footprint_link
+  base_link_frame: fcu
   # world_frame: map_navsat
 
   frequency: 50

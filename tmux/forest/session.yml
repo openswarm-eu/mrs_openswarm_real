@@ -38,10 +38,18 @@ windows:
       layout: tiled
       panes:
         -  waitForHw; roslaunch $ROS_LAUNCH_PATH/navsat.launch
-  - distance_filter:
+  # - switch_estimator:
+  #     layout: tiled
+  #     panes:
+  #       -  waitForHw; roslaunch $ROS_LAUNCH_PATH/switch_estimator.launch
+  # - distance_filter:
+  #     layout: tiled
+  #     panes:
+  #       -  waitForHw; roslaunch $ROS_LAUNCH_PATH/range_filter.launch
+  - distance_adaptive:
       layout: tiled
       panes:
-        -  waitForHw; roslaunch $ROS_LAUNCH_PATH/range_filter.launch
+        -  waitForHw; roslaunch $ROS_LAUNCH_PATH/range_adaptative.launch
   # - imu_cal:
   #     layout: tiled
   #     panes:
@@ -66,10 +74,10 @@ windows:
       layout: tiled
       panes:
         - waitForHw; sleep 15; roslaunch $ROS_LAUNCH_PATH/lio_sam/run_uav.launch
-  - republisher:
-      layout: tiled
-      panes:
-        -  waitForHw; roslaunch $ROS_LAUNCH_PATH/repub_odom_tf_desired.launch
+  # - republisher:
+  #     layout: tiled
+  #     panes:
+  #       -  waitForHw; roslaunch $ROS_LAUNCH_PATH/repub_odom_tf_desired.launch
   - octomap:
       layout: tiled
       panes:

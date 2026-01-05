@@ -60,7 +60,7 @@
         <remap from="~input" to="pcl_raw_crop_temp" />
         <remap from="~output" to="pcl_filtered" />
         <param name="input_frame" value="$(arg UAV_NAME)/lslidar_link"/>
-        <param name="output_frame" value="$(arg UAV_NAME)/base_footprint_link"/>
+        <param name="output_frame" value="$(arg UAV_NAME)/fcu"/>
         <rosparam command="load" file="$(arg ROS_CONFIG_PATH)/lslidar/filter_lslidar_up.yaml" />
     </node>    
 

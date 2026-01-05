@@ -11,8 +11,8 @@ lio_sam:
   gpsFixFilteredTopic: ""                       # Its subscribed but not used for anything yet
 
   # Frames
-  lidarFrame: "base_footprint_link"
-  baselinkFrame: "base_footprint_link"
+  lidarFrame: "fcu"
+  baselinkFrame: "fcu"
   odometryFrame: "odom"
   mapFrame: "map"
   mapFrameAsChild: true  # If true, map frame is a child of the odometry frame, otherwise it is a parent
