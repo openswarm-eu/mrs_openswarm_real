@@ -5,8 +5,8 @@
     <arg name="UAV_NAME" default="$(optenv UAV_NAME)" />
 
     <!-- Namespace -->
-    <arg name="lidarFrame" default="$(optenv UAV_NAME)/base_footprint_link" />
-    <arg name="baselinkFrame" default="$(optenv UAV_NAME)/base_footprint_link" />
+    <arg name="lidarFrame" default="$(optenv UAV_NAME)/fcu" />
+    <arg name="baselinkFrame" default="$(optenv UAV_NAME)/fcu" />
     <arg name="odometryFrame" default="$(optenv UAV_NAME)/odom" />
     <arg name="mapFrame" default="$(optenv UAV_NAME)/map" />
 

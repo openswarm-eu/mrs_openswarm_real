@@ -16,7 +16,7 @@ windows:
   - bag:
       layout: tiled
       panes:
-        - waitForRos; history -s rosbag play 2025-12-16-11-56-35.bag --clock --topics /uav9/hw_api/distance_sensor_in
+        - waitForRos; history -s rosbag play 2026-01-05-13-25-39.bag --clock --topics /uav10/hw_api/distance_sensor /uav10/hw_api/velocity
   # - tf:
   #     layout: tiled
   #     panes:
@@ -43,10 +43,14 @@ windows:
   #     layout: tiled
   #     panes:
   #       -  waitForHw; roslaunch $ROS_LAUNCH_PATH/navsat.launch
-  - distance_filter:
+  # - distance_filter:
+  #     layout: tiled
+  #     panes:
+  #       -  waitForRos; roslaunch $ROS_LAUNCH_PATH/range_filter.launch
+  - distance_adaptive:
       layout: tiled
       panes:
-        -  waitForRos; roslaunch $ROS_LAUNCH_PATH/range_filter.launch
+        -  waitForRos; roslaunch $ROS_LAUNCH_PATH/range_adaptative.launch
   # # - imu_cal:
   # #     layout: tiled
   # #     panes:

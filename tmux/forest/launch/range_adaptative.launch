@@ -1,12 +1,20 @@
 <launch>
 
     <arg name="UAV_NAME" default="$(optenv UAV_NAME uav1)"/>
-
+    
     <group ns="$(arg UAV_NAME)">
         <node pkg="mrs_openswarm_utils" type="distance_filter_adaptive" name="distance_filter_adaptive" output="screen" respawn="true">
-        <remap from="/hw_api/distance_sensor" to="hw_api/distance_sensor"/>
+        <remap from="/hw_api/distance_sensor" to="hw_api/distance_sensor_in"/>
         <remap from="/estimation_manager/odom_main" to="estimation_manager/odom_main"/>
-        <remap from="/filtered_altitude" to="filtered_altitude"/>
+        <remap from="/filtered_altitude" to="hw_api/distance_sensor"/>
+        <remap from="/hw_api/velocity" to="hw_api/velocity"/>
+
+        <param name="alpha_max" value="1.0" />  <!-- smoothing factor for max velocity -->
+        <param name="alpha_min" value="0.02" /> <!-- smoothing factor for min velocity -->
+        <param name="velocity_gain" value="0.8" /> <!-- velocity gain for adaptive filtering -->
+        <param name="drop_threshold" value="0.5" /> <!-- drop threshold for bush protection -->
+        <param name="velocity_min" value="0.5" /> <!-- minimum velocity to consider movement -->
+        <param name="velocity_max" value="2.0" /> <!-- maximum velocity for adaptive filtering -->
 
         </node>
     </group>
