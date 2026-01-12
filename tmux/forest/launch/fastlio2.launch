@@ -1,0 +1,28 @@
+<launch>
+
+    <!-- args corresponding to environment variables -->
+    <arg name="UAV_NAME" default="$(optenv UAV_NAME)" />
+    <arg name="UAV_NAMES" default="$(optenv UAV_NAMES)" />
+    <arg name="COMPUTER_NAME" default="$(optenv COMPUTER_NAME)" />
+    <arg name="ROS_CONFIG_PATH" default="$(optenv ROS_CONFIG_PATH)" />
+
+    <arg name="rviz" default="false" />
+
+    <group ns="$(arg UAV_NAME)">
+      <rosparam file="$(arg ROS_CONFIG_PATH)/leishen.yaml" command="load" />    
+
+      <param name="feature_extract_enable" type="bool" value="0"/>
+      <param name="point_filter_num" type="int" value="4"/>
+      <param name="max_iteration" type="int" value="3" />
+      <param name="filter_size_surf" type="double" value="0.5" />
+      <param name="filter_size_map" type="double" value="0.5" />
+      <param name="cube_side_length" type="double" value="1000" />
+      <param name="runtime_pos_log_enable" type="bool" value="0" />
+      <node pkg="fast_lio" type="fastlio_mapping" name="laserMapping" output="screen" />
+    </group>
+
+    <group if="$(arg rviz)">
+    <node launch-prefix="nice" pkg="rviz" type="rviz" name="rviz" args="-d $(arg ROS_CONFIG_PATH)/rviz/loam_mrs.rviz" />
+    </group>
+
+</launch>
