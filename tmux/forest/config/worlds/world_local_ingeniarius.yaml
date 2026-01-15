@@ -4,6 +4,8 @@ world_origin:
 
   origin_x: 41.22061958
   origin_y: -8.52732281
+  # origin_x: 41.22080407
+  # origin_y: -8.52723465
 
 safety_area:
 

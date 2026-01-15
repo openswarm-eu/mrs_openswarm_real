@@ -9,7 +9,7 @@
     <!-- Namespace - all topics, services and parameters will be remapped using this namespace as a prefix (eg.: "/waypoint_flier_simple/odom_uav_in" to "/uav1/waypoint_flier_simple/odom_uav_in") -->
   <group ns="$(arg UAV_NAME)">
 
-    <node pkg="sweeping_generator" type="swarm_sweeping.py" name="sweeping_generator" output="screen">
+    <node pkg="sweeping_generator" type="swarm_sweeping_latlon.py" name="sweeping_generator" output="screen">
 
       <!-- ROS parameters config file -->
       <rosparam file="$(arg ROS_CONFIG_PATH)/sweeping_generator.yaml" command="load" />
@@ -28,9 +28,22 @@
      <!-- Define the waypoint list as a parameter -->
      <param name="waypoint_frame" value="utm_navsat" />
       <param name="waypoint_list" type="yaml" value="[
+          [41.22096739828961, -8.527199651250513, 4.0],
+          [41.221082140231395, -8.527172723731946, 4.0]
+      ]"/>
+
+     <!-- Define the waypoint list as a parameter -->
+     <!-- <param name="waypoint_frame" value="utm_navsat" />
+      <param name="waypoint_list" type="yaml" value="[
           [41.2209532565427, -8.527199874661083, 3.0],
           [41.2211558739817, -8.527162951815466, 3.0]
-      ]"/>
+      ]"/> -->
+
+     <!-- Define the waypoint list as a parameter Forest -->
+     <!-- <param name="waypoint_frame" value="utm_navsat" />
+      <param name="waypoint_list" type="yaml" value="[
+          [41.216771, -8.527210, 3.0]
+      ]"/> -->
 
     <!-- Home: latitude: 47.3975176, longitude: 8.5453274 -->
     <!-- Origin: latitude: 47.3977466, longitude: 8.5455947 -->

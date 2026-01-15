@@ -50,6 +50,9 @@ windows:
       layout: tiled
       panes:
         -  waitForHw; roslaunch $ROS_LAUNCH_PATH/range_adaptative.launch
+        - 'history -s rosservice call /$UAV_NAME/control_manager/goto_fcu \"goal: \[5.0, 0.0, 0.0, 0.0\]\"'
+        - 'history -s rosservice call /$UAV_NAME/control_manager/stop \"{}\"'
+        - 'history -s rosservice call /$UAV_NAME/uav_manager/takeoff \"{}\"'
   # - imu_cal:
   #     layout: tiled
   #     panes:
@@ -65,15 +68,19 @@ windows:
   - core:
       layout: tiled
       panes:
-        - waitForHw; roslaunch $ROS_LAUNCH_PATH/mrs_core.launch
+        - waitForHw; sleep 10; roslaunch $ROS_LAUNCH_PATH/mrs_core.launch
   # - tf_connector:
   #     layout: tiled
   #     panes:
   #       - waitForTime; [ $COMPUTER_RVIZ -eq 1 ] && roslaunch $ROS_LAUNCH_PATH/tf_relay.launch || exit
-  - lio_sam:
+  # - lio_sam:
+  #     layout: tiled
+  #     panes:
+  #       - waitForHw; sleep 15; roslaunch $ROS_LAUNCH_PATH/lio_sam/run_uav.launch
+  - fast_lio:
       layout: tiled
       panes:
-        - waitForHw; sleep 15; roslaunch $ROS_LAUNCH_PATH/lio_sam/run_uav.launch
+        - waitForHw; sleep 5; roslaunch $ROS_LAUNCH_PATH/fastlio2.launch
   # - republisher:
   #     layout: tiled
   #     panes:
@@ -81,7 +88,7 @@ windows:
   - octomap:
       layout: tiled
       panes:
-        - waitForHw; sleep 6; roslaunch $ROS_LAUNCH_PATH/mrs_mapplan_octomapping.launch config_octomap_server:=./config/octomap/octomap_server.yaml config_octomap_planner:=./config/octomap/octomap_planner.yaml config_pcl_filter_ouster:=./config/octomap/lidar_filter_mapping.yaml # world_frame_id:=$UAV_NAME/world_origin
+        - waitForHw; sleep 6; roslaunch $ROS_LAUNCH_PATH/mrs_mapplan_octomapping.launch config_octomap_server:=./config/octomap/octomap_server.yaml config_octomap_planner:=./config/octomap/octomap_planner.yaml config_pcl_filter_ouster:=./config/octomap/lidar_filter_mapping.yaml world_frame_id:=$UAV_NAME/world_origin
   - octomap_min:
       layout: tiled
       panes:

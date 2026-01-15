@@ -18,7 +18,20 @@
       <param name="filter_size_map" type="double" value="0.5" />
       <param name="cube_side_length" type="double" value="1000" />
       <param name="runtime_pos_log_enable" type="bool" value="0" />
-      <node pkg="fast_lio" type="fastlio_mapping" name="laserMapping" output="screen" />
+
+      <rosparam param="common/lid_topic" subst_value="true"> /$(arg UAV_NAME)/lslidar/pcl_filtered</rosparam>
+      <rosparam param="common/imu_topic" subst_value="true"> /$(arg UAV_NAME)/hw_api/imu</rosparam>
+      <rosparam param="common/baselinkFrame" subst_value="true"> $(arg UAV_NAME)/fcu</rosparam>
+      <rosparam param="common/odometryFrame" subst_value="true"> $(arg UAV_NAME)/odom</rosparam>
+
+      <node pkg="fast_lio" type="fastlio_mapping" name="laserMapping" output="screen">
+        <remap from="/cloud_registered" to="cloud_registered" />
+        <remap from="/cloud_registered_body" to="cloud_registered_body" />
+        <remap from="/cloud_effected" to="cloud_effected" />
+        <remap from="/Laser_map" to="Laser_map" />
+        <remap from="/Odometry" to="Odometry" />
+        <remap from="/path" to="path" />
+      </node>
     </group>
 
     <group if="$(arg rviz)">
