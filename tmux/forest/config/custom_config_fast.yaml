@@ -16,6 +16,9 @@ mrs_uav_managers:
 
         max_flight_z: 100.0 # [m] maximum allowed flight Z (in the estimator frame)
 
+      message:
+        topic: "Odometry"
+
     gps_garmin: # namespace of the state estimator
       alt_garmin: # namespace of the altitude estimator
 
@@ -32,7 +35,7 @@ mrs_uav_managers:
         distance_sensor: true
         altitude: false
         magnetometer_heading: false
-        position: false
+        position: true
         orientation: true
         velocity: true
         angular_velocity: true
@@ -111,13 +114,13 @@ mrs_uav_managers:
           noise_unhealthy_coeff: 100.0 # covariance gets multiplied by this coefficient when correction is unhealthy (R)
           message:
             type: "sensor_msgs/Range"
-            topic: "hw_api/distance_sensor_in" # without uav namespace
+            topic: "hw_api/distance_sensor" # without uav namespace
             limit: 
               delay: 0.5 # [s] messages with higher delay will flag correction as unhealthy
               time_since_last: 2.0 # [s] larger time step between messages will flag correction as unhealthy
 
-          processors: ["excessive_tilt", "median_filter", "saturate"] # types of processors attached to this measurement (the processors are called in exactly this order)
-          # processors: ["excessive_tilt", "saturate"] # types of processors attached to this measurement (the processors are called in exactly this order)
+          # processors: ["excessive_tilt", "median_filter", "saturate"] # types of processors attached to this measurement (the processors are called in exactly this order)
+          processors: ["excessive_tilt", "saturate"] # types of processors attached to this measurement (the processors are called in exactly this order)
           
           median_filter:
             buffer_size: 100 # [samples] number of historic values from which the median is calculated
@@ -200,22 +203,22 @@ mrs_uav_managers:
         max_flight_z: 100.0 # [m] maximum allowed flight Z (in the estimator frame)
 
         repredictor: # repredictor for correct fusion of delayed measurements
-          enabled: false
+          enabled: true
           buffer_size: 200 # [samples] how many states and corrections are kept in history (i.e. estimator running at the default 100 Hz rate will be able to fuse corrections with up to 2 s delay with buffer size of 200 samples)
 
         process_noise: # process noise covariance (Q)
-          pos: 1.0 # position state
+          pos: 0.01  #1.0 # position state 0.01
           vel: 10.0 # velocity state
-          acc: 10.0 # acceleration state
+          acc: 0.1 # acceleration state
 
         corrections: [
           "pos_liosam",
-          "vel_hw_api"
+          # "vel_hw_api"
         ]
 
         pos_liosam:
           state_id: 0 # 0 - position, 1 - velocity, 2 - acceleration
-          noise: 0.01 # measurement noise covariance (R)
+          noise: 0.001 # measurement noise covariance (R) 0.01
           noise_unhealthy_coeff: 100.0 # covariance gets multiplied by this coefficient when correction is unhealthy (R)
           message:
             type: "nav_msgs/Odometry"
@@ -225,7 +228,7 @@ mrs_uav_managers:
               time_since_last: 2.0 # [s] larger time step between messages will flag correction as unhealthy
 
           processors: [] 
-          #processors: ["tf_to_world"] # types of processors attached to this measurement
+          # processors: ["tf_to_world"] # types of processors attached to this measurement
           # processors: ["saturate"] # types of processors attached to this measurement
           # processors: ["tf_to_world", "saturate"] # types of processors attached to this measurement
 
@@ -233,30 +236,30 @@ mrs_uav_managers:
           #   buffer_size: 100 # [samples] number of historic values from which the median is calculated
           #   max_diff: 0.5 # [m] difference of input value from median to be considered valid
 
-          saturate:
-            start_enabled: true # saturate processor can start as disabled and then be enabled by a service or a trigger condition
-            keep_enabled: true # keep enabled even after the corrections are near the value of state
-            min: -0.2
-            max: 0.2
-            limit: 1.0
+          # saturate:
+          #   start_enabled: true # saturate processor can start as disabled and then be enabled by a service or a trigger condition
+          #   keep_enabled: true # keep enabled even after the corrections are near the value of state
+          #   min: -0.2
+          #   max: 0.2
+          #   limit: 1.0
 
           # tf_to_world:
           #   # gnss_topic: "hw_api/gnss"
           #   # gnss_topic: "gps/filtered"
           #   gnss_topic: "gnss_verifier/gnss_wstatus"
 
-        vel_hw_api:
-          state_id: 1 # 0 - position, 1 - velocity, 2 - acceleration
-          noise: 0.01 # measurement noise covariance (R)
-          noise_unhealthy_coeff: 100.0 # covariance gets multiplied by this coefficient when correction is unhealthy (R)
-          message:
-            type: "geometry_msgs/Vector3Stamped"
-            topic: "hw_api/velocity" # without uav namespace
-            limit: 
-              delay: 0.5 # [s] messages with higher delay will flag correction as unhealthy
-              time_since_last: 0.5 # [s] larger time step between messages will flag correction as unhealthy
+        # vel_hw_api:
+        #   state_id: 1 # 0 - position, 1 - velocity, 2 - acceleration
+        #   noise: 0.01 # measurement noise covariance (R)
+        #   noise_unhealthy_coeff: 100.0 # covariance gets multiplied by this coefficient when correction is unhealthy (R)
+        #   message:
+        #     type: "geometry_msgs/Vector3Stamped"
+        #     topic: "hw_api/velocity" # without uav namespace
+        #     limit: 
+        #       delay: 0.5 # [s] messages with higher delay will flag correction as unhealthy
+        #       time_since_last: 0.5 # [s] larger time step between messages will flag correction as unhealthy
 
-          processors: [] # types of processors attached to this measurement
+        #   processors: [] # types of processors attached to this measurement
 
   constraint_manager:
 
