@@ -1,0 +1,12 @@
+<launch>
+
+  <!-- args corresponding to environment variables -->
+  <arg name="UAV_NAME" default="$(optenv UAV_NAME)" />
+
+  <group ns="$(arg UAV_NAME)">
+    <node name="uav_home_distance" pkg="mrs_openswarm_utils" type="home_distance.py" output="screen">
+      <param name="uav_name" value="$(arg UAV_NAME)" />
+    </node>
+  </group>
+
+</launch>

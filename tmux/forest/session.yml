@@ -152,6 +152,10 @@ windows:
       layout: tiled
       panes:
         - waitForRos; [ $SYS_ROSBAG_ENABLED -eq 1 ] && history -s rosbag record $SYS_ROSBAG_ARGS $SYS_ROSBAG_TOPICS || exit
+  - IMEC:
+      layout: tiled
+      panes:
+        - waitForTime; roslaunch $ROS_LAUNCH_PATH/bat_distance_home.launch
   - rviz:
       layout: tiled
       panes:

@@ -119,6 +119,8 @@ export SYS_ROSBAG_TOPICS="
 	/$UAV_NAME/estimation_manager/odom_main
 	/$UAV_NAME/odometry/gps
 	/$UAV_NAME/lio_sam/imupreintegration/odom
+	/$UAV_NAME/distance_from_home
+	/$UAV_NAME/distance_travelled
 "
 
 ############## RVIZ ##############

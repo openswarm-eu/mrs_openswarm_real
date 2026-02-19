@@ -227,8 +227,8 @@ mrs_uav_managers:
               delay: 2.0 # [s] messages with higher delay will flag correction as unhealthy
               time_since_last: 2.0 # [s] larger time step between messages will flag correction as unhealthy
 
-          processors: [] 
-          # processors: ["tf_to_world"] # types of processors attached to this measurement
+          # processors: []
+          processors: ["tf_to_world"] # types of processors attached to this measurement
           # processors: ["saturate"] # types of processors attached to this measurement
           # processors: ["tf_to_world", "saturate"] # types of processors attached to this measurement
 
@@ -243,9 +243,9 @@ mrs_uav_managers:
           #   max: 0.2
           #   limit: 1.0
 
-          # tf_to_world:
-          #   # gnss_topic: "hw_api/gnss"
-          #   # gnss_topic: "gps/filtered"
+          tf_to_world:
+            # gnss_topic: "hw_api/gnss"
+            gnss_topic: "gps/filtered"
           #   gnss_topic: "gnss_verifier/gnss_wstatus"
 
         # vel_hw_api:
