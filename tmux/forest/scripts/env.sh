@@ -3,7 +3,7 @@
 ############## CHANGE #############
 export UAV_NAMES="[uav11]"
 # export UAV_NAMES="[uav6, uav7, uav8, uav9, uav10, uav11, uav12, uav13, uav14, uav15]"
-export WORLD_NAME=ingeniarius	# forest, ingeniarius, alfena
+export WORLD_NAME=forest	# forest, ingeniarius, alfena
 export RESET_COMMAND_FLAG=0
 export COMPUTER_NAME="asus1"
 export SWARM_HEIGHT=5.0
@@ -31,7 +31,7 @@ export ROSCONSOLE_FORMAT='[${severity}] [${node}] [${function}] [${line}]: ${mes
 
 ############ MRS FILES ############
 export PLATFORM_CONFIG=./config/mrs_uav_system/$UAV_TYPE.yaml
-export CUSTOM_CONFIG=./config/custom_config_fast.yaml
+export CUSTOM_CONFIG=./config/custom_config_fast_test.yaml
 export NETWORK_CONFIG=./config/network_config.yaml
 
 ############## GENERAL ##############
@@ -69,8 +69,8 @@ elif [ "$WORLD_NAME" = "alfena" ]; then
 	export DATUM_LONGITUDE_END=-8.490831150515527
 elif [ "$WORLD_NAME" = "forest" ]; then
 	export WORLD_CONFIG=./config/worlds/world_local_forest.yaml
-    export DATUM_LATITUDE=41.21705308
-    export DATUM_LONGITUDE=-8.52741110
+    export DATUM_LATITUDE=41.21704291 #5308
+    export DATUM_LONGITUDE=-8.52741694 #110
     export DATUM_HEADING=0.0
 	export DATUM_LATITUDE_START=41.21683395
 	export DATUM_LONGITUDE_START=-8.527359231666667
@@ -119,7 +119,7 @@ export SYS_ROSBAG_TOPICS="
 	/$UAV_NAME/estimation_manager/odom_main
 	/$UAV_NAME/odometry/gps
 	/$UAV_NAME/lio_sam/imupreintegration/odom
-	/$UAV_NAME/distance_from_home
+	/$UAV_NAME/home_distance
 	/$UAV_NAME/distance_travelled
 "
 

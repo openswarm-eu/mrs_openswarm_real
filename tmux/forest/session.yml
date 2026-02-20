@@ -123,8 +123,8 @@ windows:
       layout: tiled
       panes:
         - waitForHw; history -s roslaunch mrs_uav_autostart automatic_start.launch
-        - 'history -s rosservice call /$UAV_NAME/octomap_planner/goto \"goal: \[13.72, 51.51, 10.5, 0.0]\"'
-        - 'history -s rosservice call /$UAV_NAME/octomap_planner/goto \"goal: \[10.0, 32.0, 10.0, 0.0\]\"'
+        - 'history -s rosservice call /$UAV_NAME/octomap_planner/goto \"goal: \[32.0, -13.6, 7.5, -0.7]\"'
+        - 'history -s rosservice call /$UAV_NAME/octomap_planner/goto \"goal: \[42.5, -7.4, 4.8, 0.0\]\"'
         - 'history -s rosservice call /$UAV_NAME/octomap_planner/stop \"{}\"'
   - t_demo:
       layout: tiled
