@@ -34,6 +34,10 @@ publish:
     scan_publish_en:  true       # false: close all the point cloud output
     dense_publish_en: true       # false: low down the points number in a global-frame point clouds scan.
     scan_bodyframe_pub_en: true  # true: output the point cloud scans in IMU-body-frame
+    global_map_en: true
+    global_map_visualization_radius: 1000.0
+    global_map_visualization_keyframe_density: 2.0
+    global_map_visualization_cloud_density: 0.2
 
 pcd_save:
     pcd_save_en: false

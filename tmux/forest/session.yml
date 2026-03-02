@@ -141,6 +141,7 @@ windows:
   - MapGlobalService:
       layout: tiled
       panes:
+        - waitForControl; roslaunch $ROS_LAUNCH_PATH/global_map_provider.launch
         - waitForControl; roslaunch $ROS_LAUNCH_PATH/map_global_service.launch
         - 'history -s rosservice call /$UAV_NAME/map_global_generation/save_map'
   - Nimbro:
