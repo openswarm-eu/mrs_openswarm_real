@@ -11,9 +11,13 @@
       <param name="uav_name" value="$(arg UAV_NAME)" />
       <param name="uav_names" type="yaml" value="$(arg UAV_NAMES)"/>
       <param name="frame_output" value="common_origin" />
-      <param name="wait_time" value="3.0" />
+      <param name="wait_time" value="15.0" />
       <param name="save_pcd_file" value="true" />
       <param name="use_icp" value="true" />
+      <param name="icp_max_correspondence_distance" value="3.0" />
+      <param name="icp_transformation_epsilon" value="1e-6" />
+      <param name="icp_max_iterations" value="400" />
+
       <param name="save_map_topic" value="save_map" />
 
     </node>

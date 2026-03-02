@@ -111,3 +111,5 @@ services:
     type: mrs_msgs/ReferenceStampedSrv
   - name: "sweeping_generator/start"
     type: mrs_msgs/Vec1
+  - name: "global_map_provider/get_global_map"
+    type: mrs_openswarm_utils/save_map
