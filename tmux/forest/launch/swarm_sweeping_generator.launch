@@ -18,19 +18,23 @@
       <param name="uav_names" type="yaml" value="$(arg UAV_NAMES)"/>
       <param name="computer_name" value="$(arg COMPUTER_NAME)" />
 
-     <!-- Define the waypoint list as a parameter -->
-      <!-- <param name="waypoint_list" type="yaml" value="[
-          [10.0, 15.0, 1.5],
-          [10.0, 30.0, 1.5],
-          [20.0, 30.0, 1.5]
-      ]"/> -->
+      <param name="offset_waypoint_utm_flag" value="false" />
+      <param name="automated_calculation" value="true" />
 
-     <!-- Define the waypoint list as a parameter -->
-     <!-- <param name="waypoint_frame" value="utm_navsat" />
+     <!-- Define the start/end points: Ingeniarius -->
+      <param name="lat_start" value="41.2209624" />
+      <param name="lon_start" value="-8.5272224" />
+      <param name="lat_end" value="41.2211131" />
+      <param name="lon_end" value="-8.5271921" />
+      <param name="distance_between_waypoints" value="2.0" />
+      <param name="distance_line" value="10.0" />
+      <param name="altitude" value="4.0" />
+
+     <!-- Define the waypoint list as a parameter: Ingeniarius -->
       <param name="waypoint_list" type="yaml" value="[
-          [41.22096739828961, -8.527199651250513, 4.0],
-          [41.221082140231395, -8.527172723731946, 4.0]
-      ]"/> -->
+          [41.2209624, -8.5272224, 4.0],
+          [41.2211131, -8.5271921, 4.0]
+      ]"/>
 
      <!-- Define the waypoint list as a parameter -->
      <!-- <param name="waypoint_frame" value="utm_navsat" />
@@ -46,14 +50,22 @@
       ]"/> -->
 
      <!-- Define the waypoint list as a parameter Forest -->
-     <param name="waypoint_frame" value="utm_navsat" />
-      <param name="waypoint_list" type="yaml" value="[
+     <!-- <param name="waypoint_frame" value="utm_navsat" /> -->
+      <!-- <param name="waypoint_list" type="yaml" value="[
           [41.2169393, -8.5272475, 6.0],
           [41.2167611, -8.5269573, 6.0],
           [41.216761, -8.5271551, 6.0],
           [41.2168936, -8.5272511, 2.5],
           [41.2165874, -8.5274389, 7.0]
-      ]"/>
+      ]"/> -->
+
+      <!-- <param name="waypoint_list" type="yaml" value="[
+          [41.21695207, -8.52726923, 6.0],
+          [41.21682235, -8.52704707, 6,0],
+          [41.21683629, -8.52705242, 6.0],
+          [41.21676361, -8.52719684, 2.5],
+          [41.21665414, -8.52741256, 7.0]
+      ]"/> -->
 
     <!-- Home: latitude: 47.3975176, longitude: 8.5453274 -->
     <!-- Origin: latitude: 47.3977466, longitude: 8.5455947 -->

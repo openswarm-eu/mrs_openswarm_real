@@ -30,7 +30,7 @@ mrs_uav_managers:
       address: "liosam/LiosamEstimatorPlugin"
 
       requires: # data required from the hw api
-        gnss: true
+        gnss: false
         imu: false
         distance_sensor: true
         altitude: false

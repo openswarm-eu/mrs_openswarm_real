@@ -34,10 +34,10 @@ windows:
       layout: tiled
       panes:
         - waitForHw; roslaunch $ROS_LAUNCH_PATH/gnss_status_verifier.launch
-  - navsat:
-      layout: tiled
-      panes:
-        -  waitForHw; roslaunch $ROS_LAUNCH_PATH/navsat.launch
+  # - navsat:
+  #     layout: tiled
+  #     panes:
+  #       -  waitForHw; roslaunch $ROS_LAUNCH_PATH/navsat.launch
   # - switch_estimator:
   #     layout: tiled
   #     panes:
@@ -88,7 +88,7 @@ windows:
   - octomap:
       layout: tiled
       panes:
-        - waitForHw; sleep 6; roslaunch $ROS_LAUNCH_PATH/mrs_mapplan_octomapping.launch config_octomap_server:=./config/octomap/octomap_server.yaml config_octomap_planner:=./config/octomap/octomap_planner.yaml config_pcl_filter_ouster:=./config/octomap/lidar_filter_mapping.yaml world_frame_id:=$UAV_NAME/local_origin #world_frame_id:=$UAV_NAME/world_origin
+        - waitForHw; sleep 6; roslaunch $ROS_LAUNCH_PATH/mrs_mapplan_octomapping.launch config_octomap_server:=./config/octomap/octomap_server.yaml config_octomap_planner:=./config/octomap/octomap_planner.yaml config_pcl_filter_ouster:=./config/octomap/lidar_filter_mapping.yaml world_frame_id:=$UAV_NAME/world_origin
   - octomap_min:
       layout: tiled
       panes:

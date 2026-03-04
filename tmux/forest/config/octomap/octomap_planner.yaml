@@ -13,7 +13,7 @@ main_timer:
 diagnostics_timer:
   rate: 10.0 # [Hz]
 
-euclidean_distance_cutoff: 1.5 # [m] maximum distance for Euclidean distance field
+euclidean_distance_cutoff: 0.5 # [m] maximum distance for Euclidean distance field
 safe_obstacle_distance: 
   default: 2.0 # [m]
   min: 1.5 # [m]
