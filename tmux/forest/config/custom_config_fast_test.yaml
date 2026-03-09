@@ -4,7 +4,7 @@ mrs_uav_managers:
 
     state_estimators: [
       "liosam",
-      # "gps_garmin",
+      "gps_garmin",
       # "passthrough"
     ]
 
@@ -252,9 +252,9 @@ mrs_uav_managers:
           #   limit: 1.0
 
           tf_to_world:
-            # gnss_topic: "hw_api/gnss"
-          #   gnss_topic: "gps/filtered"
-            gnss_topic: "gnss_verifier/gnss_wstatus"
+            gnss_topic: "hw_api/gnss"
+            # gnss_topic: "gps/filtered"
+            # gnss_topic: "gnss_verifier/gnss_wstatus"
 
         # vel_hw_api:
         #   state_id: 1 # 0 - position, 1 - velocity, 2 - acceleration
@@ -411,7 +411,7 @@ mrs_uav_managers:
     #     frame_id: "mapping_origin"
 
     # first available tf source from this list will produce the utm and world origin tfs
-    utm_source_priority: ["liosam", "f9p", "rtk_garmin", "rtk", "gps_garmin", "gps_baro"]
+    # utm_source_priority: ["liosam", "f9p", "rtk_garmin", "rtk", "gps_garmin", "gps_baro"]
 
   uav_manager:
 
