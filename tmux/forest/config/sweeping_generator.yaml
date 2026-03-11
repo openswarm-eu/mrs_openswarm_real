@@ -11,7 +11,7 @@ timer_pose:
 
 timer_comm:
   rate: 1.0 # [Hz]
-  timeout: 5.0 # [s]
+  timeout: 20.0 # [s]
 
 center:
   x: 10.0 # [m]
