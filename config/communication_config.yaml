@@ -71,6 +71,9 @@ topics: # topics published out of this machine to receivers specified above
  - name: "leader_index"
    compress: true # enable bz2 compression
    rate: 2.0
+ - name: "initial_altitude"
+   compress: true # enable bz2 compression
+   rate: 1.0
 
 services:
   - name: "trajectory_generation/path"
