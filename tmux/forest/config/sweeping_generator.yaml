@@ -16,7 +16,7 @@ timer_comm:
 number_of_samples: 100
 departure_time: 5.0 # [s], pair-based follower launch delay after first leader_index
 enable_estimator_change: true
-estimator_change_timer: 2.0 # [s], delay after flying_normally=true before calling change_estimator
+estimator_change_timer: 15.0 # [s], delay after flying_normally=true before calling change_estimator
 
 center:
   x: 10.0 # [m]

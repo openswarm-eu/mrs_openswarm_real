@@ -1,6 +1,16 @@
 common:
     lid_topic:  "/lidar"
     imu_topic:  "/imu"
+    altitude_fusion_en: true
+    altitude_topic: "/distance_sensor"
+    altitude_disable_service_name: "/disable_altitude_fusion"
+    altitude_use_known_at_start: true
+    altitude_known_at_start: 0.0
+    altitude_noise_std: 0.08
+    altitude_max_residual: 1.0
+    altitude_timeout: 0.2
+    altitude_sensor_to_imu_z: 0.0
+    altitude_min_cos_tilt: 0.3
     time_sync_en: false         # ONLY turn on when external time synchronization is really not possible
     time_offset_lidar_to_imu: 0.0 # Time offset between lidar and IMU calibrated by other algorithms, e.g. LI-Init (can be found in README).
                                   # This param will take effect no matter what time_sync_en is. So if the time offset is not known exactly, please set as 0.0

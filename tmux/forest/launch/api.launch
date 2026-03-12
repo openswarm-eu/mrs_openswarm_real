@@ -59,8 +59,8 @@
       <remap from="~mavros_actuator_control_out" to="mavros/actuator_control" />
       <remap from="~mavros_gps_status_raw_in" to="mavros/gpsstatus/gps1/raw" />
 
-      <remap from="~distance_sensor" to="hw_api/distance_sensor_in" />
-      <remap from="~imu" to="hw_api/imu_in" />
+      <!-- <remap from="~distance_sensor" to="hw_api/distance_sensor_in" /> -->
+      <!-- <remap from="~imu" to="hw_api/imu_in" /> -->
       <!-- <remap from="~orientation" to="hw_api/orientation_in" /> -->
 
     </node>

@@ -21,6 +21,8 @@
 
       <rosparam param="common/lid_topic" subst_value="true"> /$(arg UAV_NAME)/lslidar/pcl_filtered</rosparam>
       <rosparam param="common/imu_topic" subst_value="true"> /$(arg UAV_NAME)/hw_api/imu</rosparam>
+      <rosparam param="common/altitude_topic" subst_value="true"> /$(arg UAV_NAME)/hw_api/distance_sensor</rosparam>
+      <rosparam param="common/altitude_disable_service_name" subst_value="true"> /$(arg UAV_NAME)/fast_lio/disable_altitude_fusion</rosparam>
       <rosparam param="common/baselinkFrame" subst_value="true"> $(arg UAV_NAME)/fcu</rosparam>
       <rosparam param="common/odometryFrame" subst_value="true"> $(arg UAV_NAME)/odom</rosparam>
 

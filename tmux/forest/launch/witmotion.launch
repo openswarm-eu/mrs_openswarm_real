@@ -5,7 +5,12 @@
     <group ns="$(arg UAV_NAME)">
 
         <rosparam command="load" file="$(find mrs_openswarm_real)/tmux/openswarm/config/imu/config.yml" />
-        <node name="witmotion_imu" pkg="witmotion_ros"  type="witmotion_ros_node" output="screen"/>
+        <!-- <node name="witmotion_imu" pkg="witmotion_ros"  type="witmotion_ros_node" output="screen"/> -->
+
+
+        <node name="witmotion_imu" pkg="witmotion_ros" type="witmotion_ros_node" output="screen">
+            <remap from="witmotion_imu/imu" to="hw_api/imu"/>
+        </node>
 
         <!-- Debug quaternions to euler angles (rad) -->
 

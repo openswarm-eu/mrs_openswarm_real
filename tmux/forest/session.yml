@@ -57,10 +57,10 @@ windows:
   #     layout: tiled
   #     panes:
   #       -  waitForHw; roslaunch $ROS_LAUNCH_PATH/imu_cal_uav.launch
-  - imu_filter:
-      layout: tiled
-      panes:
-        -  waitForHw; roslaunch $ROS_LAUNCH_PATH/imu_upsampler.launch
+  # - imu_filter:
+  #     layout: tiled
+  #     panes:
+  #       -  waitForHw; roslaunch $ROS_LAUNCH_PATH/imu_upsampler.launch
   # - imu_wit:
   #     layout: tiled
   #     panes:
