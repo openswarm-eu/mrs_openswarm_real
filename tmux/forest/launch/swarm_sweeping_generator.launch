@@ -41,8 +41,10 @@
      <!-- Define the start/end points: Forest -->
       <!-- <param name="lat_start" value="41.2168814" />
       <param name="lon_start" value="-8.5274679" /> -->
-      <param name="lat_start" value="41.2168033" />
-      <param name="lon_start" value="-8.5272925" />
+      <!-- <param name="lat_start" value="41.2168033" />
+      <param name="lon_start" value="-8.5272925" /> -->
+      <param name="lat_start" value="41.2167986" />
+      <param name="lon_start" value="-8.5272961" />
       <param name="lat_end" value="41.2167039" />
       <param name="lon_end" value="-8.5272145" />
       <param name="distance_between_waypoints" value="4.0" />
