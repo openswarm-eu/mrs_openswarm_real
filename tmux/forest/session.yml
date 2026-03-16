@@ -57,10 +57,10 @@ windows:
   #     layout: tiled
   #     panes:
   #       -  waitForHw; roslaunch $ROS_LAUNCH_PATH/imu_cal_uav.launch
-  # - imu_filter:
-  #     layout: tiled
-  #     panes:
-  #       -  waitForHw; roslaunch $ROS_LAUNCH_PATH/imu_upsampler.launch
+  - imu_filter:
+      layout: tiled
+      panes:
+        -  waitForHw; roslaunch $ROS_LAUNCH_PATH/imu_upsampler.launch
   # - imu_wit:
   #     layout: tiled
   #     panes:
@@ -81,10 +81,10 @@ windows:
       layout: tiled
       panes:
         - waitForHw; sleep 5; roslaunch $ROS_LAUNCH_PATH/fastlio2.launch
-  # - republisher:
+  # - odom_republisher:
   #     layout: tiled
   #     panes:
-  #       -  waitForHw; roslaunch $ROS_LAUNCH_PATH/repub_odom_tf_desired.launch
+  #       -  waitForHw; roslaunch $ROS_LAUNCH_PATH/odom_altitude_offset.launch
   - octomap:
       layout: tiled
       panes:
@@ -155,10 +155,10 @@ windows:
       layout: tiled
       panes:
         - waitForRos; [ $SYS_ROSBAG_ENABLED -eq 1 ] && history -s rosbag record $SYS_ROSBAG_ARGS $SYS_ROSBAG_TOPICS || exit
-  - IMEC:
-      layout: tiled
-      panes:
-        - waitForTime; roslaunch $ROS_LAUNCH_PATH/bat_distance_home.launch
+  # - IMEC:
+  #     layout: tiled
+  #     panes:
+  #       - waitForTime; roslaunch $ROS_LAUNCH_PATH/bat_distance_home.launch
   - rviz:
       layout: tiled
       panes:

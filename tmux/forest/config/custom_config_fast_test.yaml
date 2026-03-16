@@ -287,7 +287,7 @@ mrs_uav_managers:
     # list of allowed gains per odometry mode
     allowed_constraints:
       liosam: ["ingeniarius","slow", "medium", "fast"]
-      gps_garmin: ["ingeniarius","slow", "medium", "fast"]
+      gps_garmin: ["slow", "medium", "fast"]
       passthrough: ["slow", "medium", "fast"]
 
     # those gains will be used automatically when a localization mode switches

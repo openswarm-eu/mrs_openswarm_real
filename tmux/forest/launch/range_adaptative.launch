@@ -8,7 +8,9 @@
         <remap from="/estimation_manager/odom_main" to="estimation_manager/odom_main"/>
         <remap from="/filtered_altitude" to="hw_api/distance_sensor"/>
         <remap from="/hw_api/velocity" to="hw_api/velocity"/>
+        <remap from="/control_manager/diagnostics" to="control_manager/diagnostics"/>
 
+        <param name="filter_enabled" value="false" /> <!-- enable/disable the adaptive filtering -->
         <param name="alpha_max" value="1.0" />  <!-- smoothing factor for max velocity -->
         <param name="alpha_min" value="0.02" /> <!-- smoothing factor for min velocity -->
         <param name="alpha_takeoff" value="0.02" /> <!-- smoothing factor for min velocity -->
