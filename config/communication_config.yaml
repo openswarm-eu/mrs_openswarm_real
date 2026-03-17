@@ -116,3 +116,5 @@ services:
     type: mrs_msgs/Vec1
   - name: "global_map_provider/get_global_map"
     type: mrs_openswarm_utils/save_map
+  - name: "sweeping_generator/emergency
+    type: std_srvs/Trigger"
