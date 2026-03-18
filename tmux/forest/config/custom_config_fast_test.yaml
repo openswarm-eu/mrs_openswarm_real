@@ -51,7 +51,7 @@ mrs_uav_managers:
           name: "alt_liosam"
         heading:
           name: "hdg_liosam"
-          passthrough: true # *** if true, then heading is not estimated but passed through from the orientation topic
+          passthrough: false # *** if true, then heading is not estimated but passed through from the orientation topic
 
       topics:
         orientation: "hw_api/orientation" # orientation passthrough
@@ -155,49 +155,49 @@ mrs_uav_managers:
           #   buffer_size: 20 # the number of samples from which the median is calculated
           #   max_diff: 2.0 # [m] reject measurement if difference from median is over this value
 
-      hdg_liosam: # namespace of the heading estimator
-
-        max_flight_z: 100.0 # [m] maximum allowed flight Z (in the estimator frame)
-
-        topics:
-          orientation: "hw_api/orientation" # without uav namespace
-          angular_velocity: "hw_api/angular_velocity" # without uav namespace
-
-      # namespace of the heading estimator
-      # hdg_liosam: 
+      # hdg_liosam: # namespace of the heading estimator
 
       #   max_flight_z: 100.0 # [m] maximum allowed flight Z (in the estimator frame)
 
-      #   position_innovation_limit: 1.0 # [m] innovation limit that will trigger switch to other estimator
+      #   topics:
+      #     orientation: "hw_api/orientation" # without uav namespace
+      #     angular_velocity: "hw_api/angular_velocity" # without uav namespace
 
-      #   repredictor: # repredictor for correct fusion of delayed measurements
-      #     enabled: true
-      #     buffer_size: 200 # [samples] how many states and corrections are kept in history (i.e. estimator running at the default 100 Hz rate will be able to fuse corrections with up to 2 s delay with buffer size of 200 samples)
+      # namespace of the heading estimator
+      hdg_liosam:
 
-      #   process_noise: # process noise covariance (Q)
-      #     pos: 0.1 # position state
-      #     vel: 0.1 # velocity state
+        max_flight_z: 100.0 # [m] maximum allowed flight Z (in the estimator frame)
 
-      #   # topics:
-      #   #   orientation: "hw_api/orientation" # without uav namespace
-      #   #   angular_velocity: "hw_api/angular_velocity" # without uav namespace
+        position_innovation_limit: 1.0 # [m] innovation limit that will trigger switch to other estimator
 
-      #   corrections: [
-      #     "hdg_liosam"
-      #   ]
+        repredictor: # repredictor for correct fusion of delayed measusrements
+          enabled: true
+          buffer_size: 200 # [samples] how many states and corrections are kept in history (i.e. estimator running at the default 100 Hz rate will be able to fuse corrections with up to 2 s delay with buffer size of 200 samples)
 
-      #   hdg_liosam:
-      #     state_id: 0 # 0 - position, 1 - velocity, 2 - acceleration
-      #     noise: 0.0001 # measurement noise covariance (R)
-      #     noise_unhealthy_coeff: 100.0 # covariance gets multiplied by this coefficient when correction is unhealthy (R)
-      #     message:
-      #       type: "nav_msgs/Odometry"
-      #       topic: "Odometry" # without uav namespace
-      #       limit: 
-      #         delay: 2.0 # [s] messages with higher delay will flag correction as unhealthy
-      #         time_since_last: 1.0 # [s] larger time step between messages will flag correction as unhealthy
+        process_noise: # process noise covariance (Q)
+          pos: 0.1 # position state
+          vel: 0.1 # velocity state
 
-      #     processors: [] # types of processors attached to this measurement
+        # topics:
+        #   orientation: "hw_api/orientation" # without uav namespace
+        #   angular_velocity: "hw_api/angular_velocity" # without uav namespace
+
+        corrections: [
+          "hdg_liosam"
+        ]
+
+        hdg_liosam:
+          state_id: 0 # 0 - position, 1 - velocity, 2 - acceleration
+          noise: 0.0001 # measurement noise covariance (R)
+          noise_unhealthy_coeff: 100.0 # covariance gets multiplied by this coefficient when correction is unhealthy (R)
+          message:
+            type: "nav_msgs/Odometry"
+            topic: "Odometry" # without uav namespace
+            limit:
+              delay: 2.0 # [s] messages with higher delay will flag correction as unhealthy
+              time_since_last: 1.0 # [s] larger time step between messages will flag correction as unhealthy
+
+          processors: [] # types of processors attached to this measurement
 
       # namespace of the lateral estimator
       lat_liosam: 
@@ -422,7 +422,7 @@ mrs_uav_managers:
         enabled: true
         attitude_topic: "attitude" # name of the attitude topic(expects geometry_msgs/QuaternionStamped topic type)
       namespace: "estimation_manager/liosam" # the namespace of the topic (usually the node that publishes the topic)
-      utm_based: false # if true, will publish tf to utm_origin
+      utm_based: true # if true, will publish tf to utm_origin
       inverted: true # publish as inverted tf (the default for inverted mrs tf tree convention)
       republish_in_frames: [] # the odometry message will be transformed and republished in the specified frames
 
