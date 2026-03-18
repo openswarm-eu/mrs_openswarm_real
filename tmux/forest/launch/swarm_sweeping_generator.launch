@@ -20,6 +20,7 @@
 
       <param name="offset_waypoint_utm_flag" value="false" />
       <param name="automated_calculation" value="true" />
+      <!-- <param name="octomap_request_type" value="vec4"/> -->
 
      <!-- Define the start/end points: Ingeniarius -->
       <!-- <param name="lat_start" value="41.2207406" />
@@ -41,21 +42,14 @@
      <!-- Define the start/end points: Forest -->
       <!-- <param name="lat_start" value="41.2168814" />
       <param name="lon_start" value="-8.5274679" /> -->
-      <!-- <param name="lat_start" value="41.2168033" />
-      <param name="lon_start" value="-8.5272925" /> -->
-
-      <!-- Primeiros pontos -->
+      <!-- first point test
       <param name="lat_start" value="41.2167986" />
-      <param name="lon_start" value="-8.5272961" />
-      <!-- <param name="lat_end" value="41.2167039" />
-      <param name="lon_end" value="-8.5272145" /> -->
-
-      <!-- Pontos do experimento -->
-      <!-- <param name="lat_start" value="41.2169407" />
-      <param name="lon_start" value="-8.527461" /> -->
+      <param name="lon_start" value="-8.5272961" /> -->
+      <param name="lat_start" value="41.2168793" />
+      <param name="lon_start" value="-8.527360" />
       <param name="lat_end" value="41.2161171" />
       <param name="lon_end" value="-8.5267119" />
-      <param name="distance_between_waypoints" value="4.0" />
+      <param name="distance_between_waypoints" value="4.5" />
       <param name="distance_line" value="15.0" />
       <param name="altitude" value="5.0" />
 
