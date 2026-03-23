@@ -7,6 +7,9 @@
     <group ns="$(arg UAV_NAME)">
         <node pkg="mrs_openswarm_utils" type="imu_upsampler" name="imu_upsampler">
             <param name="target_rate" value="$(arg target_rate)"/>
+
+            <remap from="hw_api/imu_in" to="mavros/imu/data"/>
+            <remap from="hw_api/imu" to="mavros/imu/data_upsampled"/>
         </node>
     </group>
 
