@@ -34,10 +34,10 @@ windows:
       layout: tiled
       panes:
         - waitForHw; roslaunch $ROS_LAUNCH_PATH/gnss_status_verifier.launch
-  # - navsat:
-  #     layout: tiled
-  #     panes:
-  #       -  waitForHw; roslaunch $ROS_LAUNCH_PATH/navsat.launch
+  - navsat:
+      layout: tiled
+      panes:
+        -  waitForHw; roslaunch $ROS_LAUNCH_PATH/navsat.launch
   # - switch_estimator:
   #     layout: tiled
   #     panes:
@@ -85,6 +85,10 @@ windows:
   #     layout: tiled
   #     panes:
   #       -  waitForHw; roslaunch $ROS_LAUNCH_PATH/odom_altitude_offset.launch
+  - odom_upsampled:
+      layout: tiled
+      panes:
+        -  waitForHw; roslaunch $ROS_LAUNCH_PATH/odom_upsampler.launch
   - octomap:
       layout: tiled
       panes:

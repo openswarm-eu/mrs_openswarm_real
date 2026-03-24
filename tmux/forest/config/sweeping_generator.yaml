@@ -4,7 +4,7 @@ leader_msg: "mpc"
 frame_publish: "utm_origin"
 
 # octopmap planner frame
-waypoint_frame: "liosam_origin"
+waypoint_frame: "world_origin"
 
 timer_main:
   rate: 1.0 # [Hz]

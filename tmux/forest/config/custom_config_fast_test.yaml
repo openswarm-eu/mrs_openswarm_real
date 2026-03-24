@@ -88,7 +88,7 @@ mrs_uav_managers:
           noise_unhealthy_coeff: 100.0 # covariance gets multiplied by this coefficient when correction is unhealthy (R)
           message:
             type: "nav_msgs/Odometry"
-            topic: "Odometry" #"lio_sam/imupreintegration/odom" # without uav namespace
+            topic: "Odometry_upsampled" #"lio_sam/imupreintegration/odom" # without uav namespace
             limit: 
               delay: 2.0 # [s] messages with higher delay will flag correction as unhealthy
               time_since_last: 1.0 # [s] larger time step between messages will flag correction as unhealthy
