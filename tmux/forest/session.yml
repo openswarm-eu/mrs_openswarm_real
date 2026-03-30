@@ -77,10 +77,14 @@ windows:
   #     layout: tiled
   #     panes:
   #       - waitForHw; sleep 15; roslaunch $ROS_LAUNCH_PATH/lio_sam/run_uav.launch
-  - fast_lio:
+  # - fast_lio:
+  #     layout: tiled
+  #     panes:
+  #       - waitForHw; sleep 5; roslaunch $ROS_LAUNCH_PATH/fastlio2.launch
+  - fast_lio_cal:
       layout: tiled
       panes:
-        - waitForHw; sleep 5; roslaunch $ROS_LAUNCH_PATH/fastlio2.launch
+        - waitForHw; sleep 5; roslaunch $ROS_LAUNCH_PATH/fastlio2_cal.launch
   # - odom_republisher:
   #     layout: tiled
   #     panes:
