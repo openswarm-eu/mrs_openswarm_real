@@ -4,11 +4,11 @@ mrs_uav_managers:
 
     state_estimators: [
       "liosam",
-      "gps_garmin",
+      # "gps_garmin",
       # "passthrough"
     ]
 
-    initial_state_estimator: "gps_garmin"   # will be used as the first state estimator
+    initial_state_estimator: "liosam"   # will be used as the first state estimator
     agl_height_estimator: "garmin_agl"  # only slightly filtered height for checking min height (not used in control feedback)
 
     passthrough: # namespace of the state estimator
@@ -30,7 +30,7 @@ mrs_uav_managers:
       address: "liosam/LiosamEstimatorPlugin"
 
       requires: # data required from the hw api
-        gnss: false
+        gnss: true
         imu: false
         distance_sensor: true
         altitude: false
@@ -235,8 +235,8 @@ mrs_uav_managers:
               delay: 2.0 # [s] messages with higher delay will flag correction as unhealthy
               time_since_last: 2.0 # [s] larger time step between messages will flag correction as unhealthy
 
-          processors: []
-          # processors: ["tf_to_world"] # types of processors attached to this measurement
+          # processors: []
+          processors: ["tf_to_world"] # types of processors attached to this measurement
           # processors: ["saturate"] # types of processors attached to this measurement
           # processors: ["tf_to_world", "saturate"] # types of processors attached to this measurement
 
@@ -251,8 +251,8 @@ mrs_uav_managers:
           #   max: 0.2
           #   limit: 1.0
 
-          # tf_to_world:
-          #   gnss_topic: "hw_api/gnss"
+          tf_to_world:
+            gnss_topic: "hw_api/gnss"
             # gnss_topic: "gps/filtered"
             # gnss_topic: "gnss_verifier/gnss_wstatus"
 
@@ -411,8 +411,8 @@ mrs_uav_managers:
   #   #     enabled: true
   #   #     frame_id: "mapping_origin"
 
-  #   # first available tf source from this list will produce the utm and world origin tfs
-  #   # utm_source_priority: ["liosam", "f9p", "rtk_garmin", "rtk", "gps_garmin", "gps_baro"]
+    # first available tf source from this list will produce the utm and world origin tfs
+    # utm_source_priority: ["liosam", "f9p", "rtk_garmin", "rtk", "gps_garmin", "gps_baro"]
 
   transform_manager:
 
@@ -437,6 +437,7 @@ mrs_uav_managers:
         enabled: true
         frame_id: "mapping_origin"
 
+    utm_source_priority: ["liosam", "f9p", "rtk_garmin", "rtk", "gps_garmin", "gps_baro"]
 
   uav_manager:
 
