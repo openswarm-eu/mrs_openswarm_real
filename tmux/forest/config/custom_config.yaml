@@ -2,256 +2,20 @@ mrs_uav_managers:
 
   estimation_manager:
 
+    # loaded state estimator plugins
     state_estimators: [
-      "liosam",
-      "gps_garmin",
-      # "passthrough"
+      "gps_baro",
+      "gps_garmin"
     ]
 
-    initial_state_estimator: "liosam"   # will be used as the first state estimator
-    agl_height_estimator: "garmin_agl"  # only slightly filtered height for checking min height (not used in control feedback)
-
-    passthrough: # namespace of the state estimator
-      alt_garmin: # namespace of the altitude estimator
-
-        max_flight_z: 100.0 # [m] maximum allowed flight Z (in the estimator frame)
-
-    gps_garmin: # namespace of the state estimator
-      alt_garmin: # namespace of the altitude estimator
-
-        max_flight_z: 100.0 # [m] maximum allowed flight Z (in the estimator frame)
-
-    # namespace of the state estimator
-    liosam:
-
-      address: "liosam/LiosamEstimatorPlugin"
-
-      requires: # data required from the hw api
-        gnss: false
-        imu: false
-        distance_sensor: true
-        altitude: false
-        magnetometer_heading: false
-        position: false
-        orientation: true
-        velocity: true
-        angular_velocity: true
-
-      override_frame_id: # override the default frame_id with a custom one (e.g. slam_origin instead of aloam_origin)
-        enabled: false
-        frame_id: "slam_origin" # the desired frame_id without the UAV namespace
-
-      estimators: # the names of the partial estimators
-        lateral:
-          name: "lat_liosam"
-        altitude:
-          name: "alt_liosam"
-        heading:
-          name: "hdg_liosam"
-          passthrough: false # if true, then heading is not estimated but passed through from the orientation topic
-
-      topics:
-        orientation: "hw_api/orientation" # orientation passthrough
-        angular_velocity: "hw_api/angular_velocity" # angular velocity passthrough
-
-      # namespace of the altitude estimator
-      alt_liosam: 
-
-        max_flight_z: 100.0 # [m] maximum allowed flight Z (in the estimator frame)
- 
-        innovation:
-          limit: 1.0 # [m] innovation limit that will trigger action
-          action: "mitigate" # {"eland", "switch", "mitigate"}
-  
-        repredictor: # repredictor for correct fusion of delayed measurements
-          enabled: false
-          buffer_size: 200 # [samples] how many states and corrections are kept in history (i.e. estimator running at the default 100 Hz rate will be able to fuse corrections with up to 2 s delay with buffer size of 200 samples)
-  
-        process_noise: # process noise covariance (Q)
-          pos: 1.0 # position state
-          vel: 1.0 # velocity state
-          acc: 1.0 # acceleration state
-  
-        corrections: [
-          # "pos_liosam",
-          # "pos_px4",
-          "pos_garmin",
-          "vel_hw_api"
-        ]
-  
-        # pos_liosam:
-        #   state_id: 0 # 0 - position, 1 - velocity, 2 - acceleration
-        #   noise: 0.01 # measurement noise covariance (R) # Test have been made with 0.5 in order to reduce oscillations
-        #   noise_unhealthy_coeff: 100.0 # covariance gets multiplied by this coefficient when correction is unhealthy (R)
-        #   message:
-        #     type: "nav_msgs/Odometry"
-        #     topic: "lio_sam/mapping/odometry" #"lio_sam/imupreintegration/odom" # without uav namespace
-        #     limit: 
-        #       delay: 2.0 # [s] messages with higher delay will flag correction as unhealthy
-        #       time_since_last: 1.0 # [s] larger time step between messages will flag correction as unhealthy
-  
-        #   processors: [] # types of processors attached to this measurement
-
-        # pos_px4:
-        #   state_id: 0 # 0 - position, 1 - velocity, 2 - acceleration
-        #   noise: 0.001 # measurement noise covariance (R)
-        #   noise_unhealthy_coeff: 100.0 # covariance gets multiplied by this coefficient when correction is unhealthy (R)
-        #   message:
-        #     type: "nav_msgs/Odometry"
-        #     topic: "hw_api/odometry" # without uav namespace
-        #     limit:
-        #       delay: 2.0 # [s] messages with higher delay will flag correction as unhealthy
-        #       time_since_last: 1.0 # [s] larger time step between messages will flag correction as unhealthy
-
-        #   processors: [] # types of processors attached to this measurement
-
-        pos_garmin:
-          state_id: 0 # 0 - position, 1 - velocity, 2 - acceleration
-          noise: 0.1 # measurement noise covariance (R)
-          noise_unhealthy_coeff: 100.0 # covariance gets multiplied by this coefficient when correction is unhealthy (R)
-          message:
-            type: "sensor_msgs/Range"
-            topic: "hw_api/distance_sensor" # without uav namespace
-            limit: 
-              delay: 0.5 # [s] messages with higher delay will flag correction as unhealthy
-              time_since_last: 2.0 # [s] larger time step between messages will flag correction as unhealthy
-
-          # processors: ["excessive_tilt", "median_filter", "saturate"] # types of processors attached to this measurement (the processors are called in exactly this order)
-          processors: ["excessive_tilt", "saturate"] # types of processors attached to this measurement (the processors are called in exactly this order)
-          
-          median_filter:
-            buffer_size: 100 # [samples] number of historic values from which the median is calculated
-            max_diff: 2.0 # [m] difference of input value from median to be considered valid
-
-          saturate:
-            start_enabled: true # saturate processor can start as disabled and then be enabled by a service or a trigger condition
-            keep_enabled: true # keep enabled even after the corrections are near the value of state
-            min: -0.1
-            max: 0.1
-            limit: 2.0
-
-          excessive_tilt:
-            orientation_topic: "hw_api/orientation"
-            max_tilt: 30.0 # [deg]
-
-        # Parameters of altitude median filters - buffer_size , max_diff 
-        vel_hw_api:
-          state_id: 1 # 0 - position, 1 - velocity, 2 - acceleration
-          noise: 0.01 # measurement noise covariance (R)
-          noise_unhealthy_coeff: 100.0 # covariance gets multiplied by this coefficient when correction is unhealthy (R)
-          message:
-            type: "geometry_msgs/Vector3Stamped"
-            topic: "hw_api/velocity" # without uav namespace
-            limit: 
-              delay: 1.0 # [s] messages with higher delay will flag correction as unhealthy
-              time_since_last: 0.5 # [s] larger time step between messages will flag correction as unhealthy
-
-          processors: [] # types of processors attached to this measurement
-
-          # median_filter:
-          #   buffer_size: 20 # the number of samples from which the median is calculated
-          #   max_diff: 2.0 # [m] reject measurement if difference from median is over this value
-
-      # namespace of the heading estimator
-      hdg_liosam: 
-
-        max_flight_z: 100.0 # [m] maximum allowed flight Z (in the estimator frame)
-
-        position_innovation_limit: 1.0 # [m] innovation limit that will trigger switch to other estimator
-
-        repredictor: # repredictor for correct fusion of delayed measurements
-          enabled: true
-          buffer_size: 200 # [samples] how many states and corrections are kept in history (i.e. estimator running at the default 100 Hz rate will be able to fuse corrections with up to 2 s delay with buffer size of 200 samples)
-
-        process_noise: # process noise covariance (Q)
-          pos: 0.1 # position state
-          vel: 0.1 # velocity state
-
-        corrections: [
-          "hdg_liosam"
-        ]
-
-        hdg_liosam:
-          state_id: 0 # 0 - position, 1 - velocity, 2 - acceleration
-          noise: 0.0001 # measurement noise covariance (R)
-          noise_unhealthy_coeff: 100.0 # covariance gets multiplied by this coefficient when correction is unhealthy (R)
-          message:
-            type: "nav_msgs/Odometry"
-            topic: "lio_sam/imupreintegration/odom" # without uav namespace
-            limit: 
-              delay: 2.0 # [s] messages with higher delay will flag correction as unhealthy
-              time_since_last: 1.0 # [s] larger time step between messages will flag correction as unhealthy
-
-          processors: [] # types of processors attached to this measurement
-
-      # namespace of the lateral estimator
-      lat_liosam: 
-
-        hdg_source_topic: "liosam/hdg_liosam/output" # [mrs_uav_state_estimation/EstimatorOutput]
-
-        innovation:
-          limit: 1.0 # [m] innovation limit that will trigger action
-          action: "mitigate" # {"eland", "switch", "mitigate"}
-
-        max_flight_z: 100.0 # [m] maximum allowed flight Z (in the estimator frame)
-
-        repredictor: # repredictor for correct fusion of delayed measurements
-          enabled: false
-          buffer_size: 200 # [samples] how many states and corrections are kept in history (i.e. estimator running at the default 100 Hz rate will be able to fuse corrections with up to 2 s delay with buffer size of 200 samples)
-
-        process_noise: # process noise covariance (Q)
-          pos: 0.1 # position state
-          vel: 10.0 # velocity state
-          acc: 10.0 # acceleration state
-
-        corrections: [
-          "pos_liosam",
-          "vel_hw_api"
-        ]
-
-        pos_liosam:
-          state_id: 0 # 0 - position, 1 - velocity, 2 - acceleration
-          noise: 0.01 # measurement noise covariance (R)
-          noise_unhealthy_coeff: 100.0 # covariance gets multiplied by this coefficient when correction is unhealthy (R)
-          message:
-            type: "nav_msgs/Odometry"
-            topic: "lio_sam/imupreintegration/odom" # without uav namespace
-            limit: 
-              delay: 2.0 # [s] messages with higher delay will flag correction as unhealthy
-              time_since_last: 1.0 # [s] larger time step between messages will flag correction as unhealthy
-
-          processors: ["saturate"] # types of processors attached to this measurement
-
-          # median_filter:
-          #   buffer_size: 100 # [samples] number of historic values from which the median is calculated
-          #   max_diff: 0.5 # [m] difference of input value from median to be considered valid
-
-          saturate:
-            start_enabled: true # saturate processor can start as disabled and then be enabled by a service or a trigger condition
-            keep_enabled: true # keep enabled even after the corrections are near the value of state
-            min: -0.2
-            max: 0.2
-            limit: 1.0
-
-        vel_hw_api:
-          state_id: 1 # 0 - position, 1 - velocity, 2 - acceleration
-          noise: 0.01 # measurement noise covariance (R)
-          noise_unhealthy_coeff: 100.0 # covariance gets multiplied by this coefficient when correction is unhealthy (R)
-          message:
-            type: "geometry_msgs/Vector3Stamped"
-            topic: "hw_api/velocity" # without uav namespace
-            limit: 
-              delay: 0.5 # [s] messages with higher delay will flag correction as unhealthy
-              time_since_last: 0.5 # [s] larger time step between messages will flag correction as unhealthy
-
-          processors: [] # types of processors attached to this measurement
+    initial_state_estimator: "gps_garmin" # will be used as the first state estimator
+    agl_height_estimator: "garmin_agl" # only slightly filtered height for checking min height (not used in control feedback)
 
   constraint_manager:
 
     estimator_types: [
-      "liosam",
+      "gps_baro",
       "gps_garmin",
-      "passthrough"
     ]
 
     constraints: [
@@ -263,16 +27,15 @@ mrs_uav_managers:
 
     # list of allowed gains per odometry mode
     allowed_constraints:
-      liosam: ["ingeniarius","slow", "medium", "fast"]
-      gps_garmin: ["slow", "medium", "fast"]
-      passthrough: ["slow", "medium", "fast"]
+      gps_baro: ["ingeniarius","slow", "medium", "fast"]
+      gps_garmin: ["ingeniarius","slow", "medium", "fast"]
 
     # those gains will be used automatically when a localization mode switches
     # and the current gains are not in the allowed list (next paragraphs)
     default_constraints:
-      liosam: "slow"
+      gps_baro: "slow"
       gps_garmin: "slow"
-      passthrough: "slow"
+
 
     ingeniarius:
 
@@ -312,9 +75,8 @@ mrs_uav_managers:
   gain_manager:
 
     estimator_types: [
-      "liosam",
+      "gps_baro",
       "gps_garmin",
-      "passthrough"
     ]
 
     gains: [
@@ -325,23 +87,22 @@ mrs_uav_managers:
 
     # list of allowed gains per odometry mode
     allowed_gains:
-      liosam: ["ingeniarius", "supersoft", "soft"]
-      gps_garmin: ["supersoft", "soft"]
-      passthrough: ["supersoft", "soft"]
+      gps_baro: ["ingeniarius", "supersoft", "soft"]
+      gps_garmin: ["ingeniarius", "supersoft", "soft"]
 
     # those gains will be used automatically when a localization mode switches
     # and the current gains are not in the allowed list (next paragraphs)
     default_gains:
-      liosam: "ingeniarius"
-      gps_garmin: "supersoft"
+      gps_baro: "ingeniarius"
+      gps_garmin: "ingeniarius"
       passthrough: "soft"
 
     ingeniarius:
 
       horizontal:
         kp: 0.5   # (default: 3.0)
-        kv: 0.7   # (default: 2.0) 0.8
-        ka: 0.1   # (default: 1.0) 0.1
+        kv: 0.7   # (default: 2.0)
+        ka: 0.1   # (default: 1.0)
 
         kib: 0.1      # (default: 0.1)
         kib_lim: 10.0
@@ -355,7 +116,7 @@ mrs_uav_managers:
         ka: 0.3   # (default: 1.0)
 
       attitude:
-        kq_roll_pitch: 2.0  # (default: 5.0) 2.0
+        kq_roll_pitch: 4.0  # (default: 5.0)
         kq_yaw: 1.5         # (default: 5.0)
 
       mass_estimator:
@@ -364,34 +125,18 @@ mrs_uav_managers:
         # the maximum estimated uav mass difference
         km_lim: 20.0 # [kg, at least 1/2 of the UAVs mass to allow landing detection]
 
-  transform_manager:
-
-    liosam:
-      odom_topic: "odom" # name of the topic (expects nav_msgs/Odometry topic type)
-      tf_from_attitude: # used for transforming velocities before full transform is available
-        enabled: true
-        attitude_topic: "attitude" # name of the attitude topic(expects geometry_msgs/QuaternionStamped topic type)
-      namespace: "estimation_manager/liosam" # the namespace of the topic (usually the node that publishes the topic)
-      utm_based: false # if true, will publish tf to utm_origin
-      inverted: true # publish as inverted tf (the default for inverted mrs tf tree convention)
-      republish_in_frames: ["local_origin"] # the odometry message will be transformed and republished in the specified frames
-
-    # mapping_origin_tf:
-    #   enabled: true
-    #   debug_prints: false
-    #   lateral_topic: "odom" # name of the topic used for x, y components of the tf (expects nav_msgs/Odometry topic type)
-    #   altitude_topic: "odom" # name of the topic  used for z components of the tf (expects nav_msgs/Odometry topic type)
-    #   orientation_topic: "hw_api/orientation" # name of the topic  used for orientation components of the tf (expects geometry_msgs/Quaternion topic type)
-    #   inverted: true # publish as inverted tf (the default for inverted mrs tf tree convention)
-    #   custom_frame_id:
-    #     enabled: true
-    #     frame_id: "mapping_origin"
 
   uav_manager:
 
+    min_height_checking:
+      enabled: false
+
+    max_height_checking:
+      enabled: false
+
     # require gain or constraint manager running to takeoff?
-    require_gain_manager: false       #### 
-    require_constraint_manager: false ####
+    require_gain_manager: false 
+    require_constraint_manager: false
 
     takeoff:
 
@@ -405,7 +150,7 @@ mrs_uav_managers:
         controller: "Se3Controller"
         tracker: "MpcTracker"
 
-      takeoff_height: 10.0
+      takeoff_height: 4.0
 
     landing:
 
@@ -716,8 +461,8 @@ mrs_uav_trackers:
 
       enabled:           true # disabling this will stop this UAV to react to others, but it will still transmit data to others
       enabled_passively: true # disabling this will stop this uav to even transmit its data to others (only if enabled: false)
-      radius: 2.0 # [m]
-      correction: 3.0 # [m]
+      radius: 1.0 # [m]
+      correction: 1.5 # [m]
 
 mrs_uav_trajectory_generation:
 

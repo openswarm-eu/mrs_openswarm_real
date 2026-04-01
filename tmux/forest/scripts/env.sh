@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ############## CHANGE #############
-export UAV_NAMES="[uav10]"
+export UAV_NAMES="[uav14]"
 # export UAV_NAMES="[uav6, uav7, uav8, uav9, uav10, uav11, uav12, uav13, uav14, uav15]"
 export WORLD_NAME=forest	# forest, ingeniarius, alfena
 export RESET_COMMAND_FLAG=0
@@ -31,7 +31,7 @@ export ROSCONSOLE_FORMAT='[${severity}] [${node}] [${function}] [${line}]: ${mes
 
 ############ MRS FILES ############
 export PLATFORM_CONFIG=./config/mrs_uav_system/$UAV_TYPE.yaml
-export CUSTOM_CONFIG=./config/custom_config_fast_test.yaml
+export CUSTOM_CONFIG=./config/custom_config.yaml
 export NETWORK_CONFIG=./config/network_config.yaml
 
 ############## GENERAL ##############

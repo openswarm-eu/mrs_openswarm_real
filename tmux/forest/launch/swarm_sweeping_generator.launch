@@ -22,6 +22,7 @@
       <param name="automated_calculation" value="true" />
       <param name="automated_calculation_1line" value="false" />
       <param name="set_relative_heading_enable" value="false" />
+      <param name="estimator_change_request_value" value="gps_baro" />
       <!-- <param name="octomap_request_type" value="vec4"/> -->
 
      <!-- Define the start/end points: Ingeniarius -->

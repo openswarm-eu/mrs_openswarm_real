@@ -21,6 +21,7 @@
       <rosparam param="common/odometryFrame" subst_value="true"> $(arg UAV_NAME)/odom</rosparam>
 
       <rosparam param="initialization/use_calibration_file" subst_value="true" > true</rosparam>
+      <rosparam param="initialization/useImuHeadingInitialization" subst_value="true" > true</rosparam>
 
       <node pkg="lidar_imu_init" type="li_init" name="laserMapping" output="screen">
         <remap from="/cloud_registered" to="cloud_registered" />
