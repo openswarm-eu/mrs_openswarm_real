@@ -1,0 +1,78 @@
+<launch>
+
+  <!-- args corresponding to environment variables -->
+  <arg name="UAV_NAME" default="$(optenv UAV_NAME)" />
+  <arg name="UAV_NAMES" default="$(optenv UAV_NAMES)" />
+  <arg name="COMPUTER_NAME" default="$(optenv COMPUTER_NAME)" />
+  <arg name="ROS_CONFIG_PATH" default="$(optenv ROS_CONFIG_PATH)" />
+
+    <!-- Namespace - all topics, services and parameters will be remapped using this namespace as a prefix (eg.: "/waypoint_flier_simple/odom_uav_in" to "/uav1/waypoint_flier_simple/odom_uav_in") -->
+  <group ns="$(arg UAV_NAME)">
+
+    <node pkg="sweeping_generator" type="swarm_sweeping_latlon.py" name="sweeping_generator" output="screen">
+
+      <!-- ROS parameters config file -->
+      <rosparam file="$(arg ROS_CONFIG_PATH)/sweeping_generator.yaml" command="load" />
+
+      <param name="uav_name" value="$(arg UAV_NAME)" />
+      <param name="uav_names" type="yaml" value="$(arg UAV_NAMES)"/>
+      <param name="computer_name" value="$(arg COMPUTER_NAME)" />
+
+      <param name="offset_waypoint_utm_flag" value="false" />
+      <param name="automated_calculation" value="true" />
+
+     <!-- Define the start/end points: Ingeniarius -->
+      <!-- <param name="lat_start" value="41.2207406" />
+      <param name="lon_start" value="-8.5272058" /> 10,12, 55.90-->
+      <!-- <param name="lat_start" value="41.2211212" />
+      <param name="lon_start" value="-8.5271739" />
+      <param name="lat_end" value="41.2211131" />
+      <param name="lon_end" value="-8.5271921" />
+      <param name="distance_between_waypoints" value="2.0" />
+      <param name="distance_line" value="10.0" />
+      <param name="altitude" value="4.0" /> -->
+
+     <!-- Define the waypoint list as a parameter: Ingeniarius -->
+      <!-- <param name="waypoint_list" type="yaml" value="[
+          [41.2209624, -8.5272224, 4.0],
+          [41.2211131, -8.5271921, 4.0]
+      ]"/> -->
+
+     <!-- Define the start/end points: Forest -->
+      <!-- <param name="lat_start" value="41.2168814" />
+      <param name="lon_start" value="-8.5274679" /> -->
+      <!-- <param name="lat_start" value="41.2168033" />
+      <param name="lon_start" value="-8.5272925" /> -->
+
+      <!-- Primeiros pontos -->
+      <param name="lat_start" value="41.2167986" />
+      <param name="lon_start" value="-8.5272961" />
+      <!-- <param name="lat_end" value="41.2167039" />
+      <param name="lon_end" value="-8.5272145" /> -->
+
+      <!-- Pontos do experimento -->
+      <!-- <param name="lat_start" value="41.2169407" />
+      <param name="lon_start" value="-8.527461" /> -->
+      <param name="lat_end" value="41.2161171" />
+      <param name="lon_end" value="-8.5267119" />
+      <param name="distance_between_waypoints" value="4.0" />
+      <param name="distance_line" value="15.0" />
+      <param name="altitude" value="5.0" />
+
+     <!-- Define the waypoint list as a parameter: Forest -->
+      <!-- <param name="waypoint_list" type="yaml" value="[
+          [41.2209624, -8.5272224, 4.0],
+          [41.2211131, -8.5271921, 4.0]
+      ]"/> -->
+
+      <remap from="~control_manager_diag_in" to="control_manager/diagnostics" />
+      <remap from="~octomap_planner_diag_in" to="octomap_planner/diagnostics" />
+      <remap from="~path_out" to="trajectory_generation/path" />
+      <remap from="~start_in" to="~start" />
+      <remap from="~emergency_in" to="~emergency" />
+
+    </node>
+
+  </group>
+
+</launch>
