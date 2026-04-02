@@ -1,12 +1,14 @@
 #!/bin/bash
 
 ############## CHANGE #############
-export UAV_NAMES="[uav14]"
-# export UAV_NAMES="[uav6, uav7, uav8, uav9, uav10, uav11, uav12, uav13, uav14, uav15]"
+# export UAV_NAMES="[uav7]"
+export UAV_NAMES="[uav7, uav8, uav9, uav10, uav11, uav12, uav13, uav14, uav15]"
 export WORLD_NAME=forest	# forest, ingeniarius, alfena
 export RESET_COMMAND_FLAG=0
 export COMPUTER_NAME="asus1"
 export SWARM_HEIGHT=5.0
+export SYS_ROSBAG_ENABLED=0       # enable / disable bag recording
+export TMUX_LOG_RECORDING=1       # enable / disable tmux logging
 
 ############## CONFIG #############
 # Get the hostname
@@ -91,7 +93,6 @@ else
 fi
 
 ############## ROS BAG ##############
-export SYS_ROSBAG_ENABLED=1         # enable / disable bag recording (be careful to NOT run long term experiments without bags!)
 export SYS_ROSBAG_SIZE='1024'       # max size before splitting in Mb (i.e. 0 = infinite, 1024 = 1024Mb = 1Gb)
 export SYS_ROSBAG_DURATION='8h'
 export SYS_ROSBAG_PATH="$HOME/bag_files/$PROJECT_NAME/latest/"
@@ -106,21 +107,25 @@ export SYS_ROSBAG_ARGS="
 export SYS_ROSBAG_TOPICS="
 	/$UAV_NAME/mavros.*
 	/$UAV_NAME/rtk.*
+	/$UAV_NAME/hw_api.*
 	/$UAV_NAME/witmotion_imu/imu
-	/$UAV_NAME/hw_api/imu
-	/$UAV_NAME/hw_api/gnss
-	/$UAV_NAME/hw_api/altitude
-	/$UAV_NAME/hw_api/odometry
-	/$UAV_NAME/hw_api/velocity
-	/$UAV_NAME/hw_api/angular_velocity
-	/$UAV_NAME/hw_api/battery_state
 	/$UAV_NAME/gnss_verifier/gnss_wstatus
 	/$UAV_NAME/lslidar/pcl_filtered
 	/$UAV_NAME/estimation_manager/odom_main
 	/$UAV_NAME/odometry/gps
-	/$UAV_NAME/lio_sam/imupreintegration/odom
+	/$UAV_NAME/Odometry
 	/$UAV_NAME/home_distance
 	/$UAV_NAME/distance_travelled
+	/$UAV_NAME/octomap_global_vis/free_cells_vis_array_throttled
+	/$UAV_NAME/octomap_global_vis/occupied_cells_vis_array_throttled
+	/$UAV_NAME/octomap_local_vis/free_cells_vis_array_throttled
+	/$UAV_NAME/octomap_local_vis/occupied_cells_vis_array_throttled
+	/$UAV_NAME/octomap_planner/path
+	/$UAV_NAME/octomap_planner/visualize_input
+	/$UAV_NAME/octomap_planner/visualize_planner
+	/$UAV_NAME/octomap_planner/visualize_processed
+	/$UAV_NAME/trajectory_generation.*
+	/tf
 "
 
 ############## RVIZ ##############

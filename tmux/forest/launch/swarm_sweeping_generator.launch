@@ -5,6 +5,7 @@
   <arg name="UAV_NAMES" default="$(optenv UAV_NAMES)" />
   <arg name="COMPUTER_NAME" default="$(optenv COMPUTER_NAME)" />
   <arg name="ROS_CONFIG_PATH" default="$(optenv ROS_CONFIG_PATH)" />
+  <arg name="SWARM_HEIGHT" default="$(optenv SWARM_HEIGHT)" />
 
     <!-- Namespace - all topics, services and parameters will be remapped using this namespace as a prefix (eg.: "/waypoint_flier_simple/odom_uav_in" to "/uav1/waypoint_flier_simple/odom_uav_in") -->
   <group ns="$(arg UAV_NAME)">
@@ -55,7 +56,7 @@
       <param name="distance_between_waypoints" value="4.5" />
       <param name="distance_between_lines" value="4.5" />
       <param name="distance_line" value="30.0" />
-      <param name="altitude" value="5.0" />
+      <param name="altitude" value="$(arg SWARM_HEIGHT)" />
 
      <!-- Define the waypoint list as a parameter: Forest -->
       <!-- <param name="waypoint_list" type="yaml" value="[

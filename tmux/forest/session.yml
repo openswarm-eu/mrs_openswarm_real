@@ -61,10 +61,10 @@ windows:
       layout: tiled
       panes:
         -  waitForHw; roslaunch $ROS_LAUNCH_PATH/imu_upsampler.launch
-  # - imu_wit:
-  #     layout: tiled
-  #     panes:
-  #       -  waitForHw; roslaunch $ROS_LAUNCH_PATH/witmotion.launch
+  - imu_wit:
+      layout: tiled
+      panes:
+        -  waitForHw; roslaunch $ROS_LAUNCH_PATH/witmotion.launch
   - core:
       layout: tiled
       panes:
@@ -77,14 +77,14 @@ windows:
   #     layout: tiled
   #     panes:
   #       - waitForHw; sleep 15; roslaunch $ROS_LAUNCH_PATH/lio_sam/run_uav.launch
-  # - fast_lio:
-  #     layout: tiled
-  #     panes:
-  #       - waitForHw; sleep 5; roslaunch $ROS_LAUNCH_PATH/fastlio2.launch
-  - fast_lio_cal:
+  - fast_lio:
       layout: tiled
       panes:
-        - waitForHw; sleep 5; roslaunch $ROS_LAUNCH_PATH/fastlio2_cal.launch
+        - waitForHw; sleep 5; roslaunch $ROS_LAUNCH_PATH/fastlio2.launch
+  # - fast_lio_cal:
+  #     layout: tiled
+  #     panes:
+  #       - waitForHw; sleep 5; roslaunch $ROS_LAUNCH_PATH/fastlio2_cal.launch
   # - odom_republisher:
   #     layout: tiled
   #     panes:
@@ -96,7 +96,7 @@ windows:
   - octomap:
       layout: tiled
       panes:
-        - waitForHw; sleep 6; roslaunch $ROS_LAUNCH_PATH/mrs_mapplan_octomapping.launch config_octomap_server:=./config/octomap/octomap_server.yaml config_octomap_planner:=./config/octomap/octomap_planner.yaml config_pcl_filter_ouster:=./config/octomap/lidar_filter_mapping.yaml world_frame_id:=$UAV_NAME/liosam_origin
+        - waitForHw; sleep 6; roslaunch $ROS_LAUNCH_PATH/mrs_mapplan_octomapping.launch config_octomap_server:=./config/octomap/octomap_server.yaml config_octomap_planner:=./config/octomap/octomap_planner.yaml config_pcl_filter_ouster:=./config/octomap/lidar_filter_mapping.yaml world_frame_id:=$UAV_NAME/world_origin
   - octomap_min:
       layout: tiled
       panes:
@@ -162,11 +162,11 @@ windows:
   - bag:
       layout: tiled
       panes:
-        - waitForRos; [ $SYS_ROSBAG_ENABLED -eq 1 ] && history -s rosbag record $SYS_ROSBAG_ARGS $SYS_ROSBAG_TOPICS || exit
-  # - IMEC:
-  #     layout: tiled
-  #     panes:
-  #       - waitForTime; roslaunch $ROS_LAUNCH_PATH/bat_distance_home.launch
+        - waitForRos; [ $SYS_ROSBAG_ENABLED -eq 1 ] && rosbag record $SYS_ROSBAG_ARGS $SYS_ROSBAG_TOPICS || exit
+  - IMEC:
+      layout: tiled
+      panes:
+        - waitForTime; roslaunch $ROS_LAUNCH_PATH/bat_distance_home.launch
   - rviz:
       layout: tiled
       panes:
