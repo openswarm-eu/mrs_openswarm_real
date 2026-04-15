@@ -2,12 +2,13 @@
 
 ############## CHANGE #############
 # export UAV_NAMES="[uav7]"
-export UAV_NAMES="[uav7, uav8, uav9, uav10, uav11, uav12, uav13, uav14, uav15]"
+# export UAV_NAMES="[uav11, uav10, uav9, uav13, uav7, uav8, uav12, uav14, uav15]"
+export UAV_NAMES="[uav10, uav7, uav8, uav11, uav9, uav13, uav12, uav14, uav15]"
 export WORLD_NAME=forest	# forest, ingeniarius, alfena
 export RESET_COMMAND_FLAG=0
-export COMPUTER_NAME="asus1"
+export COMPUTER_NAME="asus2"
 export SWARM_HEIGHT=5.0
-export SYS_ROSBAG_ENABLED=0       # enable / disable bag recording
+export SYS_ROSBAG_ENABLED=1       # enable / disable bag recording
 export TMUX_LOG_RECORDING=1       # enable / disable tmux logging
 
 ############## CONFIG #############
