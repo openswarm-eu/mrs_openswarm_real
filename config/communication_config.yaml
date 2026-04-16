@@ -17,6 +17,9 @@ topics: # topics published out of this machine to receivers specified above
  - name: "mrs_uav_status/uav_status_short"
    compress: true # enable bz2 compression
    rate: 10.0
+ - name: "octomap_planner/diagnostics"
+   compress: true # enable bz2 compression
+   rate: 1.0
  - name: "octomap_planner/path"
    compress: true # enable bz2 compression
    rate: 1.0

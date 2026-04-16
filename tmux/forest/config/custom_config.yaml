@@ -33,15 +33,15 @@ mrs_uav_managers:
     # those gains will be used automatically when a localization mode switches
     # and the current gains are not in the allowed list (next paragraphs)
     default_constraints:
-      gps_baro: "slow"
-      gps_garmin: "slow"
+      gps_baro: "ingeniarius"
+      gps_garmin: "ingeniarius"
 
 
     ingeniarius:
 
       horizontal:
-        speed: 0.5
-        acceleration: 0.5
+        speed: 1.0
+        acceleration: 0.75
         jerk: 10.0
         snap: 10.0
 

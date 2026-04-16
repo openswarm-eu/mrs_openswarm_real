@@ -3,7 +3,7 @@
 ############## CHANGE #############
 # export UAV_NAMES="[uav7]"
 # export UAV_NAMES="[uav11, uav10, uav9, uav13, uav7, uav8, uav12, uav14, uav15]"
-export UAV_NAMES="[uav10, uav7, uav8, uav11, uav9, uav13, uav12, uav14, uav15]"
+export UAV_NAMES="[uav14, uav15, uav8, uav7, uav9, uav12, uav13, uav10, uav11]"
 export WORLD_NAME=forest	# forest, ingeniarius, alfena
 export RESET_COMMAND_FLAG=0
 export COMPUTER_NAME="asus2"
